@@ -4,5 +4,4 @@
 sylius:
     form:
         email:
-            enabled: Aktiviert
-            content: Inhalt
+            content: Sisältö
