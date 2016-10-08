@@ -50,7 +50,20 @@ class TwigAdapter extends AbstractAdapter
             /** @var \Twig_Template $template */
             $template = $this->twig->loadTemplate($email->getTemplate());
 
-            $subject = $template->renderBlock('subject', $data);
+            if($template->hasBlock('subject')){
+                
+                $subject = $template->renderBlock('subject', $data);
+                
+            } 
+            else{
+                
+                $twig = new \Twig_Environment(new \Twig_Loader_Array(array()));
+                
+                $subjectTemplate = $twig->createTemplate($email->getSubject());
+                $subject = $subjectTemplate->render($data);
+                
+            }
+            
             $body = $template->renderBlock('body', $data);
         } else {
             $twig = new \Twig_Environment(new \Twig_Loader_Array([]));
