@@ -27,7 +27,10 @@
             <argument type="service" id="sylius.email_provider" />
             <argument type="service" id="sylius.mailer.default_settings_provider" />
         </service>
-
+     
+        <service id="sylius.email_sender.alias" alias="sylius.email_sender" public="true" />
+        <service id="Sylius\Component\Mailer\Sender\SenderInterface" alias="sylius.email_sender.alias" />
+ 
         <service id="sylius.mailer.default_settings_provider" class="Sylius\Component\Mailer\Provider\DefaultSettingsProvider">
             <argument>%sylius.mailer.sender_name%</argument>
             <argument>%sylius.mailer.sender_address%</argument>
