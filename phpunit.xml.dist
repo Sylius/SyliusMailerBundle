@@ -10,7 +10,7 @@
 
     <testsuites>
         <testsuite name="SyliusMailerBundle Test Suite">
-            <directory>./test/</directory>
+            <directory>./src/Bundle/test/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
