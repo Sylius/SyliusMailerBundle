@@ -47,4 +47,16 @@ final class SyliusMailerExtension extends Extension
         $container->setParameter('sylius.mailer.emails', $config['emails']);
         $container->setParameter('sylius.mailer.templates', $templates);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getConfiguration(array $config, ContainerBuilder $container): Configuration
+    {
+        $configuration = new Configuration();
+
+        $container->addObjectResource($configuration);
+
+        return $configuration;
+    }
 }
