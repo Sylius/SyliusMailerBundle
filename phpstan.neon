@@ -11,6 +11,7 @@ parameters:
         - %currentWorkingDirectory%/src/Bundle/spec/*
         - %currentWorkingDirectory%/src/Bundle/test/*
         - %currentWorkingDirectory%/src/Component/spec/*
+        - %currentWorkingDirectory%/src/Component/vendor/*
 
     ignoreErrors:
         # Symfony 3.4 compatibility
