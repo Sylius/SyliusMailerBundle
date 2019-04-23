@@ -7,6 +7,7 @@ includes:
 parameters:
     reportUnmatchedIgnoredErrors: false
     excludes_analyse:
+        - %currentWorkingDirectory%/src/Bundle/DependencyInjection/Configuration.php
         - %currentWorkingDirectory%/src/Bundle/spec/*
         - %currentWorkingDirectory%/src/Bundle/test/*
         - %currentWorkingDirectory%/src/Component/spec/*
