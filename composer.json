@@ -22,39 +22,36 @@
     "require": {
         "php": "^7.2",
 
-        "sylius/mailer": "^1.2",
-        "symfony/framework-bundle": "^3.4|^4.1.1"
+        "symfony/config": "^3.4|^4.1.1",
+        "symfony/dependency-injection": "^3.4|^4.1.1",
+        "symfony/framework-bundle": "^3.4|^4.1.1",
+        "symfony/http-kernel": "^3.4|^4.1.1"
     },
     "require-dev": {
         "phpspec/phpspec": "^5.0",
         "phpunit/phpunit": "^7.0",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "symfony/browser-kit": "^3.4|^4.1.1",
-        "symfony/dependency-injection": "^3.4|^4.1.1",
+        "symfony/console": "^3.4|^4.1.1",
         "symfony/swiftmailer-bundle": "^3.1",
-        "symfony/templating": "^3.4|^4.1.1",
         "symfony/twig-bundle": "^3.4|^4.1.1"
     },
-    "config": {
-        "bin-dir": "bin"
+    "replace": {
+        "sylius/mailer": "self.version"
     },
     "autoload": {
-        "psr-4": { "Sylius\\Bundle\\MailerBundle\\": "" }
+        "psr-4": {
+            "Sylius\\Bundle\\MailerBundle\\": "src/Bundle/",
+            "Sylius\\Component\\Mailer\\": "src/Component/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\MailerBundle\\spec\\": "spec/"
+            "Sylius\\Bundle\\MailerBundle\\spec\\": "src/Bundle/spec/",
+            "Sylius\\Component\\Mailer\\spec\\": "src/Component/spec/"
         },
-        "classmap": ["test/app/AppKernel.php"]
+        "classmap": [
+            "src/Bundle/test/app/AppKernel.php"
+        ]
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../../*/*"
-        }
-    ],
     "extra": {
         "branch-alias": {
             "dev-master": "1.4-dev"

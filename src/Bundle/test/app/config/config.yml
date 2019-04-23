@@ -4,8 +4,6 @@ imports:
 framework:
     assets: false
     secret: "%secret%"
-    templating:
-        engines: ['twig']
     default_locale: "%locale%"
     http_method_override: true
     test: ~
