@@ -2,6 +2,7 @@
 
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.5/phpunit.xsd"
+         backupGlobals="false"
          colors="true"
 >
     <php>
@@ -10,7 +11,7 @@
 
     <testsuites>
         <testsuite name="SyliusMailerBundle Test Suite">
-            <directory>./test/</directory>
+            <directory>./src/Bundle/test/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
