@@ -15,28 +15,24 @@ namespace Sylius\Bundle\MailerBundle\Tests;
 
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class SyliusMailerBundleTest extends KernelTestCase
 {
-    /**
-     * @test
-     */
+    /** @test */
     public function its_services_are_initializable(): void
     {
         self::bootKernel();
 
-        /** @var ContainerBuilder $container */
-        $container = self::$container;
+        /** @var Container $container */
+        $container = self::$kernel->getContainer();
 
-        $services = $container->get('test.service_container')->getServiceIds();
-
-        $services = array_filter($services, function (string $serviceId): bool {
+        $serviceIds = array_filter($container->getServiceIds(), function (string $serviceId): bool {
             return 0 === strpos($serviceId, 'sylius.');
         });
 
-        foreach ($services as $id) {
+        foreach ($serviceIds as $id) {
             Assert::assertNotNull($container->get($id, ContainerInterface::NULL_ON_INVALID_REFERENCE));
         }
     }
