@@ -37,16 +37,4 @@ class AppKernel extends Kernel
     {
         $loader->load(__DIR__ . '/config/config.yml');
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getContainerBaseClass(): string
-    {
-        if (0 === strpos($this->environment, 'test')) {
-            return MockerContainer::class;
-        }
-
-        return parent::getContainerBaseClass();
-    }
 }

@@ -14,21 +14,23 @@ declare(strict_types=1);
 namespace Sylius\Bundle\MailerBundle\Tests;
 
 use PHPUnit\Framework\Assert;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-final class SyliusMailerBundleTest extends WebTestCase
+final class SyliusMailerBundleTest extends KernelTestCase
 {
     /**
      * @test
      */
     public function its_services_are_initializable(): void
     {
-        /** @var ContainerBuilder $container */
-        $container = self::createClient()->getContainer();
+        self::bootKernel();
 
-        $services = $container->getServiceIds();
+        /** @var ContainerBuilder $container */
+        $container = self::$container;
+
+        $services = $container->get('test.service_container')->getServiceIds();
 
         $services = array_filter($services, function (string $serviceId): bool {
             return 0 === strpos($serviceId, 'sylius.');
