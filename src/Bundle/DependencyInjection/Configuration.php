@@ -26,57 +26,47 @@ final class Configuration implements ConfigurationInterface
     {
         if (method_exists(TreeBuilder::class, 'getRootNode')) {
             $treeBuilder = new TreeBuilder('sylius_mailer');
-            $rootNode = $treeBuilder->getRootNode();
+
+            /** @var ArrayNodeDefinition $rootNodeDefinition */
+            $rootNodeDefinition = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
             $treeBuilder = new TreeBuilder();
-            $rootNode = $treeBuilder->root('sylius_mailer');
+
+            /** @var ArrayNodeDefinition $rootNodeDefinition */
+            $rootNodeDefinition = $treeBuilder->root('sylius_mailer');
         }
 
-        $rootNode
-            ->children()
-                ->scalarNode('sender_adapter')->defaultValue('sylius.email_sender.adapter.swiftmailer')->end()
-                ->scalarNode('renderer_adapter')->defaultValue('sylius.email_renderer.adapter.twig')->end()
-            ->end()
-        ;
+        $rootNodeDefinition->children()->scalarNode('sender_adapter')->defaultValue('sylius.email_sender.adapter.swiftmailer');
+        $rootNodeDefinition->children()->scalarNode('renderer_adapter')->defaultValue('sylius.email_renderer.adapter.twig');
 
-        $this->addEmailsSection($rootNode);
+        $this->addEmailsSection($rootNodeDefinition);
 
         return $treeBuilder;
     }
 
-    private function addEmailsSection(ArrayNodeDefinition $node): void
+    private function addEmailsSection(ArrayNodeDefinition $nodeDefinition): void
     {
-        $node
-            ->children()
-                ->arrayNode('sender')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('name')->defaultValue('Example.com Store')->end()
-                        ->scalarNode('address')->defaultValue('no-reply@example.com')->end()
-                    ->end()
-                ->end()
-                ->arrayNode('emails')
-                    ->useAttributeAsKey('code')
-                    ->arrayPrototype()
-                        ->children()
-                            ->scalarNode('subject')->cannotBeEmpty()->end()
-                            ->scalarNode('template')->cannotBeEmpty()->end()
-                            ->booleanNode('enabled')->defaultTrue()->end()
-                            ->arrayNode('sender')
-                                ->children()
-                                    ->scalarNode('name')->end()
-                                    ->scalarNode('address')->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-                ->arrayNode('templates')
-                    ->useAttributeAsKey('name')
-                    ->scalarPrototype()->end()
-                ->end()
-            ->end()
-        ;
+        /** @var ArrayNodeDefinition $senderNodeDefinition */
+        $senderNodeDefinition = $nodeDefinition->children()->arrayNode('sender')->addDefaultsIfNotSet();
+
+        $senderNodeDefinition->children()->scalarNode('name')->defaultValue('Example.com Store');
+        $senderNodeDefinition->children()->scalarNode('address')->defaultValue('no-reply@example.com');
+
+        /** @var ArrayNodeDefinition $emailsNodeDefinition */
+        $emailsNodeDefinition = $nodeDefinition->children()->arrayNode('emails')->useAttributeAsKey('code');
+
+        /** @var ArrayNodeDefinition $emailNodeDefinition */
+        $emailNodeDefinition = $emailsNodeDefinition->arrayPrototype();
+
+        $emailNodeDefinition->children()->scalarNode('subject')->cannotBeEmpty();
+        $emailNodeDefinition->children()->scalarNode('template')->cannotBeEmpty();
+        $emailNodeDefinition->children()->scalarNode('enabled')->defaultTrue();
+
+        /** @var ArrayNodeDefinition $emailSenderNodeDefinition */
+        $emailSenderNodeDefinition = $emailNodeDefinition->children()->arrayNode('sender');
+
+        $emailSenderNodeDefinition->children()->scalarNode('name');
+        $emailSenderNodeDefinition->children()->scalarNode('address');
     }
 }

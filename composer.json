@@ -29,6 +29,9 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^5.0",
+        "phpstan/phpstan-phpunit": "^0.11",
+        "phpstan/phpstan-shim": "^0.11",
+        "phpstan/phpstan-webmozart-assert": "^0.11",
         "phpunit/phpunit": "^7.0",
         "sylius-labs/coding-standard": "^3.0",
         "symfony/console": "^3.4|^4.1.1",
@@ -51,6 +54,11 @@
         },
         "classmap": [
             "src/Bundle/test/app/AppKernel.php"
+        ]
+    },
+    "scripts": {
+        "analyse": [
+            "@php vendor/bin/phpstan analyse --ansi -c phpstan.neon -l max src"
         ]
     },
     "extra": {
