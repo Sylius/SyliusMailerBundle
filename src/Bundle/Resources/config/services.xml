@@ -46,6 +46,7 @@
         <service id="sylius.email_renderer.adapter.twig" class="Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter"
                  parent="sylius.email_renderer.adapter.abstract" public="true">
             <argument type="service" id="twig" />
+            <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="sylius.email_sender.adapter.abstract" class="Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter" abstract="true">
@@ -56,6 +57,7 @@
         <service id="sylius.email_sender.adapter.swiftmailer" class="Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter"
                  parent="sylius.email_sender.adapter.abstract" public="true">
             <argument type="service" id="mailer" />
+            <argument type="service" id="event_dispatcher" />
         </service>
     </services>
 </container>

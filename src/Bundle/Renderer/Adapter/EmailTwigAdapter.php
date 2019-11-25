@@ -18,15 +18,22 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
 
 class EmailTwigAdapter extends AbstractAdapter
 {
-    /** @var \Twig_Environment */
+    /** @var Environment */
     protected $twig;
 
-    public function __construct(\Twig_Environment $twig)
+    /** @var EventDispatcherInterface|null */
+    protected $dispatcher;
+
+    public function __construct(Environment $twig, ?EventDispatcherInterface $dispatcher = null)
     {
         $this->twig = $twig;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -36,11 +43,12 @@ class EmailTwigAdapter extends AbstractAdapter
     {
         $renderedEmail = $this->getRenderedEmail($email, $data);
 
-        /** @var EmailRenderEvent $event */
-        $event = $this->dispatcher->dispatch(
-            SyliusMailerEvents::EMAIL_PRE_RENDER,
-            new EmailRenderEvent($renderedEmail)
-        );
+        $event = new EmailRenderEvent($renderedEmail);
+
+        if ($this->dispatcher !== null) {
+            /** @var EmailRenderEvent $event */
+            $event = $this->dispatcher->dispatch(SyliusMailerEvents::EMAIL_PRE_RENDER, $event);
+        }
 
         return $event->getRenderedEmail();
     }
@@ -54,11 +62,13 @@ class EmailTwigAdapter extends AbstractAdapter
         return $this->provideEmailWithoutTemplate($email, $data);
     }
 
+    /**
+     * @psalm-suppress InternalMethod
+     */
     private function provideEmailWithTemplate(EmailInterface $email, array $data): RenderedEmail
     {
         $data = $this->twig->mergeGlobals($data);
 
-        /** @var \Twig_Template $template */
         $template = $this->twig->loadTemplate((string) $email->getTemplate());
 
         $subject = $template->renderBlock('subject', $data);
@@ -69,7 +79,7 @@ class EmailTwigAdapter extends AbstractAdapter
 
     private function provideEmailWithoutTemplate(EmailInterface $email, array $data): RenderedEmail
     {
-        $twig = new \Twig_Environment(new \Twig_Loader_Array([]));
+        $twig = new Environment(new ArrayLoader([]));
 
         $subjectTemplate = $twig->createTemplate((string) $email->getSubject());
         $bodyTemplate = $twig->createTemplate((string) $email->getContent());

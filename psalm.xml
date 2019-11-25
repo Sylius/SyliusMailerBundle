@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<psalm
+        totallyTyped="false"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+            <directory name="src/Bundle/spec" />
+            <directory name="src/Bundle/test" />
+            <directory name="src/Component/spec" />
+            <directory name="src/Component/vendor" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <DeprecatedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="Symfony\Component\EventDispatcher\Event" />
+            </errorLevel>
+        </DeprecatedClass>
+
+        <DeprecatedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\TreeBuilder::root" />
+            </errorLevel>
+        </DeprecatedMethod>
+
+        <InvalidArgument>
+            <errorLevel type="suppress">
+                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
+            </errorLevel>
+        </InvalidArgument>
+
+        <PossiblyNullReference>
+            <errorLevel type="suppress">
+                <file name="src/Bundle/DependencyInjection/Configuration.php" />
+            </errorLevel>
+        </PossiblyNullReference>
+
+        <PossiblyUndefinedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::arrayNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::scalarNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeDefinition::variableNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeParentInterface::end" />
+            </errorLevel>
+        </PossiblyUndefinedMethod>
+
+        <TooManyArguments>
+            <errorLevel type="suppress">
+                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
+                <referencedFunction name="Symfony\Component\Config\Definition\Builder\TreeBuilder::__construct" />
+            </errorLevel>
+        </TooManyArguments>
+    </issueHandlers>
+</psalm>

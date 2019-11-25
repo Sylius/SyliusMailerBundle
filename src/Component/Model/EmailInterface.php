@@ -39,6 +39,9 @@ interface EmailInterface
      */
     public function getContent(): ?string;
 
+    /**
+     * @return void
+     */
     public function setContent(string $content);
 
     public function getTemplate(): ?string;
