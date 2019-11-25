@@ -22,10 +22,10 @@
     "require": {
         "php": "^7.2",
 
-        "symfony/config": "^3.4|^4.1.1",
-        "symfony/dependency-injection": "^3.4|^4.1.1",
-        "symfony/framework-bundle": "^3.4|^4.1.1",
-        "symfony/http-kernel": "^3.4|^4.1.1"
+        "symfony/config": "^3.4|^4.3",
+        "symfony/dependency-injection": "^3.4|^4.3",
+        "symfony/framework-bundle": "^3.4|^4.3",
+        "symfony/http-kernel": "^3.4|^4.3"
     },
     "require-dev": {
         "phpspec/phpspec": "^5.0",
@@ -34,9 +34,9 @@
         "phpstan/phpstan-webmozart-assert": "^0.11",
         "phpunit/phpunit": "^7.0",
         "sylius-labs/coding-standard": "^3.0",
-        "symfony/console": "^3.4|^4.1.1",
+        "symfony/console": "^3.4|^4.3",
         "symfony/swiftmailer-bundle": "^3.1",
-        "symfony/twig-bundle": "^3.4|^4.1.1"
+        "symfony/twig-bundle": "^3.4|^4.3"
     },
     "replace": {
         "sylius/mailer": "self.version"
