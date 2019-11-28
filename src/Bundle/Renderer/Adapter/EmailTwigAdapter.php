@@ -59,7 +59,7 @@ class EmailTwigAdapter extends AbstractAdapter
         $data = $this->twig->mergeGlobals($data);
 
         /** @var \Twig_Template $template */
-        $template = $this->twig->loadTemplate((string) $email->getTemplate());
+        $template = $this->twig->load((string) $email->getTemplate());
 
         $subject = $template->renderBlock('subject', $data);
         $body = $template->renderBlock('body', $data);
