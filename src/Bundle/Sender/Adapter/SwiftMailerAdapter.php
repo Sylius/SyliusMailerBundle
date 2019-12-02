@@ -18,15 +18,20 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\SyliusMailerEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class SwiftMailerAdapter extends AbstractAdapter
 {
     /** @var \Swift_Mailer */
     protected $mailer;
 
-    public function __construct(\Swift_Mailer $mailer)
+    /** @var EventDispatcherInterface|null */
+    protected $dispatcher;
+
+    public function __construct(\Swift_Mailer $mailer, ?EventDispatcherInterface $dispatcher = null)
     {
         $this->mailer = $mailer;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -58,10 +63,14 @@ class SwiftMailerAdapter extends AbstractAdapter
 
         $emailSendEvent = new EmailSendEvent($message, $email, $data, $recipients, $replyTo);
 
-        $this->dispatcher->dispatch(SyliusMailerEvents::EMAIL_PRE_SEND, $emailSendEvent);
+        if ($this->dispatcher !== null) {
+            $this->dispatcher->dispatch(SyliusMailerEvents::EMAIL_PRE_SEND, $emailSendEvent);
+        }
 
         $this->mailer->send($message);
 
-        $this->dispatcher->dispatch(SyliusMailerEvents::EMAIL_POST_SEND, $emailSendEvent);
+        if ($this->dispatcher !== null) {
+            $this->dispatcher->dispatch(SyliusMailerEvents::EMAIL_POST_SEND, $emailSendEvent);
+        }
     }
 }

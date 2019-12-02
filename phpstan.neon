@@ -18,3 +18,6 @@ parameters:
         - '/Call to function method_exists\(\) with .Symfony\\\\Component…. and .getRootNode. will always evaluate to false/'
         - '/Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder::getRootNode\(\)/'
         - '/Class Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder does not have a constructor and must be instantiated without any parameters/'
+
+        - '/Parameter \#1 \$event of method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface::dispatch\(\) expects object, string given\./'
+        - '/Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface::dispatch\(\) invoked with 2 parameters, 1 required\./'
