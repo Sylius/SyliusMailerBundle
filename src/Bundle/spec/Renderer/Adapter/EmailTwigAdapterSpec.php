@@ -21,10 +21,12 @@ use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Twig\Environment;
+use Twig\Template;
 
 final class EmailTwigAdapterSpec extends ObjectBehavior
 {
-    function let(\Twig_Environment $twig): void
+    function let(Environment $twig): void
     {
         $this->beConstructedWith($twig);
     }
@@ -35,8 +37,8 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
     }
 
     function it_renders_an_email(
-        \Twig_Environment $twig,
-        \Twig_Template $template,
+        Environment $twig,
+        Template $template,
         EmailInterface $email,
         EmailRenderEvent $event,
         EventDispatcherInterface $dispatcher,
@@ -47,7 +49,8 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         $twig->mergeGlobals([])->shouldBeCalled()->willReturn([]);
 
         $email->getTemplate()->shouldBeCalled()->willReturn('MyTemplate');
-        $twig->loadTemplate('MyTemplate')->shouldBeCalled()->willReturn($template);
+        $twig->getTemplateClass('MyTemplate')->willReturn('MyTemplate');
+        $twig->loadTemplate('MyTemplate', 'MyTemplate')->shouldBeCalled()->willReturn($template);
 
         $template->renderBlock('subject', [])->willReturn('template');
         $template->renderBlock('body', [])->willReturn('body');

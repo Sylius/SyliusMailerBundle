@@ -18,13 +18,16 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
+use Twig\Environment;
+use Twig\Loader\ArrayLoader;
+use Twig\Template;
 
 class EmailTwigAdapter extends AbstractAdapter
 {
-    /** @var \Twig_Environment */
+    /** @var Environment */
     protected $twig;
 
-    public function __construct(\Twig_Environment $twig)
+    public function __construct(Environment $twig)
     {
         $this->twig = $twig;
     }
@@ -58,8 +61,9 @@ class EmailTwigAdapter extends AbstractAdapter
     {
         $data = $this->twig->mergeGlobals($data);
 
-        /** @var \Twig_Template $template */
-        $template = $this->twig->loadTemplate((string) $email->getTemplate());
+        $templateName = (string) $email->getTemplate();
+        /** @var Template $template */
+        $template = $this->twig->loadTemplate($this->twig->getTemplateClass($templateName), $templateName);
 
         $subject = $template->renderBlock('subject', $data);
         $body = $template->renderBlock('body', $data);
@@ -69,7 +73,7 @@ class EmailTwigAdapter extends AbstractAdapter
 
     private function provideEmailWithoutTemplate(EmailInterface $email, array $data): RenderedEmail
     {
-        $twig = new \Twig_Environment(new \Twig_Loader_Array([]));
+        $twig = new Environment(new ArrayLoader([]));
 
         $subjectTemplate = $twig->createTemplate((string) $email->getSubject());
         $bodyTemplate = $twig->createTemplate((string) $email->getContent());
