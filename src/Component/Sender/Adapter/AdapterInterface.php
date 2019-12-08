@@ -32,5 +32,7 @@ interface AdapterInterface
         array $data,
         array $attachments = [],
         array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = []
     ): void;
 }

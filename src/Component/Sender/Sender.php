@@ -44,8 +44,15 @@ final class Sender implements SenderInterface
     /**
      * {@inheritdoc}
      */
-    public function send(string $code, array $recipients, array $data = [], array $attachments = [], array $replyTo = []): void
-    {
+    public function send(
+        string $code,
+        array $recipients,
+        array $data = [],
+        array $attachments = [],
+        array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = []
+    ): void {
         Assert::allStringNotEmpty($recipients);
 
         $email = $this->provider->getEmail($code);
@@ -68,6 +75,8 @@ final class Sender implements SenderInterface
             $data,
             $attachments,
             $replyTo,
+            $ccRecipients,
+            $bccRecipients
         );
     }
 }

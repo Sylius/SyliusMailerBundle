@@ -48,9 +48,20 @@ final class SenderSpec extends ObjectBehavior
         $data = ['foo' => 2];
 
         $rendererAdapter->render($email, ['foo' => 2])->willReturn($renderedEmail);
-        $senderAdapter->send(['john@example.com'], 'sender@example.com', 'Sender', $renderedEmail, $email, $data, [], [])->shouldBeCalled();
+        $senderAdapter->send(
+            ['john@example.com'],
+            'sender@example.com',
+            'Sender',
+            $renderedEmail,
+            $email,
+            $data,
+            [],
+            [],
+            ['cc@mail.com'],
+            ['bcc@mail.com']
+        )->shouldBeCalled();
 
-        $this->send('bar', ['john@example.com'], $data, []);
+        $this->send('bar', ['john@example.com'], $data, [], [], ['cc@mail.com'], ['bcc@mail.com']);
     }
 
     function it_does_not_send_disabled_emails(

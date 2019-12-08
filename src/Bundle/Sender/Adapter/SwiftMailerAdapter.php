@@ -55,13 +55,16 @@ class SwiftMailerAdapter extends AbstractAdapter
         array $data,
         array $attachments = [],
         array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = []
     ): void {
         $message = (new \Swift_Message())
             ->setSubject($renderedEmail->getSubject())
             ->setFrom([$senderAddress => $senderName])
             ->setTo($recipients)
-            ->setReplyTo($replyTo)
-        ;
+            ->setCc($ccRecipients)
+            ->setBcc($bccRecipients)
+            ->setReplyTo($replyTo);
 
         $message->setBody($renderedEmail->getBody(), 'text/html');
 
