@@ -40,7 +40,8 @@
         "symfony/console": "^4.3|^5.0",
         "symfony/swiftmailer-bundle": "^3.1",
         "symfony/twig-bundle": "^4.3|^5.0",
-        "vimeo/psalm": "^3.5"
+        "vimeo/psalm": "^3.5",
+        "matthiasnoback/symfony-dependency-injection-test": "^4.0"
     },
     "replace": {
         "sylius/mailer": "self.version"
