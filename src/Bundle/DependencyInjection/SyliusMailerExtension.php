@@ -40,8 +40,8 @@ final class SyliusMailerExtension extends Extension
             $loader->load($configFile);
         }
 
-        $this->configureSenderAdapter($container);
-        $this->configureRendererAdapter($container);
+        $this->configureSenderAdapter($container, $config);
+        $this->configureRendererAdapter($container, $config);
 
         $container->setParameter('sylius.mailer.sender_name', $config['sender']['name']);
         $container->setParameter('sylius.mailer.sender_address', $config['sender']['address']);
@@ -64,7 +64,7 @@ final class SyliusMailerExtension extends Extension
         return $configuration;
     }
 
-    private function configureSenderAdapter(ContainerBuilder $container): void
+    private function configureSenderAdapter(ContainerBuilder $container, array $config): void
     {
         $bundles = $container->getParameter('kernel.bundles');
 
@@ -82,7 +82,7 @@ final class SyliusMailerExtension extends Extension
         $container->setAlias('sylius.email_sender.adapter', $config['sender_adapter'] ?? $defaultSenderAdapter);
     }
 
-    private function configureRendererAdapter(ContainerBuilder $container): void
+    private function configureRendererAdapter(ContainerBuilder $container, array $config): void
     {
         $bundles = $container->getParameter('kernel.bundles');
 

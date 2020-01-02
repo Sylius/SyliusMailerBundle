@@ -30,8 +30,8 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('sender_adapter')->defaultValue('sylius.email_sender.adapter.default')->end()
-                ->scalarNode('renderer_adapter')->defaultValue('sylius.email_renderer.adapter.default')->end()
+                ->scalarNode('sender_adapter')->end()
+                ->scalarNode('renderer_adapter')->end()
             ->end()
         ;
 

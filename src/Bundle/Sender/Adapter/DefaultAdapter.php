@@ -16,9 +16,18 @@ namespace Sylius\Bundle\MailerBundle\Sender\Adapter;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class DefaultAdapter extends AbstractAdapter
 {
+    /** @var EventDispatcherInterface|null */
+    protected $dispatcher;
+
+    public function __construct(?EventDispatcherInterface $dispatcher = null)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
     public function send(
         array $recipients,
         string $senderAddress,
