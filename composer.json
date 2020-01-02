@@ -27,7 +27,8 @@
         "symfony/dependency-injection": "^4.3|^5.0",
         "symfony/framework-bundle": "^4.3|^5.0",
         "symfony/http-kernel": "^4.3|^5.0",
-        "twig/twig": "^2.12"
+        "twig/twig": "^2.12",
+        "webmozart/assert": "^1.6"
     },
     "require-dev": {
         "phpspec/phpspec": "^6.1",
