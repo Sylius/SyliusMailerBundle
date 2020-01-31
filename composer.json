@@ -29,11 +29,11 @@
         "twig/twig": "^2.12"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.0",
-        "phpstan/phpstan-phpunit": "^0.11",
-        "phpstan/phpstan": "^0.11",
-        "phpstan/phpstan-webmozart-assert": "^0.11",
-        "phpunit/phpunit": "^7.0",
+        "phpspec/phpspec": "^6.1",
+        "phpstan/phpstan-phpunit": "^0.12",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-webmozart-assert": "^0.12",
+        "phpunit/phpunit": "^8.5",
         "sylius-labs/coding-standard": "^3.0",
         "symfony/console": "^3.4|^4.3",
         "symfony/swiftmailer-bundle": "^3.1",

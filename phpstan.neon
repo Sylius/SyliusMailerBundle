@@ -5,7 +5,9 @@ includes:
     - vendor/phpstan/phpstan-phpunit/rules.neon
 
 parameters:
+    checkMissingIterableValueType: false
     reportUnmatchedIgnoredErrors: false
+
     excludes_analyse:
         - %currentWorkingDirectory%/src/Bundle/DependencyInjection/Configuration.php
         - %currentWorkingDirectory%/src/Bundle/spec/*
