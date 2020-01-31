@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Component\Mailer\Event;
 
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class EmailRenderEvent extends Event
 {

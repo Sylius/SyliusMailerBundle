@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Mailer\Sender\Adapter;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 abstract class AbstractAdapter implements AdapterInterface
 {

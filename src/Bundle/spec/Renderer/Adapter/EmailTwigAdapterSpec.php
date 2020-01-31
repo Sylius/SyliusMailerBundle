@@ -20,7 +20,7 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
 use Twig\Template;
 
@@ -52,10 +52,11 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         $template->renderBlock('subject', [])->willReturn('template');
         $template->renderBlock('body', [])->willReturn('body');
 
-        $dispatcher->dispatch(
-            SyliusMailerEvents::EMAIL_PRE_RENDER,
-            Argument::type(EmailRenderEvent::class)
-        )->shouldBeCalled()->willReturn($event);
+        $dispatcher
+            ->dispatch(Argument::type(EmailRenderEvent::class), SyliusMailerEvents::EMAIL_PRE_RENDER)
+            ->shouldBeCalled()
+            ->willReturn($event)
+        ;
 
         $event->getRenderedEmail()->shouldBeCalled()->willReturn($renderedEmail);
 
@@ -72,10 +73,11 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         $email->getSubject()->shouldBeCalled()->willReturn('subject');
         $email->getContent()->shouldBeCalled()->willReturn('content');
 
-        $dispatcher->dispatch(
-            SyliusMailerEvents::EMAIL_PRE_RENDER,
-            Argument::type(EmailRenderEvent::class)
-        )->shouldBeCalled()->willReturn($event);
+        $dispatcher
+            ->dispatch(Argument::type(EmailRenderEvent::class), SyliusMailerEvents::EMAIL_PRE_RENDER)
+            ->shouldBeCalled()
+            ->willReturn($event)
+        ;
 
         $event->getRenderedEmail()->shouldBeCalled()->willReturn($renderedEmail);
 
