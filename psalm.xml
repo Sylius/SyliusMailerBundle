@@ -17,12 +17,6 @@
     </projectFiles>
 
     <issueHandlers>
-        <DeprecatedMethod>
-            <errorLevel type="suppress">
-                <referencedMethod name="Symfony\Component\Config\Definition\Builder\TreeBuilder::root" />
-            </errorLevel>
-        </DeprecatedMethod>
-
         <PossiblyNullReference>
             <errorLevel type="suppress">
                 <file name="src/Bundle/DependencyInjection/Configuration.php" />
