@@ -22,22 +22,23 @@
     "require": {
         "php": "^7.2",
 
-        "symfony/config": "^3.4|^4.3",
-        "symfony/dependency-injection": "^3.4|^4.3",
-        "symfony/framework-bundle": "^3.4|^4.3",
-        "symfony/http-kernel": "^3.4|^4.3",
+        "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0",
+        "symfony/config": "^4.3|^5.0",
+        "symfony/dependency-injection": "^4.3|^5.0",
+        "symfony/framework-bundle": "^4.3|^5.0",
+        "symfony/http-kernel": "^4.3|^5.0",
         "twig/twig": "^2.12"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.0",
-        "phpstan/phpstan-phpunit": "^0.11",
-        "phpstan/phpstan": "^0.11",
-        "phpstan/phpstan-webmozart-assert": "^0.11",
-        "phpunit/phpunit": "^7.0",
+        "phpspec/phpspec": "^6.1",
+        "phpstan/phpstan-phpunit": "^0.12",
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-webmozart-assert": "^0.12",
+        "phpunit/phpunit": "^8.5",
         "sylius-labs/coding-standard": "^3.0",
-        "symfony/console": "^3.4|^4.3",
+        "symfony/console": "^4.3|^5.0",
         "symfony/swiftmailer-bundle": "^3.1",
-        "symfony/twig-bundle": "^3.4|^4.3",
+        "symfony/twig-bundle": "^4.3|^5.0",
         "vimeo/psalm": "^3.5"
     },
     "replace": {

@@ -18,7 +18,7 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 
@@ -47,7 +47,7 @@ class EmailTwigAdapter extends AbstractAdapter
 
         if ($this->dispatcher !== null) {
             /** @var EmailRenderEvent $event */
-            $event = $this->dispatcher->dispatch(SyliusMailerEvents::EMAIL_PRE_RENDER, $event);
+            $event = $this->dispatcher->dispatch($event, SyliusMailerEvents::EMAIL_PRE_RENDER);
         }
 
         return $event->getRenderedEmail();

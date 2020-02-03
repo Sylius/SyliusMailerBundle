@@ -20,7 +20,7 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\SyliusMailerEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class SwiftMailerAdapterSpec extends ObjectBehavior
 {
@@ -45,17 +45,17 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
         $renderedEmail->getSubject()->shouldBeCalled()->willReturn('subject');
         $renderedEmail->getBody()->shouldBeCalled()->willReturn('body');
 
-        $dispatcher->dispatch(
-            SyliusMailerEvents::EMAIL_PRE_SEND,
-            Argument::type(EmailSendEvent::class)
-        )->shouldBeCalled();
+        $dispatcher
+            ->dispatch(Argument::type(EmailSendEvent::class), SyliusMailerEvents::EMAIL_PRE_SEND)
+            ->shouldBeCalled()
+        ;
 
         $mailer->send(Argument::type('\Swift_Message'))->shouldBeCalled();
 
-        $dispatcher->dispatch(
-            SyliusMailerEvents::EMAIL_POST_SEND,
-            Argument::type(EmailSendEvent::class)
-        )->shouldBeCalled();
+        $dispatcher
+            ->dispatch(Argument::type(EmailSendEvent::class), SyliusMailerEvents::EMAIL_POST_SEND)
+            ->shouldBeCalled()
+        ;
 
         $this->send(
             ['pawel@sylius.com'],

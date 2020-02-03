@@ -17,24 +17,6 @@
     </projectFiles>
 
     <issueHandlers>
-        <DeprecatedClass>
-            <errorLevel type="suppress">
-                <referencedClass name="Symfony\Component\EventDispatcher\Event" />
-            </errorLevel>
-        </DeprecatedClass>
-
-        <DeprecatedMethod>
-            <errorLevel type="suppress">
-                <referencedMethod name="Symfony\Component\Config\Definition\Builder\TreeBuilder::root" />
-            </errorLevel>
-        </DeprecatedMethod>
-
-        <InvalidArgument>
-            <errorLevel type="suppress">
-                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
-            </errorLevel>
-        </InvalidArgument>
-
         <PossiblyNullReference>
             <errorLevel type="suppress">
                 <file name="src/Bundle/DependencyInjection/Configuration.php" />
@@ -52,8 +34,8 @@
 
         <TooManyArguments>
             <errorLevel type="suppress">
-                <referencedFunction name="Symfony\Component\EventDispatcher\EventDispatcherInterface::dispatch" />
                 <referencedFunction name="Symfony\Component\Config\Definition\Builder\TreeBuilder::__construct" />
+                <referencedFunction name="Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch" />
             </errorLevel>
         </TooManyArguments>
     </issueHandlers>
