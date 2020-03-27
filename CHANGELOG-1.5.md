@@ -1,5 +1,11 @@
 ## CHANGELOG FOR `1.5.x`
 
+### v1.5.1 (2020-03-27)
+
+#### TL;DR
+
+- [#16](https://github.com/Sylius/SyliusMailerBundle/issues/16) Fix missing subject bug ([@lchrusciel](https://github.com/lchrusciel))
+
 ### v1.5.0 (2020-02-26)
 
 #### TL;DR
