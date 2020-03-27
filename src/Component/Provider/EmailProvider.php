@@ -50,7 +50,11 @@ final class EmailProvider implements EmailProviderInterface
         $configuration = $this->configuration[$code];
 
         $email->setCode($code);
-        $email->setSubject($configuration['subject']);
+
+        if (isset($configuration['subject'])) {
+            $email->setSubject($configuration['subject']);
+        }
+
         $email->setTemplate($configuration['template']);
 
         if (isset($configuration['enabled']) && false === $configuration['enabled']) {
