@@ -39,8 +39,8 @@ final class DefaultAdapter extends AbstractAdapter
         array $replyTo = []
     ): void {
         throw new \RuntimeException(sprintf(
-            'You need to configure an adapter to send the email. Take a look at %s (requires "symfony/swiftmailer-bundle" library).',
-            SwiftMailerAdapter::class
+            'You need to configure an adapter to send the email. Take a look at %s (requires "symfony/mailer" library).',
+            SymfonyMailerAdapter::class
         ));
     }
 }

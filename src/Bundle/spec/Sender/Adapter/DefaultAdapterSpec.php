@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Bundle\MailerBundle\Sender\Adapter;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter;
+use Sylius\Bundle\MailerBundle\Sender\Adapter\SymfonyMailerAdapter;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
@@ -32,8 +32,8 @@ final class DefaultAdapterSpec extends ObjectBehavior
     ): void {
         $this
             ->shouldThrow(new \RuntimeException(sprintf(
-                'You need to configure an adapter to send the email. Take a look at %s (requires "symfony/swiftmailer-bundle" library).',
-                SwiftMailerAdapter::class
+                'You need to configure an adapter to send the email. Take a look at %s (requires "symfony/mailer" library).',
+                SymfonyMailerAdapter::class
             )))
             ->during('send', [['pawel@sylius.com'], 'arnaud@sylius.com', 'arnaud', $renderedEmail, $email, []])
         ;
