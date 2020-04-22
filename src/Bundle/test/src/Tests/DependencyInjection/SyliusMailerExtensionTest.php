@@ -19,10 +19,12 @@ use Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailDefaultAdapter;
 use Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter;
 use Sylius\Bundle\MailerBundle\Sender\Adapter\DefaultAdapter;
 use Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter;
+use Sylius\Bundle\MailerBundle\Sender\Adapter\SymfonyMailerAdapter;
 use Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Mailer\MailerInterface;
 use Twig\Environment;
 
 final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
@@ -31,7 +33,6 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
     public function it_configures_mailer_adapters_and_sender_with_default_data(): void
     {
         $this->mockService('event_dispatcher', EventDispatcher::class);
-
         $this->container->setParameter('kernel.bundles', []);
 
         $this->load();
@@ -70,7 +71,7 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
     public function it_configures_twig_and_swiftmailer_adapters_if_they_are_available(): void
     {
         $this->mockService('event_dispatcher', EventDispatcher::class);
-        $this->mockService('mailer', \Swift_Mailer::class);
+        $this->mockService('swiftmailer.mailer.default', \Swift_Mailer::class);
         $this->mockService('twig', Environment::class);
 
         $this->container->setParameter(
@@ -86,6 +87,55 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasService('sylius.email_sender.adapter.swiftmailer', SwiftMailerAdapter::class);
         $this->assertContainerBuilderHasAlias('sylius.email_sender.adapter', 'sylius.email_sender.adapter.swiftmailer');
+
+        $this->assertContainerBuilderHasService('sylius.email_renderer.adapter.twig', EmailTwigAdapter::class);
+        $this->assertContainerBuilderHasAlias('sylius.email_renderer.adapter', 'sylius.email_renderer.adapter.twig');
+    }
+
+    /** @test */
+    public function it_configures_twig_and_symfony_mailer_adapters_if_they_are_available(): void
+    {
+        $this->mockService('event_dispatcher', EventDispatcher::class);
+        $this->mockService('mailer.mailer', MailerInterface::class);
+        $this->mockService('twig', Environment::class);
+
+        $this->container->setParameter(
+            'kernel.bundles',
+            ['TwigBundle' => TwigBundle::class]
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertContainerBuilderHasParameter('sylius.mailer.sender_name', 'Example.com Store');
+        $this->assertContainerBuilderHasParameter('sylius.mailer.sender_address', 'no-reply@example.com');
+
+        $this->assertContainerBuilderHasService('sylius.email_sender.adapter.symfony_mailer', SymfonyMailerAdapter::class);
+        $this->assertContainerBuilderHasAlias('sylius.email_sender.adapter', 'sylius.email_sender.adapter.symfony_mailer');
+
+        $this->assertContainerBuilderHasService('sylius.email_renderer.adapter.twig', EmailTwigAdapter::class);
+        $this->assertContainerBuilderHasAlias('sylius.email_renderer.adapter', 'sylius.email_renderer.adapter.twig');
+    }
+
+    /** @test */
+    public function it_configures_twig_and_swift_mailer_adapters_over_symfony_mailer_if_both_are_available(): void
+    {
+        $this->mockService('event_dispatcher', EventDispatcher::class);
+        $this->mockService('mailer.mailer', MailerInterface::class);
+        $this->mockService('swiftmailer.mailer.default', \Swift_Mailer::class);
+        $this->mockService('twig', Environment::class);
+
+        $this->container->setParameter(
+            'kernel.bundles',
+            ['SwiftmailerBundle' => SwiftmailerBundle::class, 'TwigBundle' => TwigBundle::class]
+        );
+
+        $this->load();
+        $this->compile();
+
+        $this->assertTrue(interface_exists(MailerInterface::class));
+        $this->assertContainerBuilderHasService('sylius.email_sender.adapter.symfony_mailer', SymfonyMailerAdapter::class);
+        $this->assertContainerBuilderHasAlias('sylius.email_sender.adapter', 'sylius.email_sender.adapter.symfony_mailer');
 
         $this->assertContainerBuilderHasService('sylius.email_renderer.adapter.twig', EmailTwigAdapter::class);
         $this->assertContainerBuilderHasAlias('sylius.email_renderer.adapter', 'sylius.email_renderer.adapter.twig');

@@ -15,6 +15,7 @@ namespace Sylius\Bundle\MailerBundle\DependencyInjection;
 
 use Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter;
 use Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter;
+use Sylius\Bundle\MailerBundle\Sender\Adapter\SymfonyMailerAdapter;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -40,7 +41,9 @@ final class SyliusMailerExtension extends Extension
             $loader->load($configFile);
         }
 
-        $this->configureSenderAdapter($container, $config);
+        $adapter = $this->configureSenderAdapter($container, $config);
+        $container->setAlias('sylius.email_sender.adapter', $adapter);
+
         $this->configureRendererAdapter($container, $config);
 
         $container->setParameter('sylius.mailer.sender_name', $config['sender']['name']);
@@ -64,22 +67,35 @@ final class SyliusMailerExtension extends Extension
         return $configuration;
     }
 
-    private function configureSenderAdapter(ContainerBuilder $container, array $config): void
+    private function configureSenderAdapter(ContainerBuilder $container, array $config): string
     {
-        $bundles = $container->getParameter('kernel.bundles');
+        if (isset($config['sender_adapter'])) {
+            return $config['sender_adapter'];
+        }
 
-        $defaultSenderAdapter = 'sylius.email_sender.adapter.default';
-        if (array_key_exists('SwiftmailerBundle', $bundles)) {
+        if ($container->get('service_container')->has('mailer.mailer')) {
+            $symfonyMailerAdapter = new ChildDefinition('sylius.email_sender.adapter.abstract');
+            $symfonyMailerAdapter->setClass(SymfonyMailerAdapter::class);
+            $symfonyMailerAdapter->setArguments([new Reference('mailer.mailer'), new Reference('event_dispatcher')]);
+            $symfonyMailerAdapter->setPrivate(false);
+
+            $container->setDefinition('sylius.email_sender.adapter.symfony_mailer', $symfonyMailerAdapter);
+
+            return 'sylius.email_sender.adapter.symfony_mailer';
+        }
+
+        if ($container->get('service_container')->has('swiftmailer.mailer.default')) {
             $swiftmailerAdapter = new ChildDefinition('sylius.email_sender.adapter.abstract');
             $swiftmailerAdapter->setClass(SwiftMailerAdapter::class);
-            $swiftmailerAdapter->setArguments([new Reference('mailer'), new Reference('event_dispatcher')]);
+            $swiftmailerAdapter->setArguments([new Reference('swiftmailer.mailer.default'), new Reference('event_dispatcher')]);
             $swiftmailerAdapter->setPrivate(false);
 
             $container->setDefinition('sylius.email_sender.adapter.swiftmailer', $swiftmailerAdapter);
-            $defaultSenderAdapter = 'sylius.email_sender.adapter.swiftmailer';
+
+            return 'sylius.email_sender.adapter.swiftmailer';
         }
 
-        $container->setAlias('sylius.email_sender.adapter', $config['sender_adapter'] ?? $defaultSenderAdapter);
+        return 'sylius.email_sender.adapter.default';
     }
 
     private function configureRendererAdapter(ContainerBuilder $container, array $config): void
