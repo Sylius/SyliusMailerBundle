@@ -1,0 +1,25 @@
+---------------------------------------------------------------------------
+
+by pocky at 2020-04-21T00:03:31Z
+
+@Zales0123 Hello! Is it possible to fix your conflict? This PR is great!
+
+@pamil @lchrusciel I have a fully functional code for Symfony Mailer with another SenderAdapter. If we merge this PR, resolve conflict on #7 and add SymfonyMailerAdapter, this bundle/component will works very well until his deprecation.
+
+---------------------------------------------------------------------------
+
+by pocky at 2020-04-21T16:37:26Z
+
+Thank you! #18 is ready for tests :)
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-22T09:40:20Z
+
+Do we still need a twig as a dependency on this library then?
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2020-04-22T09:43:19Z
+
+Thanks, Mateusz! :1st_place_medal:
