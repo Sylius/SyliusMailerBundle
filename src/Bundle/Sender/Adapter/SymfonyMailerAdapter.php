@@ -23,7 +23,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-class SymfonyMailerAdapter extends AbstractAdapter
+final class SymfonyMailerAdapter extends AbstractAdapter
 {
     /** @var MailerInterface */
     protected $mailer;

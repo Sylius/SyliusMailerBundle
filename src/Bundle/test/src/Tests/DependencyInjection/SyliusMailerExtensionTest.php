@@ -118,7 +118,7 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
     }
 
     /** @test */
-    public function it_configures_twig_and_swift_mailer_adapters_over_symfony_mailer_if_both_are_available(): void
+    public function it_configures_twig_and_symfony_mailer_adapters_over_swift_mailer_if_both_are_available(): void
     {
         $this->mockService('event_dispatcher', EventDispatcher::class);
         $this->mockService('mailer.mailer', MailerInterface::class);
