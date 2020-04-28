@@ -28,10 +28,10 @@ final class SymfonyMailerAdapter extends AbstractAdapter
     /** @var MailerInterface */
     protected $mailer;
 
-    /** @var EventDispatcherInterface|null */
+    /** @var EventDispatcherInterface */
     protected $dispatcher;
 
-    public function __construct(MailerInterface $mailer, ?EventDispatcherInterface $dispatcher = null)
+    public function __construct(MailerInterface $mailer, EventDispatcherInterface $dispatcher)
     {
         $this->mailer = $mailer;
         $this->dispatcher = $dispatcher;
