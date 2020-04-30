@@ -60,7 +60,7 @@ class MovieController
     {
         // Your code.
 
-        $this->get('sylius.email_sender')->send('movie_added_notification', array('team@website.com'), array('movie' => $movie, 'user' => $this->getUser()));
+        $this->get('sylius.email_sender')->send('movie_added_notification', ['team@website.com'], ['movie' => $movie, 'user' => $this->getUser()]);
     }
 }
 ```
@@ -86,7 +86,7 @@ class MovieNotificationListener
         $movie = $event->getMovie();
         $user = $event->getUser();
 
-        $this->sender->send('movie_added_notification', array('team@website.com'), array('movie' => $movie, 'user' => $user));
+        $this->sender->send('movie_added_notification', ['team@website.com'], ['movie' => $movie, 'user' => $user]);
     }
 }
 ```

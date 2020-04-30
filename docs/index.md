@@ -10,10 +10,10 @@ The bundle supports adapters, by default e-mails are rendered using Twig and sen
 This bundle provides easy integration of the [Sylius mailer component](https://docs.sylius.com/en/latest/components_and_bundles/components/Mailer/index.html)
 with any Symfony full-stack application.
 
-* [installation](installation.md)
-* [your first email](your_first_email.md)
-* [using custom adapter](using_custom_adapter.md)
-* [configuration](configuration.md)
+* [Installation](installation.md)
+* [Your First Email](your_first_email.md)
+* [Using Custom Adapter](using_custom_adapter.md)
+* [Configuration reference](configuration.md)
     
 ## Learn more
 
