@@ -21,7 +21,7 @@ class RenderedEmail
     /** @var string */
     protected $body;
 
-    /** @var string */
+    /** @var string|null */
     protected $bodyPlaintext;
 
     public function __construct(string $subject, string $body, string $bodyPlaintext = null)
@@ -51,7 +51,7 @@ class RenderedEmail
         $this->body = $body;
     }
 
-    public function getBodyPlaintext(): string
+    public function getBodyPlaintext(): ?string
     {
         return $this->bodyPlaintext;
     }
