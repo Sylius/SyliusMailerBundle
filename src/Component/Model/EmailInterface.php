@@ -44,6 +44,16 @@ interface EmailInterface
      */
     public function setContent(string $content);
 
+    /**
+     * @return string
+     */
+    public function getContentPlaintext(): ?string;
+
+    /**
+     * @return void
+     */
+    public function setContentPlaintext(string $content);
+
     public function getTemplate(): ?string;
 
     public function setTemplate(string $template): void;

@@ -31,6 +31,9 @@ final class Email implements EmailInterface
     private $content;
 
     /** @var string|null */
+    private $contentPlaintext;
+
+    /** @var string|null */
     private $template;
 
     /** @var string|null */
@@ -116,6 +119,22 @@ final class Email implements EmailInterface
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+   /**
+     * {@inheritdoc}
+     */
+    public function getContentPlaintext(): ?string
+    {
+        return $this->contentPlaintext;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setContentPlaintext(string $content): void
+    {
+        $this->contentPlaintext = $content;
     }
 
     /**
