@@ -24,7 +24,7 @@ class RenderedEmail
     /** @var string */
     protected $bodyPlaintext;
 
-    public function __construct(string $subject, string $body, string $bodyPlaintext)
+    public function __construct(string $subject, string $body, string $bodyPlaintext = null)
     {
         $this->subject = $subject;
         $this->body = $body;
