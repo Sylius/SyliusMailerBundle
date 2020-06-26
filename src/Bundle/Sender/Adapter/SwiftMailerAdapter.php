@@ -54,7 +54,7 @@ class SwiftMailerAdapter extends AbstractAdapter
             ->setReplyTo($replyTo);
 
         $bodyPlaintext = $renderedEmail->getBodyPlaintext();
-        if (strlen($bodyPlaintext) > 0) {
+        if ($bodyPlaintext !== null) {
             $message->setBody();
             $message->addPart($renderedEmail->getBody(), 'text/html');
         } else {
