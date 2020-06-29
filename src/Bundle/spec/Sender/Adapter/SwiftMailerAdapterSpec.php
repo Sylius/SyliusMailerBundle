@@ -44,6 +44,7 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
 
         $renderedEmail->getSubject()->shouldBeCalled()->willReturn('subject');
         $renderedEmail->getBody()->shouldBeCalled()->willReturn('body');
+        $renderedEmail->getBodyPlaintext()->shouldBeCalled()->willReturn('body_plaintext');
 
         $dispatcher
             ->dispatch(Argument::type(EmailSendEvent::class), SyliusMailerEvents::EMAIL_PRE_SEND)
