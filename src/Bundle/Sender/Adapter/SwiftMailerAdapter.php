@@ -55,7 +55,7 @@ class SwiftMailerAdapter extends AbstractAdapter
 
         $bodyPlaintext = $renderedEmail->getBodyPlaintext();
         if ($bodyPlaintext !== null) {
-            $message->setBody();
+            $message->setBody($bodyPlaintext);
             $message->addPart($renderedEmail->getBody(), 'text/html');
         } else {
             $message->setBody($renderedEmail->getBody(), 'text/html');
