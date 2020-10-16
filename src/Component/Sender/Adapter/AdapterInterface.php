@@ -27,7 +27,7 @@ interface AdapterInterface
      * @param EmailInterface $email
      * @param array<mixed, mixed> $data
      * @param string[] $attachments
-     * @param string[] $replyTo
+     * @param array<mixed, string> $replyTo
      * @throws SyliusMailerException
      */
     public function send(
