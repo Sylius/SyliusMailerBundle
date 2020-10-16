@@ -3,3 +3,6 @@
 
 /composer.phar
 /composer.lock
+
+.idea
+.phpunit.result.cache
