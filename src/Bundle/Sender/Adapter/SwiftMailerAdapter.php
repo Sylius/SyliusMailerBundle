@@ -20,23 +20,18 @@ use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-class SwiftMailerAdapter extends AbstractAdapter
+final class SwiftMailerAdapter extends AbstractAdapter
 {
     /** @var \Swift_Mailer */
-    protected $mailer;
-
-    /** @var EventDispatcherInterface|null */
-    protected $dispatcher;
+    private $mailer;
 
     public function __construct(\Swift_Mailer $mailer, ?EventDispatcherInterface $dispatcher = null)
     {
+        parent::__construct($dispatcher);
+
         $this->mailer = $mailer;
-        $this->dispatcher = $dispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function send(
         array $recipients,
         string $senderAddress,

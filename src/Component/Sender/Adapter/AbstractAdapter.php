@@ -17,10 +17,15 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 abstract class AbstractAdapter implements AdapterInterface
 {
-    /** @var EventDispatcherInterface */
+    /** @var EventDispatcherInterface|null */
     protected $dispatcher;
 
-    public function setEventDispatcher(EventDispatcherInterface $dispatcher): void
+    public function __construct(?EventDispatcherInterface $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
+    public function setEventDispatcher(?EventDispatcherInterface $dispatcher): void
     {
         $this->dispatcher = $dispatcher;
     }
