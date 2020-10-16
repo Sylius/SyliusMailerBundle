@@ -20,7 +20,7 @@ use Sylius\Component\Mailer\Renderer\RenderedEmail;
 interface AdapterInterface
 {
     /**
-     * @param array<mixed, string> $recipients
+     * @param array<mixed, string> $recipients Example: ['receiver@domain.org', 'other@domain.org' => 'A name']
      * @param string $senderAddress
      * @param string $senderName
      * @param RenderedEmail $renderedEmail
