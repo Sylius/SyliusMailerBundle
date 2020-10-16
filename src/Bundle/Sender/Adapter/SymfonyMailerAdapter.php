@@ -50,13 +50,19 @@ final class SymfonyMailerAdapter extends AbstractAdapter
         $message = (new Email())
             ->subject($renderedEmail->getSubject())
             ->from(new Address($senderAddress, $senderName))
-            ->to($recipients)
-            ->replyTo($replyTo)
             ->html($renderedEmail->getBody())
         ;
 
+        foreach ($this->convertToAddresses($recipients) as $recipient) {
+            $message->addTo($recipient);
+        }
+
         foreach ($attachments as $attachment) {
             $message->attachFromPath($attachment);
+        }
+
+        foreach ($this->convertToAddresses($replyTo) as $replyToAddress) {
+            $message->addReplyTo($replyToAddress);
         }
 
         $emailSendEvent = new EmailSendEvent($message, $email, $data, $recipients, $replyTo);
@@ -77,6 +83,17 @@ final class SymfonyMailerAdapter extends AbstractAdapter
 
         if ($this->dispatcher !== null) {
             $this->dispatcher->dispatch($emailSendEvent, SyliusMailerEvents::EMAIL_POST_SEND);
+        }
+    }
+
+    private function convertToAddresses(array $addresses): \Generator
+    {
+        foreach ($addresses as $key => $value) {
+            if (is_string($key)) {
+                yield new Address($key, $value);
+            } else {
+                yield new Address($value);
+            }
         }
     }
 }
