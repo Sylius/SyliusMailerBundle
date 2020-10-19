@@ -21,13 +21,10 @@ interface AdapterInterface
 {
     /**
      * @param array<mixed, string> $recipients Example: ['receiver@domain.org', 'other@domain.org' => 'A name']
-     * @param string $senderAddress
-     * @param string $senderName
-     * @param RenderedEmail $renderedEmail
-     * @param EmailInterface $email
      * @param array<mixed, mixed> $data
      * @param string[] $attachments
      * @param array<mixed, string> $replyTo
+     *
      * @throws SyliusMailerException
      */
     public function send(

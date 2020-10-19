@@ -98,7 +98,7 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
             'arnaud',
             $renderedEmail,
             $email,
-            []
+            [],
         ]);
     }
 }
