@@ -24,7 +24,7 @@
         }
     ],
     "require": {
-        "php": "^7.3",
+        "php": "^7.3 || ^8.0",
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
