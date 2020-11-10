@@ -2,49 +2,57 @@
     "name": "sylius/mailer-bundle",
     "type": "symfony-bundle",
     "description": "Mailers and e-mail template management for Symfony projects.",
-    "keywords": ["mailer", "email", "swiftmailer"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "mailer",
+        "email",
+        "swiftmailer"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php": "^7.3",
-
         "sylius-labs/polyfill-symfony-event-dispatcher": "^1.0",
-        "symfony/config": "^4.4|^5.1",
-        "symfony/dependency-injection": "^4.4|^5.1",
-        "symfony/framework-bundle": "^4.4|^5.1",
-        "symfony/http-kernel": "^4.4|^5.1",
+        "symfony/config": "^4.4 || ^5.1",
+        "symfony/dependency-injection": "^4.4 || ^5.1",
+        "symfony/framework-bundle": "^4.4 || ^5.1",
+        "symfony/http-kernel": "^4.4 || ^5.1",
         "twig/twig": "^2.12",
         "webmozart/assert": "^1.9"
     },
+    "replace": {
+        "sylius/mailer": "self.version"
+    },
     "require-dev": {
+        "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "phpspec/phpspec": "^7.0",
-        "phpstan/phpstan-phpunit": "0.12.16",
         "phpstan/phpstan": "0.12.54",
+        "phpstan/phpstan-phpunit": "0.12.16",
         "phpstan/phpstan-webmozart-assert": "0.12.7",
         "phpunit/phpunit": "^9.4",
         "sylius-labs/coding-standard": "^3.2",
-        "symfony/console": "^4.4|^5.1",
+        "symfony/console": "^4.4 || ^5.1",
         "symfony/swiftmailer-bundle": "^3.1",
-        "symfony/twig-bundle": "^4.4|^5.1",
-        "vimeo/psalm": "3.18.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.2"
+        "symfony/twig-bundle": "^4.4 || ^5.1",
+        "vimeo/psalm": "3.18.2"
     },
-    "replace": {
-        "sylius/mailer": "self.version"
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.6-dev"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -75,10 +83,5 @@
             "vendor/bin/phpspec run --ansi --no-interaction",
             "vendor/bin/phpunit --colors=always"
         ]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.5-dev"
-        }
     }
 }
