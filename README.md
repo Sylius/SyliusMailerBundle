@@ -1,12 +1,12 @@
-SyliusMailerBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusMailerBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusMailerBundle)
+SyliusMailerBundle
 ==================
 
-[**Symfony2**](http://symfony.com) integration of Sylius Mailer component.
+[**Symfony**](https://symfony.com) integration of Sylius Mailer component.
 
 Sylius
 ------
 
-**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.com).
+**Sylius** - Modern ecommerce for Symfony. Visit [Sylius.org](https://sylius.com).
 
 Sylius
 ------
@@ -23,7 +23,7 @@ Documentation
 Contributing
 ------------
 
-[This page](http://docs.sylius.com/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
+[This page](https://docs.sylius.com/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
 
 Follow Sylius' Development
 --------------------------
@@ -38,7 +38,7 @@ Bug tracking
 ------------
 
 Sylius uses [GitHub issues](https://github.com/Sylius/Sylius/issues).
-If you have found bug, please create an issue.
+If you have found a bug, please create an issue.
 
 MIT License
 -----------
