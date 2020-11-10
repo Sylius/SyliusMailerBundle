@@ -2,40 +2,47 @@
     "name": "sylius/mailer",
     "type": "library",
     "description": "Mails management and sending abstraction.",
-    "keywords": ["email", "mails", "notifications"],
-    "homepage": "http://sylius.com",
+    "keywords": [
+        "email",
+        "mails",
+        "notifications"
+    ],
+    "homepage": "https://sylius.com",
     "license": "MIT",
     "authors": [
         {
             "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "homepage": "https://pjedrzejewski.com"
         },
         {
             "name": "Sylius project",
-            "homepage": "http://sylius.com"
+            "homepage": "https://sylius.com"
         },
         {
             "name": "Community contributions",
-            "homepage": "http://github.com/Sylius/Sylius/contributors"
+            "homepage": "https://github.com/Sylius/Sylius/contributors"
         }
     ],
     "require": {
         "php": "^7.3",
-
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
         "phpspec/phpspec": "^7.0"
     },
-    "autoload": {
-        "psr-4": { "Sylius\\Component\\Mailer\\": "" }
-    },
-    "autoload-dev": {
-        "psr-4": { "Sylius\\Component\\Mailer\\spec\\": "spec/" }
-    },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.5-dev"
+            "dev-master": "1.6-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Sylius\\Component\\Mailer\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sylius\\Component\\Mailer\\spec\\": "spec/"
         }
     }
 }
