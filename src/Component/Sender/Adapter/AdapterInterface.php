@@ -26,6 +26,8 @@ interface AdapterInterface
         EmailInterface $email,
         array $data,
         array $attachments = [],
-        array $replyTo = []
+        array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = []
     ): void;
 }

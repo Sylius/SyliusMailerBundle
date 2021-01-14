@@ -15,5 +15,13 @@ namespace Sylius\Component\Mailer\Sender;
 
 interface SenderInterface
 {
-    public function send(string $code, array $recipients, array $data = [], array $attachments = [], array $replyTo = []): void;
+    public function send(
+        string $code,
+        array $recipients,
+        array $data = [],
+        array $attachments = [],
+        array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = []
+    ): void;
 }

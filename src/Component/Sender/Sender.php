@@ -47,8 +47,15 @@ final class Sender implements SenderInterface
     /**
      * {@inheritdoc}
      */
-    public function send(string $code, array $recipients, array $data = [], array $attachments = [], array $replyTo = []): void
-    {
+    public function send(
+        string $code,
+        array $recipients,
+        array $data = [],
+        array $attachments = [],
+        array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = []
+    ): void {
         $email = $this->provider->getEmail($code);
 
         if (!$email->isEnabled()) {
@@ -68,7 +75,9 @@ final class Sender implements SenderInterface
             $email,
             $data,
             $attachments,
-            $replyTo
+            $replyTo,
+            $ccRecipients,
+            $bccRecipients
         );
     }
 }
