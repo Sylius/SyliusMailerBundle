@@ -21,10 +21,14 @@ class RenderedEmail
     /** @var string */
     protected $body;
 
-    public function __construct(string $subject, string $body)
+    /** @var string|null */
+    protected $bodyPlaintext;
+
+    public function __construct(string $subject, string $body, string $bodyPlaintext = null)
     {
         $this->subject = $subject;
         $this->body = $body;
+        $this->bodyPlaintext = $bodyPlaintext;
     }
 
     public function getSubject(): string
@@ -45,5 +49,15 @@ class RenderedEmail
     public function setBody(string $body): void
     {
         $this->body = $body;
+    }
+
+    public function getBodyPlaintext(): ?string
+    {
+        return $this->bodyPlaintext;
+    }
+
+    public function setBodyPlaintext(string $body): void
+    {
+        $this->bodyPlaintext = $body;
     }
 }

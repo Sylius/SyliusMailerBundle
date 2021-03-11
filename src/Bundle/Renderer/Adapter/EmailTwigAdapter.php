@@ -73,8 +73,12 @@ class EmailTwigAdapter extends AbstractAdapter
 
         $subject = $template->renderBlock('subject', $data);
         $body = $template->renderBlock('body', $data);
+        $bodyPlaintext = null;
+        if ($template->hasBlock('body_plaintext', [])) {
+            $bodyPlaintext = $template->renderBlock('body_plaintext', $data);
+        }
 
-        return new RenderedEmail($subject, $body);
+        return new RenderedEmail($subject, $body, $bodyPlaintext);
     }
 
     private function provideEmailWithoutTemplate(EmailInterface $email, array $data): RenderedEmail
