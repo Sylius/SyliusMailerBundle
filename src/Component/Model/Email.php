@@ -18,26 +18,19 @@ final class Email implements EmailInterface
     /** @var mixed */
     private $id;
 
-    /** @var string|null */
-    private $code;
+    private ?string $code = null;
 
-    /** @var bool */
-    private $enabled = true;
+    private bool $enabled = true;
 
-    /** @var string|null */
-    private $subject;
+    private ?string $subject = null;
 
-    /** @var string|null */
-    private $content;
+    private ?string $content = null;
 
-    /** @var string|null */
-    private $template;
+    private ?string $template = null;
 
-    /** @var string|null */
-    private $senderName;
+    private ?string $senderName = null;
 
-    /** @var string|null */
-    private $senderAddress;
+    private ?string $senderAddress = null;
 
     /**
      * @return mixed

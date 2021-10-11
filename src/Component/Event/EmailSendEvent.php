@@ -24,8 +24,7 @@ final class EmailSendEvent extends Event
     /** @var string[] */
     protected $recipients;
 
-    /** @var EmailInterface */
-    protected $email;
+    protected EmailInterface $email;
 
     /** @var array */
     protected $data;
