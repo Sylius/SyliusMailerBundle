@@ -99,7 +99,8 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
     private function mockService(string $id, string $class): void
     {
         $this->container->setDefinition(
-            $id, (new Definition())->setClass(self::getMockClass($class))->setAutoconfigured(true)
+            $id,
+            (new Definition())->setClass(self::getMockClass($class))->setAutoconfigured(true)
         );
     }
 }

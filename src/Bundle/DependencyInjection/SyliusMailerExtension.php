@@ -66,7 +66,7 @@ final class SyliusMailerExtension extends Extension
 
     private function configureSenderAdapter(ContainerBuilder $container, array $config): void
     {
-        $bundles = $container->getParameter('kernel.bundles');
+        $bundles = (array) $container->getParameter('kernel.bundles');
 
         $defaultSenderAdapter = 'sylius.email_sender.adapter.default';
         if (array_key_exists('SwiftmailerBundle', $bundles)) {
@@ -84,7 +84,7 @@ final class SyliusMailerExtension extends Extension
 
     private function configureRendererAdapter(ContainerBuilder $container, array $config): void
     {
-        $bundles = $container->getParameter('kernel.bundles');
+        $bundles = (array) $container->getParameter('kernel.bundles');
 
         $defaultRendererAdapter = 'sylius.email_renderer.adapter.default';
         if (array_key_exists('TwigBundle', $bundles)) {

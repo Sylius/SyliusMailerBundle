@@ -1,6 +1,8 @@
 <?php
 
+use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
+use PhpCsFixer\Fixer\Phpdoc\PhpdocTagTypeFixer;
 use SlevomatCodingStandard\Sniffs\Commenting\InlineDocCommentDeclarationSniff;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symplify\EasyCodingStandard\ValueObject\Option;
@@ -21,8 +23,10 @@ file that was distributed with this source code.',
     ]]);
 
     $containerConfigurator->parameters()->set(Option::SKIP, [
+        PhpdocTagTypeFixer::class,
         InlineDocCommentDeclarationSniff::class . '.MissingVariable',
         VisibilityRequiredFixer::class => ['*Spec.php'],
         '**/var/*',
+        'src/Bundle/test/app/AppKernel.php',
     ]);
 };
