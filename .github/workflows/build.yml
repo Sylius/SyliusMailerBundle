@@ -22,14 +22,14 @@ jobs:
                         symfony: 4.4.*
                     -
                         php: 7.4
-                        symfony: 5.1.*
+                        symfony: 5.3.*
                     -
                         php: 8.0
                         symfony: 4.4.*
                         composer-flags: --ignore-platform-req=php
                     -
                         php: 8.0
-                        symfony: 5.1.*
+                        symfony: 5.3.*
                         composer-flags: --ignore-platform-req=php
 
         steps:
