@@ -1,0 +1,17 @@
+---------------------------------------------------------------------------
+
+by Roshyo at 2021-12-22T13:16:02Z
+
+Why dropping support for 7.4 ? It is still supported by Sylius
+
+---------------------------------------------------------------------------
+
+by lchrusciel at 2021-12-22T13:20:04Z
+
+Hey Stephane, you are correct. Yet, it is supported only by previous releases, and we want to move forward with the whole community. Therefore, all future releases will have PHP^8.0 and SF ^4.4 and ^5.4 support only
+
+---------------------------------------------------------------------------
+
+by GSadee at 2022-01-04T06:42:35Z
+
+Thank you, Rafał! :1st_place_medal:
