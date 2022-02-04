@@ -30,7 +30,7 @@
         "symfony/dependency-injection": "^4.4 || ^5.4",
         "symfony/framework-bundle": "^4.4 || ^5.4",
         "symfony/http-kernel": "^4.4 || ^5.4",
-        "twig/twig": "^2.12",
+        "twig/twig": "^2.12 || ^3.3",
         "webmozart/assert": "^1.9"
     },
     "replace": {

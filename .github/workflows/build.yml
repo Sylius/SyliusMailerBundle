@@ -12,17 +12,13 @@ on:
 jobs:
     tests:
         runs-on: ubuntu-latest
-        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}"
+        name: "PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, Twig ${{ matrix.twig }}"
         strategy:
             fail-fast: false
             matrix:
-                include:
-                    -
-                        php: 8.0
-                        symfony: 4.4.*
-                    -
-                        php: 8.0
-                        symfony: 5.4.*
+                php: ["8.0"]
+                symfony: ["4.4.*", "5.4.*"]
+                twig: ["^2.12", "^3.3"]
 
         steps:
             -
@@ -42,6 +38,12 @@ jobs:
                     composer global require --no-progress --no-scripts --no-plugins "symfony/flex:^1.10"
                     composer config extra.symfony.require "${{ matrix.symfony }}"
                     (cd src/Component && composer config extra.symfony.require "${{ matrix.symfony }}")
+
+            -
+                name: Restrict Twig version
+                if: matrix.twig != ''
+                run: |
+                    composer require "twig/twig:${{ matrix.twig }}" --no-update --no-scripts
 
             -
                 name: Install dependencies

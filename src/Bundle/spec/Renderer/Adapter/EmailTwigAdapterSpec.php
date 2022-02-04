@@ -23,6 +23,7 @@ use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
 use Twig\Template;
+use Twig\TemplateWrapper;
 
 final class EmailTwigAdapterSpec extends ObjectBehavior
 {
@@ -47,7 +48,7 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         $twig->mergeGlobals([])->shouldBeCalled()->willReturn([]);
 
         $email->getTemplate()->shouldBeCalled()->willReturn('MyTemplate');
-        $twig->loadTemplate('MyTemplate')->shouldBeCalled()->willReturn($template);
+        $twig->load('MyTemplate')->willReturn(new TemplateWrapper($twig->getWrappedObject(), $template->getWrappedObject()));
 
         $template->renderBlock('subject', [])->willReturn('template');
         $template->renderBlock('body', [])->willReturn('body');
