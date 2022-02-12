@@ -73,7 +73,7 @@ final class SyliusMailerExtension extends Extension
             $swiftmailerAdapter = new ChildDefinition('sylius.email_sender.adapter.abstract');
             $swiftmailerAdapter->setClass(SwiftMailerAdapter::class);
             $swiftmailerAdapter->setArguments([new Reference('mailer'), new Reference('event_dispatcher')]);
-            $swiftmailerAdapter->setPrivate(false);
+            $swiftmailerAdapter->setPublic(true);
 
             $container->setDefinition('sylius.email_sender.adapter.swiftmailer', $swiftmailerAdapter);
             $defaultSenderAdapter = 'sylius.email_sender.adapter.swiftmailer';
@@ -91,7 +91,7 @@ final class SyliusMailerExtension extends Extension
             $twigAdapter = new ChildDefinition('sylius.email_renderer.adapter.abstract');
             $twigAdapter->setClass(EmailTwigAdapter::class);
             $twigAdapter->setArguments([new Reference('twig'), new Reference('event_dispatcher')]);
-            $twigAdapter->setPrivate(false);
+            $twigAdapter->setPublic(true);
 
             $container->setDefinition('sylius.email_renderer.adapter.twig', $twigAdapter);
             $defaultRendererAdapter = 'sylius.email_renderer.adapter.twig';
