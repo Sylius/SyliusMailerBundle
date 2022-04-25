@@ -41,9 +41,7 @@
         <NonInvariantDocblockPropertyType>
             <errorLevel type="suppress">
                 <file name="src/Bundle/Renderer/Adapter/EmailDefaultAdapter.php" />
-                <file name="src/Bundle/Renderer/Adapter/EmailTwigAdapter.php" />
                 <file name="src/Bundle/Sender/Adapter/DefaultAdapter.php" />
-                <file name="src/Bundle/Sender/Adapter/SwiftMailerAdapter.php" />
             </errorLevel>
         </NonInvariantDocblockPropertyType>
     </issueHandlers>
