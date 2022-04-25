@@ -6,14 +6,14 @@ SyliusMailerBundle
 Sylius
 ------
 
-**Sylius** - Modern ecommerce for Symfony. Visit [Sylius.org](https://sylius.com).
+**Sylius** - Modern ecommerce for Symfony. Visit [sylius.org](https://sylius.com).
 
 Sylius
 ------
 
 ![Sylius](https://demo.sylius.com/assets/shop/img/logo.png)
 
-Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.com](http://sylius.com).
+Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.com](https://sylius.com).
 
 Documentation
 -------------
@@ -37,16 +37,16 @@ If you want to keep up with the updates and latest features, follow us on the fo
 Bug tracking
 ------------
 
-Sylius uses [GitHub issues](https://github.com/Sylius/Sylius/issues).
+SyliusMailerBundle uses [GitHub issues](https://github.com/Sylius/SyliusMailerBundle/issues).
 If you have found a bug, please create an issue.
 
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/Sylius/blob/master/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusMailerBundle/blob/master/LICENSE).
 
 Authors
 -------
 
-The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors](https://github.com/Sylius/Sylius/contributors).
+The bundle was originally created by [Paweł Jędrzejewski](https://pjedrzejewski.com/).
+See the list of [contributors](https://github.com/Sylius/SyliusMailerBundle/contributors).
