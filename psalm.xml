@@ -1,9 +1,8 @@
 <?xml version="1.0"?>
 <psalm
-        totallyTyped="false"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="https://getpsalm.org/schema/config"
-        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
 >
     <projectFiles>
         <directory name="src" />
@@ -38,5 +37,14 @@
                 <referencedFunction name="Symfony\Contracts\EventDispatcher\EventDispatcherInterface::dispatch" />
             </errorLevel>
         </TooManyArguments>
+
+        <NonInvariantDocblockPropertyType>
+            <errorLevel type="suppress">
+                <file name="src/Bundle/Renderer/Adapter/EmailDefaultAdapter.php" />
+                <file name="src/Bundle/Renderer/Adapter/EmailTwigAdapter.php" />
+                <file name="src/Bundle/Sender/Adapter/DefaultAdapter.php" />
+                <file name="src/Bundle/Sender/Adapter/SwiftMailerAdapter.php" />
+            </errorLevel>
+        </NonInvariantDocblockPropertyType>
     </issueHandlers>
 </psalm>
