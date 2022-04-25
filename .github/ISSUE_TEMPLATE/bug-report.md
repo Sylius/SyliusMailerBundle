@@ -5,7 +5,7 @@ about: Report a problem or error
 ---
 
 
-**Sylius version affected**: 1.x.y
+**SyliusMailerBundle version affected**: 1.x.y
 
 **Description**  
 <!-- A clear and concise description of the bug you are experiencing. -->
