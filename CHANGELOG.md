@@ -1,5 +1,9 @@
 ## CHANGELOG FOR `1.6.x`
 
+### v1.7.1 (2022-04-26)
+
+- [#118](https://github.com/Sylius/SyliusMailerBundle/issues/118) [Sender] Assert recipient emails are always not empty strings ([@lchrusciel](https://github.com/lchrusciel))
+
 ### v1.7.0 (2022-04-25)
 
 - [#14](https://github.com/Sylius/SyliusMailerBundle/issues/14) Github repository configuration from Sylius/Sylius ([@CoderMaggie](https://github.com/CoderMaggie), [@Zales0123](https://github.com/Zales0123))
