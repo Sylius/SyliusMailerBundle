@@ -17,6 +17,7 @@ use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
+use Webmozart\Assert\Assert;
 
 final class Sender implements SenderInterface
 {
@@ -45,6 +46,8 @@ final class Sender implements SenderInterface
      */
     public function send(string $code, array $recipients, array $data = [], array $attachments = [], array $replyTo = []): void
     {
+        Assert::allStringNotEmpty($recipients);
+
         $email = $this->provider->getEmail($code);
 
         if (!$email->isEnabled()) {
