@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace spec\Sylius\Component\Mailer\Sender;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
@@ -65,5 +66,28 @@ final class SenderSpec extends ObjectBehavior
         $senderAdapter->send(['john@example.com'], 'mail@sylius.com', 'Sylius Mailer', null, $email, [], [], [])->shouldNotBeCalled();
 
         $this->send('bar', ['john@example.com'], ['foo' => 2], []);
+    }
+
+    function it_throws_an_exception_if_wrong_value_is_provided_as_recipient_email(
+        RendererAdapterInterface $rendererAdapter,
+        SenderAdapterInterface $senderAdapter
+    ): void {
+        $rendererAdapter->render(Argument::any())->shouldNotBeCalled();
+        $senderAdapter->send(Argument::any())->shouldNotBeCalled();
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during(
+            'send',
+            ['bar', ['john@example.com', null], ['foo' => 2], []],
+        );
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during(
+            'send',
+            ['bar', [5], ['foo' => 2], []],
+        );
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during(
+            'send',
+            ['bar', [''], ['foo' => 2], []],
+        );
     }
 }
