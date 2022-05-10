@@ -65,6 +65,6 @@ jobs:
                 name: Run bundle tests
                 run: composer test
 
-
-            -   name: Run lint container
+            -
+                name: Run lint container
                 run: (cd src/Bundle/test && bin/console lint:container)
