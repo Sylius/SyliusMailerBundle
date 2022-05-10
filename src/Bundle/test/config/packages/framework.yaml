@@ -1,0 +1,6 @@
+framework:
+    assets: false
+    secret: "%secret%"
+    default_locale: "%locale%"
+    http_method_override: true
+    test: ~
