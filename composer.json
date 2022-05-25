@@ -60,11 +60,15 @@
         "psr-4": {
             "Sylius\\Bundle\\MailerBundle\\": "src/Bundle/",
             "Sylius\\Component\\Mailer\\": "src/Component/"
-        }
+        },
+        "exclude-from-classmap": [
+            "src/Bundle/test/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Bundle\\MailerBundle\\spec\\": "src/Bundle/spec/",
+            "Sylius\\Bundle\\MailerBundle\\Tests\\": "src/Bundle/test/",
             "Sylius\\Component\\Mailer\\spec\\": "src/Component/spec/",
             "App\\": "src/Bundle/test/src/"
         }
