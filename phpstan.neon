@@ -23,4 +23,5 @@ parameters:
 
         - '/Parameter \#1 \$event of method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface::dispatch\(\) expects object, string given\./'
         - '/Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface::dispatch\(\) invoked with 2 parameters, 1 required\./'
+        - '/Cannot call method has\(\) on object\|null/'
         - '/Property Sylius\\Component\\Mailer\\Model\\Email\:\:\$id is never written\, only read\./'

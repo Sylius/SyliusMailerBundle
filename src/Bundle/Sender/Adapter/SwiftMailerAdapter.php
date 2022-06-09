@@ -20,6 +20,9 @@ use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * @deprecated The Swift Mailer integration is deprecated since sylius/mailer-bundle 1.8. Use the Symfony Mailer integration instead.
+ */
 class SwiftMailerAdapter extends AbstractAdapter
 {
     /** @var \Swift_Mailer */
@@ -30,6 +33,12 @@ class SwiftMailerAdapter extends AbstractAdapter
 
     public function __construct(\Swift_Mailer $mailer, ?EventDispatcherInterface $dispatcher = null)
     {
+        trigger_deprecation(
+            'sylius/mailer-bundle',
+            '1.8',
+            'The Swift Mailer integration is deprecated and will be removed in 2.0. Use the Symfony Mailer integration instead.'
+        );
+
         $this->mailer = $mailer;
         $this->dispatcher = $dispatcher;
     }
