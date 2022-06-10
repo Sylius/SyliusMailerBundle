@@ -56,7 +56,7 @@ final class Configuration implements ConfigurationInterface
                     ->arrayPrototype()
                         ->children()
                             ->scalarNode('subject')
-                                ->setDeprecated('The "subject" option is deprecated since SyliusMailerBundle 1.5')
+                                ->setDeprecated('sylius/mailer-bundle', '1.5', 'The "subject" option is deprecated since SyliusMailerBundle 1.5')
                             ->end()
                             ->scalarNode('template')->cannotBeEmpty()->end()
                             ->booleanNode('enabled')->defaultTrue()->end()
