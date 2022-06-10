@@ -70,7 +70,7 @@ final class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->arrayNode('templates')
-                    ->setDeprecated('The "templates" option is deprecated')
+                    ->setDeprecated('sylius/mailer-bundle', '1.6', 'The "templates" option is deprecated')
                     ->useAttributeAsKey('name')
                     ->scalarPrototype()->end()
                 ->end()
