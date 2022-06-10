@@ -52,6 +52,7 @@ jobs:
                 run: |
                     composer remove --dev symfony/swiftmailer-bundle  --no-update --no-scripts
                     rm src/Bundle/spec/Sender/Adapter/SwiftMailerAdapterSpec.php
+                    cp src/Bundle/test/config/bundles_no_swift.php src/Bundle/test/config/bundles.php
 
             -
                 name: Install dependencies
