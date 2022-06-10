@@ -51,7 +51,7 @@ jobs:
                 if: ${{ true != contains( matrix.symfony, '5.4.*' ) }}
                 run: |
                     composer remove --dev symfony/swiftmailer-bundle  --no-update --no-scripts
-                    rm src/Bundle/Sender/Adapter/SwiftMailerAdapterSpec.php
+                    rm src/Bundle/spec/Sender/Adapter/SwiftMailerAdapterSpec.php
 
             -
                 name: Install dependencies
