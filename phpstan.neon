@@ -10,6 +10,8 @@ parameters:
 
     excludePaths:
         - %currentWorkingDirectory%/src/Bundle/DependencyInjection/Configuration.php
+        - %currentWorkingDirectory%/src/Bundle/DependencyInjection/SyliusMailerExtension.php
+        - %currentWorkingDirectory%/src/Bundle/Sender/Adapter/SwiftMailerAdapter.php
         - %currentWorkingDirectory%/src/Bundle/spec/*
         - %currentWorkingDirectory%/src/Bundle/test/*
         - %currentWorkingDirectory%/src/Bundle/tests/*

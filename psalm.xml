@@ -11,6 +11,8 @@
             <directory name="src/Bundle/spec" />
             <directory name="src/Bundle/test" />
             <directory name="src/Bundle/tests" />
+            <file name="src/Bundle/DependencyInjection/SyliusMailerExtension.php" />
+            <file name="src/Bundle/Sender/Adapter/SwiftMailerAdapter.php" />
             <directory name="src/Component/spec" />
             <directory name="src/Component/vendor" />
         </ignoreFiles>
