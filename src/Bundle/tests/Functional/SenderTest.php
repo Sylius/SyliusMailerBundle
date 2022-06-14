@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\tests\Functional;
@@ -35,7 +44,7 @@ final class SenderTest extends KernelTestCase
 
         $messages = $this->messagesProvider->getMessages();
 
-        $this->assertEquals(1, count($messages));
+        $this->assertCount(1, $messages);
         $this->assertStringContainsString('Test email subject', $messages[0]->getSubject());
         $this->assertStringContainsString('Test email body', $messages[0]->getBody());
     }
@@ -47,7 +56,7 @@ final class SenderTest extends KernelTestCase
 
         $messages = $this->messagesProvider->getMessages();
 
-        $this->assertEquals(1, count($messages));
+        $this->assertCount(1, $messages);
         $this->assertStringContainsString('Test email with data subject', $messages[0]->getSubject());
         $this->assertStringContainsString('Test email body. Data: Test data.', $messages[0]->getBody());
     }
@@ -60,7 +69,7 @@ final class SenderTest extends KernelTestCase
 
         $messages = $this->messagesProvider->getMessages();
 
-        $this->assertEquals(2, count($messages));
+        $this->assertCount(2, $messages);
         $this->assertTrue($this->doesMessageExists('Test email subject', 'Test email body', $messages));
         $this->assertTrue(
             $this->doesMessageExists('Test email with data subject', 'Test email body. Data: Test data.', $messages)
@@ -69,6 +78,8 @@ final class SenderTest extends KernelTestCase
 
     protected function tearDown(): void
     {
+        parent::tearDown();
+
         (new SentMessagesPurger($this->spoolDirectory))->purge();
     }
 

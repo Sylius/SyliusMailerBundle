@@ -12,6 +12,7 @@ parameters:
         - %currentWorkingDirectory%/src/Bundle/DependencyInjection/Configuration.php
         - %currentWorkingDirectory%/src/Bundle/spec/*
         - %currentWorkingDirectory%/src/Bundle/test/*
+        - %currentWorkingDirectory%/src/Bundle/tests/*
         - %currentWorkingDirectory%/src/Component/spec/*
         - %currentWorkingDirectory%/src/Component/vendor/*
 
