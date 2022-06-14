@@ -68,6 +68,7 @@ jobs:
             -
                 name: Run lint container (with all services)
                 run: |
+                    rm src/Bundle/test/config/packages/sylius_mailer.yaml
                     rm -rf src/Bundle/test/var/cache
                     (cd src/Bundle/test && bin/console lint:container)
 
@@ -83,6 +84,7 @@ jobs:
                 name: Run lint container (with symfony/mailer)
                 run: |
                     rm -rf src/Bundle/test/var/cache
+                    rm src/Bundle/test/config/packages/swiftmailer.yaml
                     mv mailer.yaml src/Bundle/test/config/packages/mailer.yaml
                     mv src/Bundle/test/config/bundles.php src/Bundle/test/config/bundles_swift.php
                     mv src/Bundle/test/config/bundles_no_swift.php src/Bundle/test/config/bundles.php
