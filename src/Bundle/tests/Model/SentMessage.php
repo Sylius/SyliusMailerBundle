@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\tests\Model;
 
+use Symfony\Component\Mime\Email as SymfonyEmail;
+
 final class SentMessage
 {
     private string $subject;
@@ -22,6 +24,11 @@ final class SentMessage
     public static function fromSwiftMessage(\Swift_Message $message): self
     {
         return new self($message->getSubject(), $message->getBody());
+    }
+
+    public static function fromSymfonyMessage(SymfonyEmail $message): self
+    {
+        return new self($message->getSubject(), $message->getBody()->toString());
     }
 
     public function getSubject(): string

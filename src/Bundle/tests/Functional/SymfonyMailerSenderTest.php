@@ -19,7 +19,7 @@ use Sylius\Bundle\MailerBundle\tests\Purger\SentMessagesPurger;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-final class SenderTest extends KernelTestCase
+final class SymfonyMailerSenderTest extends KernelTestCase
 {
     private SenderInterface $sender;
 
@@ -29,11 +29,11 @@ final class SenderTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        self::bootKernel(['environment' => 'test_with_swiftmailer']);
+        self::bootKernel(['environment' => 'test_with_symfony_mailer']);
         $container = self::getContainer();
 
         $this->sender = $container->get('sylius.email_sender');
-        $this->spoolDirectory = $container->getParameter('kernel.cache_dir') . '/spool/default';
+        $this->spoolDirectory = $container->getParameter('kernel.cache_dir') . '/spool/';
         $this->messagesProvider = new MessagesProvider($this->spoolDirectory);
     }
 
