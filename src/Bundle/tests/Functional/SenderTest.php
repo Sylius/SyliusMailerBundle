@@ -29,7 +29,7 @@ final class SenderTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        self::bootKernel(['environment' => 'test']);
+        self::bootKernel(['environment' => 'test_with_swiftmailer']);
         $container = self::getContainer();
 
         $this->sender = $container->get('sylius.email_sender');
@@ -72,7 +72,7 @@ final class SenderTest extends KernelTestCase
         $this->assertCount(2, $messages);
         $this->assertTrue($this->doesMessageExists('Test email subject', 'Test email body', $messages));
         $this->assertTrue(
-            $this->doesMessageExists('Test email with data subject', 'Test email body. Data: Test data.', $messages)
+            $this->doesMessageExists('Test email with data subject', 'Test email body. Data: Test data.', $messages),
         );
     }
 

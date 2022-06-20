@@ -30,7 +30,7 @@ final class EmailDefaultAdapterSpec extends ObjectBehavior
         $this
             ->shouldThrow(new \RuntimeException(sprintf(
                 'You need to configure an adapter to render the email. Take a look at %s (requires "symfony/twig-bundle" library).',
-                EmailTwigAdapter::class
+                EmailTwigAdapter::class,
             )))
             ->during('render', [$email, []])
         ;

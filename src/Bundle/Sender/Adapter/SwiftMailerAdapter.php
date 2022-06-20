@@ -36,7 +36,7 @@ class SwiftMailerAdapter extends AbstractAdapter
         trigger_deprecation(
             'sylius/mailer-bundle',
             '1.8',
-            'The Swift Mailer integration is deprecated and will be removed in 2.0. Use the Symfony Mailer integration instead.'
+            'The Swift Mailer integration is deprecated and will be removed in 2.0. Use the Symfony Mailer integration instead.',
         );
 
         $this->mailer = $mailer;
@@ -54,13 +54,14 @@ class SwiftMailerAdapter extends AbstractAdapter
         EmailInterface $email,
         array $data,
         array $attachments = [],
-        array $replyTo = []
+        array $replyTo = [],
     ): void {
         $message = (new \Swift_Message())
             ->setSubject($renderedEmail->getSubject())
             ->setFrom([$senderAddress => $senderName])
             ->setTo($recipients)
-            ->setReplyTo($replyTo);
+            ->setReplyTo($replyTo)
+        ;
 
         $message->setBody($renderedEmail->getBody(), 'text/html');
 

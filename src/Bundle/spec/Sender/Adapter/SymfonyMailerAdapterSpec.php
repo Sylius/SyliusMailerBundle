@@ -41,7 +41,7 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
         MailerInterface $mailer,
         EmailInterface $email,
         EventDispatcherInterface $dispatcher,
-        RenderedEmail $renderedEmail
+        RenderedEmail $renderedEmail,
     ): void {
         $this->setEventDispatcher($dispatcher);
 
@@ -66,14 +66,14 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
             'arnaud',
             $renderedEmail,
             $email,
-            []
+            [],
         );
     }
 
     function it_sends_an_email_with_attachments(
         MailerInterface $mailer,
         EmailInterface $email,
-        RenderedEmail $renderedEmail
+        RenderedEmail $renderedEmail,
     ): void {
         $renderedEmail->getSubject()->willReturn('subject');
         $renderedEmail->getBody()->willReturn('body');
@@ -86,14 +86,14 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
             'arnaud',
             $renderedEmail,
             $email,
-            ['/path/to/file1.txt', '/path/to/file2.txt']
+            ['/path/to/file1.txt', '/path/to/file2.txt'],
         );
     }
 
     function it_does_not_handle_exceptions_from_the_mailer(
         MailerInterface $mailer,
         EmailInterface $email,
-        RenderedEmail $renderedEmail
+        RenderedEmail $renderedEmail,
     ): void {
         $exception = new TransportException('Testing');
 
@@ -111,7 +111,7 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
                 $renderedEmail,
                 $email,
                 [],
-            ]
+            ],
         );
     }
 }

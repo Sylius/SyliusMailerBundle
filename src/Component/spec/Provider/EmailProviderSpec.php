@@ -53,7 +53,7 @@ final class EmailProviderSpec extends ObjectBehavior
 
     function it_looks_for_an_email_in_configuration_when_it_cannot_be_found_via_repository(
         EmailInterface $email,
-        EmailFactoryInterface $emailFactory
+        EmailFactoryInterface $emailFactory,
     ): void {
         $emailFactory->createNew()->willReturn($email);
 

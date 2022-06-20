@@ -62,40 +62,40 @@ jobs:
                 run: (cd src/Component && vendor/bin/phpspec run)
 
             -
-                name: Run bundle tests
-                run: composer test
+                name: Run PHPSpec tests
+                run: vendor/bin/phpspec run
 
             -
-                name: Run lint container (with all services)
+                name: Test bundle (with all services)
                 run: |
-                    rm src/Bundle/test/config/packages/sylius_mailer.yaml
                     rm -rf src/Bundle/test/var/cache
-                    (cd src/Bundle/test && bin/console lint:container)
+                    composer require symfony/mailer --no-interaction --no-scripts
+                    composer require symfony/swiftmailer-bundle --no-interaction --no-scripts
+                    rm -rf src/Bundle/test/var/cache
+                    (cd src/Bundle/test && APP_ENV=test bin/console lint:container)
+                    APP_ENV=test vendor/bin/phpunit
 
             -
                 name: Run lint container (with Swift Mailer)
                 run: |
                     rm -rf src/Bundle/test/var/cache
-                    mv src/Bundle/test/config/packages/mailer.yaml mailer.yaml
-                    composer remove symfony/mailer --dev
-                    (cd src/Bundle/test && bin/console lint:container)
+                    composer remove symfony/mailer --no-scripts
+                    rm -rf src/Bundle/test/var/cache
+                    (cd src/Bundle/test && APP_ENV=test_with_swiftmailer bin/console lint:container)
 
             -
                 name: Run lint container (with symfony/mailer)
                 run: |
                     rm -rf src/Bundle/test/var/cache
-                    rm src/Bundle/test/config/packages/swiftmailer.yaml
-                    mv mailer.yaml src/Bundle/test/config/packages/mailer.yaml
-                    mv src/Bundle/test/config/bundles.php src/Bundle/test/config/bundles_swift.php
-                    mv src/Bundle/test/config/bundles_no_swift.php src/Bundle/test/config/bundles.php
-                    composer remove symfony/swiftmailer-bundle --dev
-                    composer require symfony/mailer --dev
-                    (cd src/Bundle/test && bin/console lint:container)
+                    composer remove symfony/swiftmailer-bundle --no-scripts
+                    composer require symfony/mailer --no-scripts
+                    rm -rf src/Bundle/test/var/cache
+                    (cd src/Bundle/test && APP_ENV=test_with_symfony_mailer bin/console lint:container)
 
             -
                 name: Run lint container (with no mailers)
                 run: |
                     rm -rf src/Bundle/test/var/cache
-                    rm -f src/Bundle/test/config/packages/mailer.yaml
-                    composer remove symfony/mailer --dev
-                    (cd src/Bundle/test && bin/console lint:container)
+                    composer remove symfony/mailer --no-scripts
+                    rm -rf src/Bundle/test/var/cache
+                    (cd src/Bundle/test && APP_ENV=test_no_mailers bin/console lint:container)
