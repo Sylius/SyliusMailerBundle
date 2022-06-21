@@ -75,7 +75,7 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
 
         $this->container->setParameter(
             'kernel.bundles',
-            ['SwiftmailerBundle' => SwiftmailerBundle::class, 'TwigBundle' => TwigBundle::class]
+            ['SwiftmailerBundle' => SwiftmailerBundle::class, 'TwigBundle' => TwigBundle::class],
         );
 
         $this->load();
@@ -100,7 +100,7 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
     {
         $this->container->setDefinition(
             $id,
-            (new Definition())->setClass(self::getMockClass($class))->setAutoconfigured(true)
+            (new Definition())->setClass(self::getMockClass($class))->setAutoconfigured(true),
         );
     }
 }

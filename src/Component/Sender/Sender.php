@@ -33,7 +33,7 @@ final class Sender implements SenderInterface
         RendererAdapterInterface $rendererAdapter,
         SenderAdapterInterface $senderAdapter,
         EmailProviderInterface $provider,
-        DefaultSettingsProviderInterface $defaultSettingsProvider
+        DefaultSettingsProviderInterface $defaultSettingsProvider,
     ) {
         $this->senderAdapter = $senderAdapter;
         $this->rendererAdapter = $rendererAdapter;
@@ -67,7 +67,7 @@ final class Sender implements SenderInterface
             $email,
             $data,
             $attachments,
-            $replyTo
+            $replyTo,
         );
     }
 }

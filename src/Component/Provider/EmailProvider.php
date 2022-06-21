@@ -25,7 +25,7 @@ final class EmailProvider implements EmailProviderInterface
 
     public function __construct(
         EmailFactoryInterface $emailFactory,
-        array $configuration
+        array $configuration,
     ) {
         $this->emailFactory = $emailFactory;
         $this->configuration = $configuration;
