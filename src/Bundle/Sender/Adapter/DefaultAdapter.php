@@ -43,4 +43,22 @@ final class DefaultAdapter extends AbstractAdapter
             SymfonyMailerAdapter::class,
         ));
     }
+
+    public function sendWithCC(
+        array $recipients,
+        string $senderAddress,
+        string $senderName,
+        RenderedEmail $renderedEmail,
+        EmailInterface $email,
+        array $data,
+        array $attachments = [],
+        array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = []
+    ): void {
+        throw new \RuntimeException(sprintf(
+            'You need to configure an adapter to send the email. Take a look at %s (requires "symfony/mailer" library).',
+            SymfonyMailerAdapter::class
+        ));
+    }
 }

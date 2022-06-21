@@ -50,7 +50,14 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $mailer->send(Argument::type('\Swift_Message'))->shouldBeCalled();
+        $mailer->send(Argument::that(function(\Swift_Message $message): bool {
+            return
+                $message->getSubject() === 'subject' &&
+                $message->getBody() === 'body' &&
+                $message->getFrom() === ['arnaud@sylius.com' => 'arnaud'] &&
+                $message->getTo() === ['pawel@sylius.com' => null]
+            ;
+        }))->shouldBeCalled();
 
         $dispatcher
             ->dispatch(Argument::type(EmailSendEvent::class), SyliusMailerEvents::EMAIL_POST_SEND)
@@ -64,6 +71,52 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
             $renderedEmail,
             $email,
             [],
+        );
+    }
+
+    function it_sends_an_email_with_cc_and_bcc_emails(
+        \Swift_Mailer $mailer,
+        EmailInterface $email,
+        EventDispatcherInterface $dispatcher,
+        RenderedEmail $renderedEmail
+    ): void {
+        $this->setEventDispatcher($dispatcher);
+
+        $renderedEmail->getSubject()->shouldBeCalled()->willReturn('subject');
+        $renderedEmail->getBody()->shouldBeCalled()->willReturn('body');
+
+        $dispatcher
+            ->dispatch(Argument::type(EmailSendEvent::class), SyliusMailerEvents::EMAIL_PRE_SEND)
+            ->shouldBeCalled()
+        ;
+
+        $mailer->send(Argument::that(function(\Swift_Message $message): bool {
+            return
+                $message->getSubject() === 'subject' &&
+                $message->getBody() === 'body' &&
+                $message->getFrom() === ['arnaud@sylius.com' => 'arnaud'] &&
+                $message->getTo() === ['pawel@sylius.com' => null] &&
+                $message->getCc() === ['cc@example.com' => null] &&
+                $message->getBcc() === ['bcc@example.com' => null]
+            ;
+        }))->shouldBeCalled();
+
+        $dispatcher
+            ->dispatch(Argument::type(EmailSendEvent::class), SyliusMailerEvents::EMAIL_POST_SEND)
+            ->shouldBeCalled()
+        ;
+
+        $this->sendWithCC(
+            ['pawel@sylius.com'],
+            'arnaud@sylius.com',
+            'arnaud',
+            $renderedEmail,
+            $email,
+            [],
+            [],
+            [],
+            ['cc@example.com'],
+            ['bcc@example.com']
         );
     }
 }

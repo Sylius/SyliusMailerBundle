@@ -22,6 +22,7 @@ use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -53,7 +54,14 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $mailer->send(Argument::type(Email::class))->shouldBeCalled();
+        $mailer->send(Argument::that(function(Email $message): bool {
+            return
+                $message->getSubject() === 'subject' &&
+                $message->getBody()->bodyToString() === 'body' &&
+                $message->getFrom()[0] == new Address('arnaud@sylius.com', 'arnaud') &&
+                $message->getTo()[0] == new Address('pawel@sylius.com')
+                ;
+        }))->shouldBeCalled();
 
         $dispatcher
             ->dispatch(Argument::type(EmailSendEvent::class), SyliusMailerEvents::EMAIL_POST_SEND)
@@ -67,6 +75,39 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
             $renderedEmail,
             $email,
             [],
+        );
+    }
+
+    function it_sends_an_email_with_cc_and_bcc(
+        MailerInterface $mailer,
+        EmailInterface $email,
+        RenderedEmail $renderedEmail
+    ): void {
+        $renderedEmail->getSubject()->willReturn('subject');
+        $renderedEmail->getBody()->willReturn('body');
+
+        $mailer->send(Argument::that(function(Email $message): bool {
+            return
+                $message->getSubject() === 'subject' &&
+                $message->getBody()->bodyToString() === 'body' &&
+                $message->getFrom()[0] == new Address('arnaud@sylius.com', 'arnaud') &&
+                $message->getTo()[0] == new Address('pawel@sylius.com') &&
+                $message->getCc()[0] == new Address('cc@example.com') &&
+                $message->getBcc()[0] == new Address('bcc@example.com')
+            ;
+        }))->shouldBeCalled();
+
+        $this->sendWithCC(
+            ['pawel@sylius.com'],
+            'arnaud@sylius.com',
+            'arnaud',
+            $renderedEmail,
+            $email,
+            [],
+            [],
+            [],
+            ['cc@example.com'],
+            ['bcc@example.com']
         );
     }
 
