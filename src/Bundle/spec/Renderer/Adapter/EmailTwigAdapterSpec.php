@@ -43,7 +43,7 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         EmailInterface $email,
         EmailRenderEvent $event,
         EventDispatcherInterface $dispatcher,
-        RenderedEmail $renderedEmail
+        RenderedEmail $renderedEmail,
     ): void {
         $twig->mergeGlobals([])->shouldBeCalled()->willReturn([]);
 
@@ -68,7 +68,7 @@ final class EmailTwigAdapterSpec extends ObjectBehavior
         EmailInterface $email,
         EmailRenderEvent $event,
         EventDispatcherInterface $dispatcher,
-        RenderedEmail $renderedEmail
+        RenderedEmail $renderedEmail,
     ): void {
         $email->getTemplate()->shouldBeCalled()->willReturn(null);
         $email->getSubject()->shouldBeCalled()->willReturn('subject');

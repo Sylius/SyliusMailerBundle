@@ -8,7 +8,7 @@ parameters:
     checkMissingIterableValueType: false
     reportUnmatchedIgnoredErrors: false
 
-    excludes_analyse:
+    excludePaths:
         - %currentWorkingDirectory%/src/Bundle/DependencyInjection/Configuration.php
         - %currentWorkingDirectory%/src/Bundle/spec/*
         - %currentWorkingDirectory%/src/Bundle/test/*

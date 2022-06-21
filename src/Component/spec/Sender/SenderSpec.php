@@ -28,7 +28,7 @@ final class SenderSpec extends ObjectBehavior
         RendererAdapterInterface $rendererAdapter,
         SenderAdapterInterface $senderAdapter,
         EmailProviderInterface $provider,
-        DefaultSettingsProviderInterface $defaultSettingsProvider
+        DefaultSettingsProviderInterface $defaultSettingsProvider,
     ): void {
         $this->beConstructedWith($rendererAdapter, $senderAdapter, $provider, $defaultSettingsProvider);
     }
@@ -38,7 +38,7 @@ final class SenderSpec extends ObjectBehavior
         EmailProviderInterface $provider,
         RenderedEmail $renderedEmail,
         RendererAdapterInterface $rendererAdapter,
-        SenderAdapterInterface $senderAdapter
+        SenderAdapterInterface $senderAdapter,
     ): void {
         $provider->getEmail('bar')->willReturn($email);
         $email->isEnabled()->willReturn(true);
@@ -57,7 +57,7 @@ final class SenderSpec extends ObjectBehavior
         EmailInterface $email,
         EmailProviderInterface $provider,
         RendererAdapterInterface $rendererAdapter,
-        SenderAdapterInterface $senderAdapter
+        SenderAdapterInterface $senderAdapter,
     ): void {
         $provider->getEmail('bar')->willReturn($email);
         $email->isEnabled()->willReturn(false);
@@ -70,7 +70,7 @@ final class SenderSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_wrong_value_is_provided_as_recipient_email(
         RendererAdapterInterface $rendererAdapter,
-        SenderAdapterInterface $senderAdapter
+        SenderAdapterInterface $senderAdapter,
     ): void {
         $rendererAdapter->render(Argument::any())->shouldNotBeCalled();
         $senderAdapter->send(Argument::any())->shouldNotBeCalled();
