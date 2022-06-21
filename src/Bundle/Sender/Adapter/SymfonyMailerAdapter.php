@@ -46,7 +46,14 @@ final class SymfonyMailerAdapter extends AbstractAdapter implements CcAwareAdapt
         array $replyTo = [],
     ): void {
         $this->sendMessage(
-            $renderedEmail, $senderAddress, $senderName, $recipients, $replyTo, $attachments, $email, $data
+            $renderedEmail,
+            $senderAddress,
+            $senderName,
+            $recipients,
+            $replyTo,
+            $attachments,
+            $email,
+            $data,
         );
     }
 
@@ -63,7 +70,16 @@ final class SymfonyMailerAdapter extends AbstractAdapter implements CcAwareAdapt
         array $bccRecipients = [],
     ): void {
         $this->sendMessage(
-            $renderedEmail, $senderAddress, $senderName, $recipients, $replyTo, $attachments, $email, $data, $ccRecipients, $bccRecipients
+            $renderedEmail,
+            $senderAddress,
+            $senderName,
+            $recipients,
+            $replyTo,
+            $attachments,
+            $email,
+            $data,
+            $ccRecipients,
+            $bccRecipients,
         );
     }
 

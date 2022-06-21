@@ -20,7 +20,7 @@ use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
-use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
+use Sylius\Component\Mailer\Sender\Adapter\CcAwareAdapterInterface as SenderAdapterInterface;
 
 final class SenderSpec extends ObjectBehavior
 {
@@ -57,11 +57,40 @@ final class SenderSpec extends ObjectBehavior
             $data,
             [],
             [],
-            ['cc@mail.com'],
-            ['bcc@mail.com']
         )->shouldBeCalled();
 
-        $this->send('bar', ['john@example.com'], $data, [], [], ['cc@mail.com'], ['bcc@mail.com']);
+        $this->send('bar', ['john@example.com'], $data, [], []);
+    }
+
+    function it_sends_an_email_with_cc_and_bcc_through_the_adapter(
+        EmailInterface $email,
+        EmailProviderInterface $provider,
+        RenderedEmail $renderedEmail,
+        RendererAdapterInterface $rendererAdapter,
+        SenderAdapterInterface $senderAdapter,
+    ): void {
+        $provider->getEmail('bar')->willReturn($email);
+        $email->isEnabled()->willReturn(true);
+        $email->getSenderAddress()->willReturn('sender@example.com');
+        $email->getSenderName()->willReturn('Sender');
+
+        $data = ['foo' => 2];
+
+        $rendererAdapter->render($email, ['foo' => 2])->willReturn($renderedEmail);
+        $senderAdapter->sendWithCC(
+            ['john@example.com'],
+            'sender@example.com',
+            'Sender',
+            $renderedEmail,
+            $email,
+            $data,
+            [],
+            [],
+            ['cc@example.com'],
+            ['bcc@example.com'],
+        )->shouldBeCalled();
+
+        $this->send('bar', ['john@example.com'], $data, [], [], ['cc@example.com'], ['bcc@example.com']);
     }
 
     function it_does_not_send_disabled_emails(

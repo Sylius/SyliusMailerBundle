@@ -54,7 +54,7 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $mailer->send(Argument::that(function(Email $message): bool {
+        $mailer->send(Argument::that(function (Email $message): bool {
             return
                 $message->getSubject() === 'subject' &&
                 $message->getBody()->bodyToString() === 'body' &&
@@ -81,12 +81,12 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
     function it_sends_an_email_with_cc_and_bcc(
         MailerInterface $mailer,
         EmailInterface $email,
-        RenderedEmail $renderedEmail
+        RenderedEmail $renderedEmail,
     ): void {
         $renderedEmail->getSubject()->willReturn('subject');
         $renderedEmail->getBody()->willReturn('body');
 
-        $mailer->send(Argument::that(function(Email $message): bool {
+        $mailer->send(Argument::that(function (Email $message): bool {
             return
                 $message->getSubject() === 'subject' &&
                 $message->getBody()->bodyToString() === 'body' &&
@@ -107,7 +107,7 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
             [],
             [],
             ['cc@example.com'],
-            ['bcc@example.com']
+            ['bcc@example.com'],
         );
     }
 

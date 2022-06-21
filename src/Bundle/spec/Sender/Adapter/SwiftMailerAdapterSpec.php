@@ -50,7 +50,7 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $mailer->send(Argument::that(function(\Swift_Message $message): bool {
+        $mailer->send(Argument::that(function (\Swift_Message $message): bool {
             return
                 $message->getSubject() === 'subject' &&
                 $message->getBody() === 'body' &&
@@ -78,7 +78,7 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
         \Swift_Mailer $mailer,
         EmailInterface $email,
         EventDispatcherInterface $dispatcher,
-        RenderedEmail $renderedEmail
+        RenderedEmail $renderedEmail,
     ): void {
         $this->setEventDispatcher($dispatcher);
 
@@ -90,7 +90,7 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $mailer->send(Argument::that(function(\Swift_Message $message): bool {
+        $mailer->send(Argument::that(function (\Swift_Message $message): bool {
             return
                 $message->getSubject() === 'subject' &&
                 $message->getBody() === 'body' &&
@@ -116,7 +116,7 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
             [],
             [],
             ['cc@example.com'],
-            ['bcc@example.com']
+            ['bcc@example.com'],
         );
     }
 }

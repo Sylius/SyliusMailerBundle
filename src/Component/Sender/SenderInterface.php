@@ -19,8 +19,6 @@ interface SenderInterface
      * @param string[]|null[] $recipients A list of email addresses to receive the message. Providing null or empty string in the list of recipients is deprecated and will be removed in SyliusMailerBundle 2.0
      * @param string[] $attachments A list of file paths to attach to the message.
      * @param string[] $replyTo A list of email addresses to set as the Reply-To address for the message.
-     * @param string[] $ccRecipients A list of email addressed as carbon copy
-     * @param string[] $bccRecipients A list of email addressed as blind carbon copy
      */
     public function send(
         string $code,
@@ -28,7 +26,5 @@ interface SenderInterface
         array $data = [],
         array $attachments = [],
         array $replyTo = [],
-        array $ccRecipients = [],
-        array $bccRecipients = []
     ): void;
 }

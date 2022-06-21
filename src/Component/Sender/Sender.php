@@ -17,6 +17,7 @@ use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
+use Sylius\Component\Mailer\Sender\Adapter\CcAwareAdapterInterface;
 use Webmozart\Assert\Assert;
 
 final class Sender implements SenderInterface
@@ -50,9 +51,9 @@ final class Sender implements SenderInterface
         array $data = [],
         array $attachments = [],
         array $replyTo = [],
-        array $ccRecipients = [],
-        array $bccRecipients = []
     ): void {
+        $arguments = func_get_args();
+
         Assert::allStringNotEmpty($recipients);
 
         $email = $this->provider->getEmail($code);
@@ -66,6 +67,23 @@ final class Sender implements SenderInterface
 
         $renderedEmail = $this->rendererAdapter->render($email, $data);
 
+        if (count($arguments) > 5 && $this->senderAdapter instanceof CcAwareAdapterInterface) {
+            $this->senderAdapter->sendWithCC(
+                $recipients,
+                $senderAddress,
+                $senderName,
+                $renderedEmail,
+                $email,
+                $data,
+                $attachments,
+                $replyTo,
+                $arguments[5] ?? [],
+                $arguments[6] ?? [],
+            );
+
+            return;
+        }
+
         $this->senderAdapter->send(
             $recipients,
             $senderAddress,
@@ -75,8 +93,6 @@ final class Sender implements SenderInterface
             $data,
             $attachments,
             $replyTo,
-            $ccRecipients,
-            $bccRecipients
         );
     }
 }

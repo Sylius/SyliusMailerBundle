@@ -55,10 +55,17 @@ class SwiftMailerAdapter extends AbstractAdapter implements CcAwareAdapterInterf
         EmailInterface $email,
         array $data,
         array $attachments = [],
-        array $replyTo = []
+        array $replyTo = [],
     ): void {
         $this->sendMessage(
-            $renderedEmail, $senderAddress, $senderName, $recipients, $replyTo, $attachments, $email, $data
+            $renderedEmail,
+            $senderAddress,
+            $senderName,
+            $recipients,
+            $replyTo,
+            $attachments,
+            $email,
+            $data,
         );
     }
 
@@ -72,10 +79,19 @@ class SwiftMailerAdapter extends AbstractAdapter implements CcAwareAdapterInterf
         array $attachments = [],
         array $replyTo = [],
         array $ccRecipients = [],
-        array $bccRecipients = []
+        array $bccRecipients = [],
     ): void {
         $this->sendMessage(
-            $renderedEmail, $senderAddress, $senderName, $recipients, $replyTo, $attachments, $email, $data, $ccRecipients, $bccRecipients
+            $renderedEmail,
+            $senderAddress,
+            $senderName,
+            $recipients,
+            $replyTo,
+            $attachments,
+            $email,
+            $data,
+            $ccRecipients,
+            $bccRecipients,
         );
     }
 
@@ -89,7 +105,7 @@ class SwiftMailerAdapter extends AbstractAdapter implements CcAwareAdapterInterf
         EmailInterface $email,
         array $data,
         array $ccRecipients = [],
-        array $bccRecipients = []
+        array $bccRecipients = [],
     ): void {
         $message = (new \Swift_Message())
             ->setSubject($renderedEmail->getSubject())

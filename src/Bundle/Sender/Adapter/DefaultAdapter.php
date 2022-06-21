@@ -54,11 +54,11 @@ final class DefaultAdapter extends AbstractAdapter
         array $attachments = [],
         array $replyTo = [],
         array $ccRecipients = [],
-        array $bccRecipients = []
+        array $bccRecipients = [],
     ): void {
         throw new \RuntimeException(sprintf(
             'You need to configure an adapter to send the email. Take a look at %s (requires "symfony/mailer" library).',
-            SymfonyMailerAdapter::class
+            SymfonyMailerAdapter::class,
         ));
     }
 }
