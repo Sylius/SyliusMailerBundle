@@ -38,7 +38,7 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
         \Swift_Mailer $mailer,
         EmailInterface $email,
         EventDispatcherInterface $dispatcher,
-        RenderedEmail $renderedEmail
+        RenderedEmail $renderedEmail,
     ): void {
         $this->setEventDispatcher($dispatcher);
 
@@ -63,7 +63,7 @@ final class SwiftMailerAdapterSpec extends ObjectBehavior
             'arnaud',
             $renderedEmail,
             $email,
-            []
+            [],
         );
     }
 }

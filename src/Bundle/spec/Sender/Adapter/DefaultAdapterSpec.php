@@ -28,7 +28,7 @@ final class DefaultAdapterSpec extends ObjectBehavior
 
     function it_throws_an_exception_about_not_configured_email_sender_adapter(
         EmailInterface $email,
-        RenderedEmail $renderedEmail
+        RenderedEmail $renderedEmail,
     ): void {
         $this
             ->shouldThrow(new \RuntimeException(sprintf(
