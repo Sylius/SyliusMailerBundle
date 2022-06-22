@@ -70,9 +70,9 @@ final class SwiftmailerSenderTest extends KernelTestCase
         $messages = $this->messagesProvider->getMessages();
 
         $this->assertCount(2, $messages);
-        $this->assertTrue($this->doesMessageExists('Test email subject', 'Test email body', $messages));
+        $this->assertTrue($this->doesMessageExist('Test email subject', 'Test email body', $messages));
         $this->assertTrue(
-            $this->doesMessageExists('Test email with data subject', 'Test email body. Data: Test data.', $messages),
+            $this->doesMessageExist('Test email with data subject', 'Test email body. Data: Test data.', $messages),
         );
     }
 
@@ -83,7 +83,7 @@ final class SwiftmailerSenderTest extends KernelTestCase
         (new SentMessagesPurger($this->spoolDirectory))->purge();
     }
 
-    private function doesMessageExists(string $subject, string $body, array $messages): bool
+    private function doesMessageExist(string $subject, string $body, array $messages): bool
     {
         /** @var SentMessage $message */
         foreach ($messages as $message) {

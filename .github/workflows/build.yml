@@ -71,7 +71,6 @@ jobs:
                     rm -rf src/Bundle/test/var/cache
                     composer require symfony/mailer --no-interaction --no-scripts
                     composer require symfony/swiftmailer-bundle --no-interaction --no-scripts
-                    rm -rf src/Bundle/test/var/cache
                     (cd src/Bundle/test && APP_ENV=test bin/console lint:container)
 
             -
@@ -79,7 +78,6 @@ jobs:
                 run: |
                     rm -rf src/Bundle/test/var/cache
                     composer remove symfony/mailer --no-scripts
-                    rm -rf src/Bundle/test/var/cache
                     (cd src/Bundle/test && APP_ENV=test_with_swiftmailer bin/console lint:container)
                     vendor/bin/phpunit src/Bundle/tests/Functional/SwiftmailerSenderTest.php
 
@@ -89,7 +87,6 @@ jobs:
                     rm -rf src/Bundle/test/var/cache
                     composer remove symfony/swiftmailer-bundle --no-scripts
                     composer require symfony/mailer --no-scripts
-                    rm -rf src/Bundle/test/var/cache
                     (cd src/Bundle/test && APP_ENV=test_with_symfony_mailer bin/console lint:container)
                     vendor/bin/phpunit src/Bundle/tests/Functional/SymfonyMailerSenderTest.php
 
@@ -98,5 +95,4 @@ jobs:
                 run: |
                     rm -rf src/Bundle/test/var/cache
                     composer remove symfony/mailer --no-scripts
-                    rm -rf src/Bundle/test/var/cache
                     (cd src/Bundle/test && APP_ENV=test_no_mailers bin/console lint:container)
