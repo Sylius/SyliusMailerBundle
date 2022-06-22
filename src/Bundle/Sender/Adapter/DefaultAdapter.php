@@ -40,7 +40,7 @@ final class DefaultAdapter extends AbstractAdapter
     ): void {
         throw new \RuntimeException(sprintf(
             'You need to configure an adapter to send the email. Take a look at %s (requires "symfony/mailer" library).',
-            SymfonyMailerAdapter::class
+            SymfonyMailerAdapter::class,
         ));
     }
 }

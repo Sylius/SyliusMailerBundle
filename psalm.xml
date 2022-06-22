@@ -10,6 +10,7 @@
             <directory name="vendor" />
             <directory name="src/Bundle/spec" />
             <directory name="src/Bundle/test" />
+            <directory name="src/Bundle/tests" />
             <directory name="src/Component/spec" />
             <directory name="src/Component/vendor" />
         </ignoreFiles>

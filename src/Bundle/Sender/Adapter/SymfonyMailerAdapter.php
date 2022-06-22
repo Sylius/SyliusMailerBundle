@@ -42,14 +42,15 @@ final class SymfonyMailerAdapter extends AbstractAdapter
         EmailInterface $email,
         array $data,
         array $attachments = [],
-        array $replyTo = []
+        array $replyTo = [],
     ): void {
         $message = (new Email())
             ->subject($renderedEmail->getSubject())
             ->from(new Address($senderAddress, $senderName))
             ->to(...$recipients)
             ->replyTo(...$replyTo)
-            ->html($renderedEmail->getBody());
+            ->html($renderedEmail->getBody())
+        ;
 
         foreach ($attachments as $attachment) {
             $message->attachFromPath($attachment);

@@ -33,7 +33,7 @@ final class DefaultAdapterSpec extends ObjectBehavior
         $this
             ->shouldThrow(new \RuntimeException(sprintf(
                 'You need to configure an adapter to send the email. Take a look at %s (requires "symfony/mailer" library).',
-                SymfonyMailerAdapter::class
+                SymfonyMailerAdapter::class,
             )))
             ->during('send', [['pawel@sylius.com'], 'arnaud@sylius.com', 'arnaud', $renderedEmail, $email, []])
         ;

@@ -1,0 +1,7 @@
+sylius_mailer:
+    sender_adapter: sylius.email_sender.adapter.symfony_mailer
+    emails:
+        test_email:
+            template: 'Email/test.html.twig'
+        test_email_with_data:
+            template: 'Email/testWithData.html.twig'
