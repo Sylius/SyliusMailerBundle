@@ -13,19 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\tests\Functional;
 
-use Sylius\Bundle\MailerBundle\tests\Model\SentMessage;
-use Sylius\Bundle\MailerBundle\tests\Provider\MessagesProvider;
-use Sylius\Bundle\MailerBundle\tests\Purger\SentMessagesPurger;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 
 final class SymfonyMailerSenderTest extends KernelTestCase
 {
+    use MailerAssertionsTrait;
+
     private SenderInterface $sender;
-
-    private MessagesProvider $messagesProvider;
-
-    private string $spoolDirectory;
 
     protected function setUp(): void
     {
@@ -33,8 +29,6 @@ final class SymfonyMailerSenderTest extends KernelTestCase
         $container = self::getContainer();
 
         $this->sender = $container->get('sylius.email_sender');
-        $this->spoolDirectory = $container->getParameter('kernel.cache_dir') . '/spool/';
-        $this->messagesProvider = new MessagesProvider($this->spoolDirectory);
     }
 
     /** @test */
@@ -42,11 +36,11 @@ final class SymfonyMailerSenderTest extends KernelTestCase
     {
         $this->sender->send('test_email', ['test@example.com']);
 
-        $messages = $this->messagesProvider->getMessages();
+        $this->assertEmailCount(1);
 
-        $this->assertCount(1, $messages);
-        $this->assertStringContainsString('Test email subject', $messages[0]->getSubject());
-        $this->assertStringContainsString('Test email body', $messages[0]->getBody());
+        $email = $this->getMailerMessage();
+        $this->assertEmailHtmlBodyContains($email, 'Test email body');
+        $this->assertEmailHasHeader($email, 'subject', 'Test email subject');
     }
 
     /** @test */
@@ -54,11 +48,11 @@ final class SymfonyMailerSenderTest extends KernelTestCase
     {
         $this->sender->send('test_email_with_data', ['test@example.com'], ['data' => 'Test data']);
 
-        $messages = $this->messagesProvider->getMessages();
+        $this->assertEmailCount(1);
 
-        $this->assertCount(1, $messages);
-        $this->assertStringContainsString('Test email with data subject', $messages[0]->getSubject());
-        $this->assertStringContainsString('Test email body. Data: Test data.', $messages[0]->getBody());
+        $email = $this->getMailerMessage();
+        $this->assertEmailHtmlBodyContains($email, 'Test email body. Data: Test data.');
+        $this->assertEmailHasHeader($email, 'subject', 'Test email with data subject');
     }
 
     /** @test */
@@ -67,34 +61,14 @@ final class SymfonyMailerSenderTest extends KernelTestCase
         $this->sender->send('test_email', ['test@example.com']);
         $this->sender->send('test_email_with_data', ['test@example.com'], ['data' => 'Test data']);
 
-        $messages = $this->messagesProvider->getMessages();
+        $this->assertEmailCount(2);
 
-        $this->assertCount(2, $messages);
-        $this->assertTrue($this->doesMessageExists('Test email subject', 'Test email body', $messages));
-        $this->assertTrue(
-            $this->doesMessageExists('Test email with data subject', 'Test email body. Data: Test data.', $messages),
-        );
-    }
+        $firstEmail = $this->getMailerMessage(0);
+        $secondEmail = $this->getMailerMessage(1);
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-
-        (new SentMessagesPurger($this->spoolDirectory))->purge();
-    }
-
-    private function doesMessageExists(string $subject, string $body, array $messages): bool
-    {
-        /** @var SentMessage $message */
-        foreach ($messages as $message) {
-            if (
-                str_contains($message->getSubject(), $subject) &&
-                str_contains($message->getBody(), $body)
-            ) {
-                return true;
-            }
-        }
-
-        return false;
+        $this->assertEmailHtmlBodyContains($firstEmail, 'Test email body');
+        $this->assertEmailHasHeader($firstEmail, 'subject', 'Test email subject');
+        $this->assertEmailHtmlBodyContains($secondEmail, 'Test email body. Data: Test data.');
+        $this->assertEmailHasHeader($secondEmail, 'subject', 'Test email with data subject');
     }
 }
