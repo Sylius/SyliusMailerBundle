@@ -103,12 +103,8 @@ final class SymfonyMailerAdapter extends AbstractAdapter implements CcAwareAdapt
             ->html($renderedEmail->getBody())
         ;
 
-        if (!empty($ccRecipients)) {
-            $message->addCc(...$ccRecipients);
-        }
-        if (!empty($bccRecipients)) {
-            $message->addBcc(...$bccRecipients);
-        }
+        $message->addCc(...$ccRecipients);
+        $message->addBcc(...$bccRecipients);
 
         foreach ($attachments as $attachment) {
             $message->attachFromPath($attachment);

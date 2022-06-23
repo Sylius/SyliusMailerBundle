@@ -26,3 +26,5 @@ parameters:
         - '/Method Symfony\\Contracts\\EventDispatcher\\EventDispatcherInterface::dispatch\(\) invoked with 2 parameters, 1 required\./'
         - '/Cannot call method has\(\) on object\|null/'
         - '/Property Sylius\\Component\\Mailer\\Model\\Email\:\:\$id is never written\, only read\./'
+        - '/PHPDoc tag \@param references unknown parameter\: \$bccRecipients/'
+        - '/PHPDoc tag \@param references unknown parameter\: \$ccRecipients/'

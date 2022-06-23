@@ -60,7 +60,7 @@ final class SymfonyMailerAdapterSpec extends ObjectBehavior
                 $message->getBody()->bodyToString() === 'body' &&
                 $message->getFrom()[0] == new Address('arnaud@sylius.com', 'arnaud') &&
                 $message->getTo()[0] == new Address('pawel@sylius.com')
-                ;
+            ;
         }))->shouldBeCalled();
 
         $dispatcher

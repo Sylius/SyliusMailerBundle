@@ -17,6 +17,12 @@
     </projectFiles>
 
     <issueHandlers>
+        <InvalidDocblockParamName>
+            <errorLevel type="suppress">
+                <file name="src/Component/Sender/SenderInterface.php" />
+            </errorLevel>
+        </InvalidDocblockParamName>
+
         <PossiblyNullReference>
             <errorLevel type="suppress">
                 <file name="src/Bundle/DependencyInjection/Configuration.php" />
