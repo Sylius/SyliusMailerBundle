@@ -52,7 +52,7 @@
         "symfony/swiftmailer-bundle": "^3.1",
         "symfony/twig-bundle": "^5.4",
         "vimeo/psalm": "^4.22",
-        "rector/rector": "^0.12.19"
+        "rector/rector": "^0.13.6"
     },
     "extra": {
         "branch-alias": {
