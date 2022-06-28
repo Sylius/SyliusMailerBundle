@@ -1,4 +1,28 @@
-## CHANGELOG FOR `1.6.x`
+## CHANGELOG FOR `1.8.x`
+
+### v1.8.0-BETA.1 (2022-06-28)
+
+- [#102](https://github.com/Sylius/SyliusMailerBundle/issues/102) Add an adapter to support the Symfony Mailer component and deprecate the Swiftmailer integration ([@mbabker](https://github.com/mbabker))
+- [#116](https://github.com/Sylius/SyliusMailerBundle/issues/116) Branch alias should be 1.8-dev now 🖖 ([@Zales0123](https://github.com/Zales0123))
+- [#118](https://github.com/Sylius/SyliusMailerBundle/issues/118) [Sender] Assert recipient emails are always not empty strings ([@lchrusciel](https://github.com/lchrusciel))
+- [#123](https://github.com/Sylius/SyliusMailerBundle/issues/123) Update phpstan/phpstan requirement from 1.4.9 to 1.6.7 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)])
+- [#124](https://github.com/Sylius/SyliusMailerBundle/issues/124) Drop Symfony 4.4 ([@Zales0123](https://github.com/Zales0123))
+- [#125](https://github.com/Sylius/SyliusMailerBundle/issues/125) Update phpstan/phpstan-phpunit requirement from 1.0.0 to 1.1.1 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)])
+- [#128](https://github.com/Sylius/SyliusMailerBundle/issues/128) [DX] Usable test application ([@Zales0123](https://github.com/Zales0123))
+- [#131](https://github.com/Sylius/SyliusMailerBundle/issues/131) Fix production autoload warning ([@Ferror](https://github.com/Ferror))
+- [#138](https://github.com/Sylius/SyliusMailerBundle/issues/138) Update phpstan/phpstan-webmozart-assert requirement from 1.1.2 to 1.2.0 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)])
+- [#142](https://github.com/Sylius/SyliusMailerBundle/issues/142) Upgrade ECS configuration to fix the build ([@Zales0123](https://github.com/Zales0123))
+- [#143](https://github.com/Sylius/SyliusMailerBundle/issues/143) Update phpstan/phpstan requirement from 1.6.7 to 1.7.12 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)])
+- [#144](https://github.com/Sylius/SyliusMailerBundle/issues/144) Support PHP 8.1 ([@Zales0123](https://github.com/Zales0123))
+- [#149](https://github.com/Sylius/SyliusMailerBundle/issues/149) Update phpstan/phpstan requirement from 1.7.12 to 1.7.15 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)])
+- [#150](https://github.com/Sylius/SyliusMailerBundle/issues/150) Functional tests for sending emails (via both Swiftmailer and Symfony Mailer) ([@Zales0123](https://github.com/Zales0123))
+- [#151](https://github.com/Sylius/SyliusMailerBundle/issues/151) Fix CS and upgrade configuration ([@Zales0123](https://github.com/Zales0123))
+- [#152](https://github.com/Sylius/SyliusMailerBundle/issues/152) Allow to specify CC and BCC in sender ([@Zales0123](https://github.com/Zales0123))
+- [#153](https://github.com/Sylius/SyliusMailerBundle/issues/153) Update rector/rector requirement from ^0.12.19 to ^0.13.6 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)])
+- [#154](https://github.com/Sylius/SyliusMailerBundle/issues/154) Add test for Swiftmailer adapter as the default one ([@Zales0123](https://github.com/Zales0123))
+- [#155](https://github.com/Sylius/SyliusMailerBundle/issues/155) Allow to trigger build manually ([@Zales0123](https://github.com/Zales0123))
+
+## CHANGELOG FOR `1.7.x`
 
 ### v1.7.1 (2022-04-26)
 
@@ -16,6 +40,8 @@
 - [#113](https://github.com/Sylius/SyliusMailerBundle/issues/113) Document array structures ([@mbabker](https://github.com/mbabker))
 - [#114](https://github.com/Sylius/SyliusMailerBundle/issues/114) Upgrade Psalm and PHPStan ([@Zales0123](https://github.com/Zales0123))
 - [#115](https://github.com/Sylius/SyliusMailerBundle/issues/115) Small fixes in README ([@Zales0123](https://github.com/Zales0123))
+
+## CHANGELOG FOR `1.6.x`
 
 ### v1.6.0 (2020-11-10)
 
