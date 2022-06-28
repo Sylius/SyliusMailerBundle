@@ -17,12 +17,13 @@ use Sylius\Component\Mailer\Event\EmailSendEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
+use Sylius\Component\Mailer\Sender\Adapter\CcAwareAdapterInterface;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 
-final class SymfonyMailerAdapter extends AbstractAdapter
+final class SymfonyMailerAdapter extends AbstractAdapter implements CcAwareAdapterInterface
 {
     private MailerInterface $mailer;
 
@@ -44,6 +45,56 @@ final class SymfonyMailerAdapter extends AbstractAdapter
         array $attachments = [],
         array $replyTo = [],
     ): void {
+        $this->sendMessage(
+            $renderedEmail,
+            $senderAddress,
+            $senderName,
+            $recipients,
+            $replyTo,
+            $attachments,
+            $email,
+            $data,
+        );
+    }
+
+    public function sendWithCC(
+        array $recipients,
+        string $senderAddress,
+        string $senderName,
+        RenderedEmail $renderedEmail,
+        EmailInterface $email,
+        array $data,
+        array $attachments = [],
+        array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = [],
+    ): void {
+        $this->sendMessage(
+            $renderedEmail,
+            $senderAddress,
+            $senderName,
+            $recipients,
+            $replyTo,
+            $attachments,
+            $email,
+            $data,
+            $ccRecipients,
+            $bccRecipients,
+        );
+    }
+
+    private function sendMessage(
+        RenderedEmail $renderedEmail,
+        string $senderAddress,
+        string $senderName,
+        array $recipients,
+        array $replyTo,
+        array $attachments,
+        EmailInterface $email,
+        array $data,
+        array $ccRecipients = [],
+        array $bccRecipients = [],
+    ): void {
         $message = (new Email())
             ->subject($renderedEmail->getSubject())
             ->from(new Address($senderAddress, $senderName))
@@ -51,6 +102,9 @@ final class SymfonyMailerAdapter extends AbstractAdapter
             ->replyTo(...$replyTo)
             ->html($renderedEmail->getBody())
         ;
+
+        $message->addCc(...$ccRecipients);
+        $message->addBcc(...$bccRecipients);
 
         foreach ($attachments as $attachment) {
             $message->attachFromPath($attachment);

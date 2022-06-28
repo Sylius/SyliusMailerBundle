@@ -17,13 +17,14 @@ use Sylius\Component\Mailer\Event\EmailSendEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
+use Sylius\Component\Mailer\Sender\Adapter\CcAwareAdapterInterface;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @deprecated The Swift Mailer integration is deprecated since sylius/mailer-bundle 1.8. Use the Symfony Mailer integration instead.
  */
-class SwiftMailerAdapter extends AbstractAdapter
+class SwiftMailerAdapter extends AbstractAdapter implements CcAwareAdapterInterface
 {
     /** @var \Swift_Mailer */
     protected $mailer;
@@ -56,12 +57,69 @@ class SwiftMailerAdapter extends AbstractAdapter
         array $attachments = [],
         array $replyTo = [],
     ): void {
+        $this->sendMessage(
+            $renderedEmail,
+            $senderAddress,
+            $senderName,
+            $recipients,
+            $replyTo,
+            $attachments,
+            $email,
+            $data,
+        );
+    }
+
+    public function sendWithCC(
+        array $recipients,
+        string $senderAddress,
+        string $senderName,
+        RenderedEmail $renderedEmail,
+        EmailInterface $email,
+        array $data,
+        array $attachments = [],
+        array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = [],
+    ): void {
+        $this->sendMessage(
+            $renderedEmail,
+            $senderAddress,
+            $senderName,
+            $recipients,
+            $replyTo,
+            $attachments,
+            $email,
+            $data,
+            $ccRecipients,
+            $bccRecipients,
+        );
+    }
+
+    private function sendMessage(
+        RenderedEmail $renderedEmail,
+        string $senderAddress,
+        string $senderName,
+        array $recipients,
+        array $replyTo,
+        array $attachments,
+        EmailInterface $email,
+        array $data,
+        array $ccRecipients = [],
+        array $bccRecipients = [],
+    ): void {
         $message = (new \Swift_Message())
             ->setSubject($renderedEmail->getSubject())
             ->setFrom([$senderAddress => $senderName])
             ->setTo($recipients)
             ->setReplyTo($replyTo)
         ;
+
+        if (!empty($ccRecipients)) {
+            $message->setCc($ccRecipients);
+        }
+        if (!empty($bccRecipients)) {
+            $message->setBcc($bccRecipients);
+        }
 
         $message->setBody($renderedEmail->getBody(), 'text/html');
 

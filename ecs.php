@@ -2,6 +2,7 @@
 
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
 use PhpCsFixer\Fixer\Comment\HeaderCommentFixer;
+use PhpCsFixer\Fixer\Phpdoc\NoSuperfluousPhpdocTagsFixer;
 use PhpCsFixer\Fixer\Phpdoc\PhpdocTagTypeFixer;
 use SlevomatCodingStandard\Sniffs\Commenting\InlineDocCommentDeclarationSniff;
 use Symplify\EasyCodingStandard\Config\ECSConfig;
@@ -25,6 +26,7 @@ file that was distributed with this source code.',
         PhpdocTagTypeFixer::class,
         InlineDocCommentDeclarationSniff::class . '.MissingVariable',
         VisibilityRequiredFixer::class => ['*Spec.php'],
+        NoSuperfluousPhpdocTagsFixer::class => ['src/Component/Sender/SenderInterface.php'],
         '**/var/*',
         'src/Bundle/test/app/AppKernel.php',
     ]);

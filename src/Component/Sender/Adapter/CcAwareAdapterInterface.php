@@ -11,24 +11,30 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Mailer\Sender;
+namespace Sylius\Component\Mailer\Sender\Adapter;
 
-interface SenderInterface
+use Sylius\Component\Mailer\Model\EmailInterface;
+use Sylius\Component\Mailer\Renderer\RenderedEmail;
+
+interface CcAwareAdapterInterface extends AdapterInterface
 {
     /**
-     * @deprecated using this method without 2 last arguments ($ccRecipients and $bccRecipients) is deprecated since 1.8 and won't be possible since 2.0
-     *
-     * @param string[]|null[] $recipients A list of email addresses to receive the message. Providing null or empty string in the list of recipients is deprecated and will be removed in SyliusMailerBundle 2.0
+     * @param string[] $recipients A list of email addresses to receive the message.
      * @param string[] $attachments A list of file paths to attach to the message.
      * @param string[] $replyTo A list of email addresses to set as the Reply-To address for the message.
      * @param string[] $ccRecipients A list of email addresses set as carbon copy
      * @param string[] $bccRecipients A list of email addresses set as blind carbon copy
      */
-    public function send(
-        string $code,
+    public function sendWithCC(
         array $recipients,
-        array $data = [],
+        string $senderAddress,
+        string $senderName,
+        RenderedEmail $renderedEmail,
+        EmailInterface $email,
+        array $data,
         array $attachments = [],
         array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = [],
     ): void;
 }
