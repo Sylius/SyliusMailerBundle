@@ -55,6 +55,11 @@
             "dev-master": "1.7-dev"
         }
     },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        }
+    },
     "autoload": {
         "psr-4": {
             "Sylius\\Bundle\\MailerBundle\\": "src/Bundle/",
