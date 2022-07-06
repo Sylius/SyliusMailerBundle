@@ -123,9 +123,11 @@ class SwiftMailerAdapter extends AbstractAdapter implements CcAwareAdapterInterf
 
         $message->setBody($renderedEmail->getBody(), 'text/html');
 
-        foreach ($attachments as $attachment) {
-            $file = \Swift_Attachment::fromPath($attachment);
-
+        foreach ($attachments as $attachmentFilename => $attachmentPath) {
+            $file = \Swift_Attachment::fromPath($attachmentPath);
+            if (is_string($attachmentFilename)) {
+                $file->setFilename($attachmentFilename);
+            }
             $message->attach($file);
         }
 
