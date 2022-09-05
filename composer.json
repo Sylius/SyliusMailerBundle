@@ -87,7 +87,13 @@
             "@composer validate --strict",
             "vendor/bin/ecs check src",
             "vendor/bin/phpstan analyse --ansi -c phpstan.neon -l max src",
-            "vendor/bin/psalm"
+            "vendor/bin/psalm src"
+        ],
+        "analyse-symfony5": [
+            "@composer validate --strict",
+            "vendor/bin/ecs check src",
+            "vendor/bin/phpstan analyse --ansi -c phpstan.symfony5.neon -l max src",
+            "vendor/bin/psalm -c psalm.symfony5.xml src"
         ],
         "fix": [
             "vendor/bin/ecs check src --fix"

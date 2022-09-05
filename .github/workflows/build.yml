@@ -64,7 +64,15 @@ jobs:
                     (cd src/Component && composer update ${{ matrix.composer-flags }} --no-scripts)
 
             -
-                name: Run analysis
+                name: Run analysis with Symfony 5
+                if: matrix.symfony == '5.4.*'
+                run: |
+                    composer analyse-symfony5
+                    (cd src/Component && composer validate --strict)
+
+            -
+                name: Run analysis with Symfony 6
+                if: matrix.symfony != '5.4.*'
                 run: |
                     composer analyse
                     (cd src/Component && composer validate --strict)
