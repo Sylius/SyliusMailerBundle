@@ -18,8 +18,11 @@ jobs:
             fail-fast: false
             matrix:
                 php: ["8.0", "8.1"]
-                symfony: ["5.4.*"]
+                symfony: ["5.4.*", "6.0.*", "6.1.*"]
                 twig: ["^2.12", "^3.3"]
+                exclude:
+                    - php: "8.0"
+                      symfony: "6.1.*"
 
         steps:
             -
@@ -48,13 +51,28 @@ jobs:
                     composer require "twig/twig:${{ matrix.twig }}" --no-update --no-scripts
 
             -
+                name: Remove Swiftmailer on Symfony >= 6
+                if: matrix.symfony != '5.4.*'
+                run: |
+                    composer remove --dev symfony/swiftmailer-bundle  --no-update --no-scripts
+                    rm src/Bundle/spec/Sender/Adapter/SwiftMailerAdapterSpec.php
+
+            -
                 name: Install dependencies
                 run: |
                     composer update ${{ matrix.composer-flags }} --no-scripts
                     (cd src/Component && composer update ${{ matrix.composer-flags }} --no-scripts)
 
             -
-                name: Run analysis
+                name: Run analysis with Symfony 5
+                if: matrix.symfony == '5.4.*'
+                run: |
+                    composer analyse-symfony5
+                    (cd src/Component && composer validate --strict)
+
+            -
+                name: Run analysis with Symfony 6
+                if: matrix.symfony != '5.4.*'
                 run: |
                     composer analyse
                     (cd src/Component && composer validate --strict)
@@ -69,6 +87,7 @@ jobs:
 
             -
                 name: Test bundle (with all services)
+                if: matrix.symfony == '5.4.*'
                 run: |
                     rm -rf src/Bundle/test/var/cache
                     composer require symfony/mailer --no-interaction --no-scripts
@@ -77,9 +96,11 @@ jobs:
 
             -
                 name: Test bundle (with Swift Mailer)
+                if: matrix.symfony == '5.4.*'
                 run: |
                     rm -rf src/Bundle/test/var/cache
                     composer remove symfony/mailer --no-scripts
+                    composer require symfony/swiftmailer-bundle --no-interaction --no-scripts
                     (cd src/Bundle/test && APP_ENV=test_with_swiftmailer bin/console lint:container)
                     vendor/bin/phpunit src/Bundle/tests/Functional/SwiftmailerSenderTest.php
 
@@ -97,4 +118,5 @@ jobs:
                 run: |
                     rm -rf src/Bundle/test/var/cache
                     composer remove symfony/mailer --no-scripts
+                    composer remove symfony/swiftmailer-bundle --no-scripts
                     (cd src/Bundle/test && APP_ENV=test_no_mailers bin/console lint:container)
