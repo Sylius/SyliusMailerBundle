@@ -51,13 +51,6 @@ jobs:
                     composer require "twig/twig:${{ matrix.twig }}" --no-update --no-scripts
 
             -
-                name: Remove Swiftmailer on Symfony >= 6
-                if: matrix.symfony != '5.4.*'
-                run: |
-                    composer remove --dev symfony/swiftmailer-bundle  --no-update --no-scripts
-                    rm src/Bundle/spec/Sender/Adapter/SwiftMailerAdapterSpec.php
-
-            -
                 name: Install dependencies
                 run: |
                     composer update ${{ matrix.composer-flags }} --no-scripts
@@ -87,36 +80,15 @@ jobs:
 
             -
                 name: Test bundle (with all services)
-                if: matrix.symfony == '5.4.*'
                 run: |
                     rm -rf src/Bundle/test/var/cache
-                    composer require symfony/mailer --no-interaction --no-scripts
-                    composer require symfony/swiftmailer-bundle --no-interaction --no-scripts
-                    (cd src/Bundle/test && APP_ENV=test bin/console lint:container)
-
-            -
-                name: Test bundle (with Swift Mailer)
-                if: matrix.symfony == '5.4.*'
-                run: |
-                    rm -rf src/Bundle/test/var/cache
-                    composer remove symfony/mailer --no-scripts
-                    composer require symfony/swiftmailer-bundle --no-interaction --no-scripts
-                    (cd src/Bundle/test && APP_ENV=test_with_swiftmailer bin/console lint:container)
-                    vendor/bin/phpunit src/Bundle/tests/Functional/SwiftmailerSenderTest.php
-
-            -
-                name: Test bundle (with SymfonyMailer)
-                run: |
-                    rm -rf src/Bundle/test/var/cache
-                    composer remove symfony/swiftmailer-bundle --no-scripts
                     composer require symfony/mailer --no-scripts
-                    (cd src/Bundle/test && APP_ENV=test_with_symfony_mailer bin/console lint:container)
-                    vendor/bin/phpunit src/Bundle/tests/Functional/SymfonyMailerSenderTest.php
+                    (cd src/Bundle/test && APP_ENV=test bin/console lint:container)
+                    vendor/bin/phpunit
 
             -
                 name: Run lint container (with no mailers)
                 run: |
                     rm -rf src/Bundle/test/var/cache
                     composer remove symfony/mailer --no-scripts
-                    composer remove symfony/swiftmailer-bundle --no-scripts
                     (cd src/Bundle/test && APP_ENV=test_no_mailers bin/console lint:container)

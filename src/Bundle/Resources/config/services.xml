@@ -71,16 +71,6 @@
             public="true"
         />
         <service
-            id="sylius.email_sender.adapter.swiftmailer"
-            class="Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter"
-            parent="sylius.email_sender.adapter.abstract"
-            public="true"
-        >
-            <deprecated package="sylius/mailer-bundle" version="1.8">The "%service_id%" service is deprecated and will be removed in 2.0, use the Symfony Mailer integration instead.</deprecated>
-            <argument type="service" id="swiftmailer.mailer.default" />
-            <argument type="service" id="event_dispatcher" on-invalid="null" />
-        </service>
-        <service
             id="sylius.email_sender.adapter.symfony_mailer"
             class="Sylius\Bundle\MailerBundle\Sender\Adapter\SymfonyMailerAdapter"
             parent="sylius.email_sender.adapter.abstract"
