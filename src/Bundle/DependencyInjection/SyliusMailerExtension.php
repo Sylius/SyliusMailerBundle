@@ -44,10 +44,6 @@ final class SyliusMailerExtension extends ConfigurableExtension
 
     private function configureSenderAdapter(array $mergedConfig, ContainerBuilder $container): void
     {
-        if (!ContainerBuilder::willBeAvailable('swiftmailer/swiftmailer', \Swift::class, ['symfony/swiftmailer-bundle'])) {
-            $container->removeDefinition('sylius.email_sender.adapter.swiftmailer');
-        }
-
         if (!ContainerBuilder::willBeAvailable('symfony/mailer', MailerInterface::class, ['symfony/framework-bundle'])) {
             $container->removeDefinition('sylius.email_sender.adapter.symfony_mailer');
         }
@@ -59,7 +55,6 @@ final class SyliusMailerExtension extends ConfigurableExtension
         }
 
         $services = [
-            'sylius.email_sender.adapter.swiftmailer',
             'sylius.email_sender.adapter.symfony_mailer',
             'sylius.email_sender.adapter.default',
         ];

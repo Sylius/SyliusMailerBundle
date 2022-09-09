@@ -14,6 +14,5 @@ declare(strict_types=1);
 return [
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
     Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
-    Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['dev' => true, 'test' => true, 'test_with_swiftmailer' => true],
     Sylius\Bundle\MailerBundle\SyliusMailerBundle::class => ['all' => true],
 ];

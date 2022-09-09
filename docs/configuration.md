@@ -2,7 +2,7 @@
 
 ```yaml
 sylius_mailer:
-      sender_adapter: sylius.email_sender.adapter.swiftmailer # Adapter for sending e-mails.
+      sender_adapter: sylius.email_sender.adapter.symfony_mailer # Adapter for sending e-mails.
       renderer_adapter: sylius.email_renderer.adapter.twig # Adapter for rendering e-mails.
       sender:
           name: # Required - default sender name.
