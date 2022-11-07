@@ -29,9 +29,6 @@ class SwiftMailerAdapter extends AbstractAdapter implements CcAwareAdapterInterf
     /** @var \Swift_Mailer */
     protected $mailer;
 
-    /** @var EventDispatcherInterface|null */
-    protected $dispatcher;
-
     public function __construct(\Swift_Mailer $mailer, ?EventDispatcherInterface $dispatcher = null)
     {
         trigger_deprecation(
