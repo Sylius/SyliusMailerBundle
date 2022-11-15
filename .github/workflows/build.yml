@@ -82,6 +82,7 @@ jobs:
                     composer remove symfony/mailer --no-scripts
                     (cd src/Bundle/test && APP_ENV=test_with_swiftmailer bin/console lint:container)
                     vendor/bin/phpunit src/Bundle/tests/Functional/SwiftmailerSenderTest.php
+                    vendor/bin/phpunit src/Bundle/tests/Functional/ServiceRemovalTest.php --group swiftmailer
 
             -
                 name: Test bundle (with SymfonyMailer)
@@ -91,6 +92,7 @@ jobs:
                     composer require symfony/mailer --no-scripts
                     (cd src/Bundle/test && APP_ENV=test_with_symfony_mailer bin/console lint:container)
                     vendor/bin/phpunit src/Bundle/tests/Functional/SymfonyMailerSenderTest.php
+                    vendor/bin/phpunit src/Bundle/tests/Functional/ServiceRemovalTest.php --group symfony-mailer
 
             -
                 name: Run lint container (with no mailers)

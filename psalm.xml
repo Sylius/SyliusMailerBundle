@@ -38,6 +38,12 @@
             </errorLevel>
         </PossiblyUndefinedMethod>
 
+        <UndefinedDocblockClass>
+            <errorLevel type="suppress">
+                <referencedClass name="UnitEnum" />
+            </errorLevel>
+        </UndefinedDocblockClass>
+
         <TooManyArguments>
             <errorLevel type="suppress">
                 <referencedFunction name="Symfony\Component\Config\Definition\Builder\TreeBuilder::__construct" />
