@@ -1,5 +1,9 @@
 ## CHANGELOG FOR `2.0.x`
 
+### v2.0.0 (2022-11-24)
+
+- [#158](https://github.com/Sylius/SyliusMailerBundle/issues/158) Remove dead code on sender adapters ([@Nek-](https://github.com/Nek-))
+
 ### v2.0.0-BETA.1 (2022-09-09)
 
 - [#155](https://github.com/Sylius/SyliusMailerBundle/issues/155) Add support for Symfony 6 ([@loic425](https://github.com/loic425))
