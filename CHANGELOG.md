@@ -1,5 +1,10 @@
 ## CHANGELOG FOR `1.8.x`
 
+### v1.8.1 (2022-11-24)
+
+- [#158](https://github.com/Sylius/SyliusMailerBundle/issues/158) Remove dead code on sender adapters ([@Nek-](https://github.com/Nek-))
+- [#165](https://github.com/Sylius/SyliusMailerBundle/issues/165) Update phpstan/phpstan requirement from 1.7.15 to 1.8.5 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)])
+
 ### v1.8.0 (2022-09-07)
 
 - [#102](https://github.com/Sylius/SyliusMailerBundle/issues/102) Add an adapter to support the Symfony Mailer component and deprecate the Swiftmailer integration ([@mbabker](https://github.com/mbabker))
