@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\DependencyInjection;
 
+use Sylius\Bundle\MailerBundle\DependencyInjection\Compiler\RendererAdapterPass;
+use Sylius\Bundle\MailerBundle\DependencyInjection\Compiler\SenderAdapterPass;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
-use Symfony\Component\Mailer\MailerInterface;
-use Twig\Environment;
 
 final class SyliusMailerExtension extends ConfigurableExtension
 {
@@ -44,53 +45,15 @@ final class SyliusMailerExtension extends ConfigurableExtension
 
     private function configureSenderAdapter(array $mergedConfig, ContainerBuilder $container): void
     {
-        if (!ContainerBuilder::willBeAvailable('symfony/mailer', MailerInterface::class, ['symfony/framework-bundle'])) {
-            $container->removeDefinition('sylius.email_sender.adapter.symfony_mailer');
-        }
-
         if (isset($mergedConfig['sender_adapter'])) {
-            $container->setAlias('sylius.email_sender.adapter', $mergedConfig['sender_adapter']);
-
-            return;
-        }
-
-        $services = [
-            'sylius.email_sender.adapter.symfony_mailer',
-            'sylius.email_sender.adapter.default',
-        ];
-
-        foreach ($services as $service) {
-            if ($container->hasDefinition($service)) {
-                $container->setAlias('sylius.email_sender.adapter', $service);
-
-                return;
-            }
+            $container->setAlias(SenderAdapterPass::ADAPTER_ALIAS, new Alias($mergedConfig['sender_adapter'], true));
         }
     }
 
     private function configureRendererAdapter(array $mergedConfig, ContainerBuilder $container): void
     {
-        if (!ContainerBuilder::willBeAvailable('twig/twig', Environment::class, ['symfony/twig-bundle'])) {
-            $container->removeDefinition('sylius.email_renderer.adapter.twig');
-        }
-
         if (isset($mergedConfig['renderer_adapter'])) {
-            $container->setAlias('sylius.email_renderer.adapter', $mergedConfig['renderer_adapter']);
-
-            return;
-        }
-
-        $services = [
-            'sylius.email_renderer.adapter.twig',
-            'sylius.email_renderer.adapter.default',
-        ];
-
-        foreach ($services as $service) {
-            if ($container->hasDefinition($service)) {
-                $container->setAlias('sylius.email_renderer.adapter', $service);
-
-                return;
-            }
+            $container->setAlias(RendererAdapterPass::ADAPTER_ALIAS, new Alias($mergedConfig['renderer_adapter'], true));
         }
     }
 }
