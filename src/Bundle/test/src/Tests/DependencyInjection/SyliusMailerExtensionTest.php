@@ -27,9 +27,6 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sylius.mailer.sender_address', 'no-reply@example.com');
         $this->assertContainerBuilderHasParameter('sylius.mailer.emails');
         $this->assertContainerBuilderHasParameter('sylius.mailer.templates');
-
-        $this->assertContainerBuilderHasAlias('sylius.email_renderer.adapter');
-        $this->assertContainerBuilderHasAlias('sylius.email_sender.adapter');
     }
 
     /** @test */
@@ -39,9 +36,6 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasParameter('sylius.mailer.sender_name', 'John Doe');
         $this->assertContainerBuilderHasParameter('sylius.mailer.sender_address', 'john@doe.com');
-
-        $this->assertContainerBuilderHasAlias('sylius.email_renderer.adapter');
-        $this->assertContainerBuilderHasAlias('sylius.email_sender.adapter');
     }
 
     /** @test */
