@@ -82,7 +82,6 @@ jobs:
                 name: Test bundle (with all services)
                 run: |
                     rm -rf src/Bundle/test/var/cache
-                    composer require symfony/mailer --no-scripts
                     (cd src/Bundle/test && APP_ENV=test bin/console lint:container)
                     vendor/bin/phpunit
 
@@ -90,5 +89,5 @@ jobs:
                 name: Run lint container (with no mailers)
                 run: |
                     rm -rf src/Bundle/test/var/cache
-                    composer remove symfony/mailer --no-scripts
+                    composer remove symfony/mailer --dev --no-scripts
                     (cd src/Bundle/test && APP_ENV=test_no_mailers bin/console lint:container)
