@@ -12,7 +12,7 @@ final class CompositeEmailModifier implements EmailModifierInterface
      * @param EmailModifierInterface[] $emailModifiers
      */
     public function __construct(
-        private array $emailModifiers = []
+        private iterable $emailModifiers = []
     ) {
     }
 
