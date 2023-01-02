@@ -18,30 +18,18 @@ use SyliusLabs\Polyfill\Symfony\EventDispatcher\Event;
 
 final class EmailSendEvent extends Event
 {
-    /** @var mixed */
-    protected $message;
-
-    /** @var string[] */
-    protected $recipients;
-
-    protected EmailInterface $email;
-
-    /** @var array */
-    protected $data;
-
-    /** @var string[] */
-    protected $replyTo;
-
     /**
      * @param mixed $message
+     * @param string[] $recipients
+     * @param string[] $replyTo
      */
-    public function __construct($message, EmailInterface $email, array $data, array $recipients = [], array $replyTo = [])
-    {
-        $this->message = $message;
-        $this->email = $email;
-        $this->data = $data;
-        $this->recipients = $recipients;
-        $this->replyTo = $replyTo;
+    public function __construct(
+        protected $message,
+        protected EmailInterface $email,
+        protected array $data,
+        protected array $recipients = [],
+        protected array $replyTo = [],
+    ) {
     }
 
     public function getRecipients(): array
