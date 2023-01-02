@@ -16,6 +16,7 @@ namespace spec\Sylius\Component\Mailer\Sender;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Mailer\Model\EmailInterface;
+use Sylius\Component\Mailer\Modifier\EmailModifierInterface;
 use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
@@ -81,6 +82,44 @@ final class SenderSpec extends ObjectBehavior
             ['john@example.com'],
             'sender@example.com',
             'Sender',
+            $renderedEmail,
+            $email,
+            $data,
+            [],
+            [],
+            ['cc@example.com'],
+            ['bcc@example.com'],
+        )->shouldBeCalled();
+
+        $this->send('bar', ['john@example.com'], $data, [], [], ['cc@example.com'], ['bcc@example.com']);
+    }
+
+    function it_sends_a_modified_email_with_cc_and_bcc_through_the_adapter(
+        EmailInterface $email,
+        EmailProviderInterface $provider,
+        RenderedEmail $renderedEmail,
+        RendererAdapterInterface $rendererAdapter,
+        SenderAdapterInterface $senderAdapter,
+        DefaultSettingsProviderInterface $defaultSettingsProvider,
+        EmailModifierInterface $emailModifier,
+    ): void {
+        $this->beConstructedWith($rendererAdapter, $senderAdapter, $provider, $defaultSettingsProvider, $emailModifier);
+
+        $provider->getEmail('bar')->willReturn($email);
+
+        $emailModifier->modify($email)->shouldBeCalled()->willReturn($email);
+
+        $email->isEnabled()->willReturn(true);
+        $email->getSenderAddress()->willReturn('sender@example.com');
+        $email->getSenderName()->willReturn('Modified sender');
+
+        $data = ['foo' => 2];
+
+        $rendererAdapter->render($email, ['foo' => 2])->willReturn($renderedEmail);
+        $senderAdapter->sendWithCC(
+            ['john@example.com'],
+            'sender@example.com',
+            'Modified sender',
             $renderedEmail,
             $email,
             $data,
