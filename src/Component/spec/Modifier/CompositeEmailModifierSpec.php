@@ -1,12 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace spec\Sylius\Component\Mailer\Modifier;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Mailer\Model\EmailInterface;
-use Sylius\Component\Mailer\Modifier\CompositeEmailModifier;
 use Sylius\Component\Mailer\Modifier\EmailModifierInterface;
 
 final class CompositeEmailModifierSpec extends ObjectBehavior
@@ -24,7 +32,7 @@ final class CompositeEmailModifierSpec extends ObjectBehavior
     function it_uses_all_email_modifiers_to_modify_the_email(
         EmailModifierInterface $firstEmailModifier,
         EmailModifierInterface $secondEmailModifier,
-        EmailInterface $email
+        EmailInterface $email,
     ) {
         $firstEmailModifier->modify($email, ['factor' => 'value'])->shouldBeCalled()->willReturn($email);
         $secondEmailModifier->modify($email, ['factor' => 'value'])->shouldBeCalled()->willReturn($email);

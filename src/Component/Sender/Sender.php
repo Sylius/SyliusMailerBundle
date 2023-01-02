@@ -31,9 +31,7 @@ final class Sender implements SenderInterface
         private ?EmailModifierInterface $emailModifier = null,
     ) {
         if ($this->emailModifier === null) {
-            trigger_deprecation(
-                'sylius/mailer-bundle',
-                '2.0',
+            @trigger_error(
                 'Not passing EmailModifierInterface is deprecated since 2.1 and will not be possible in 3.0',
             );
         }
