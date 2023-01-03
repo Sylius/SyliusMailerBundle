@@ -107,13 +107,13 @@ final class SenderSpec extends ObjectBehavior
 
         $provider->getEmail('bar')->willReturn($email);
 
-        $emailModifier->modify($email)->shouldBeCalled()->willReturn($email);
+        $data = ['foo' => 2];
+
+        $emailModifier->modify($email, $data)->shouldBeCalled()->willReturn($email);
 
         $email->isEnabled()->willReturn(true);
         $email->getSenderAddress()->willReturn('sender@example.com');
         $email->getSenderName()->willReturn('Modified sender');
-
-        $data = ['foo' => 2];
 
         $rendererAdapter->render($email, ['foo' => 2])->willReturn($renderedEmail);
         $senderAdapter->sendWithCC(

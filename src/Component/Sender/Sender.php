@@ -53,7 +53,7 @@ final class Sender implements SenderInterface
 
         $email = $this->provider->getEmail($code);
         if ($this->emailModifier !== null) {
-            $email = $this->emailModifier->modify($email);
+            $email = $this->emailModifier->modify($email, $data);
         }
 
         if (!$email->isEnabled()) {
