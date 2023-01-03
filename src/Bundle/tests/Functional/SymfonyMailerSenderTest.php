@@ -45,7 +45,7 @@ final class SymfonyMailerSenderTest extends KernelTestCase
         $this->assertEmailHtmlBodyContains($email, 'Test email body');
         $this->assertEmailHasHeader($email, 'subject', 'Test email subject');
         $this->assertEmailHasSenderName($email, 'Sender');
-        $this->assertEmailHasSenderEmail($email, 'sender@example.com');
+        $this->assertEmailAddressContains($email, 'From', 'sender@example.com');
     }
 
     /** @test */
@@ -59,7 +59,7 @@ final class SymfonyMailerSenderTest extends KernelTestCase
         $this->assertEmailHtmlBodyContains($email, 'Test email body. Data: Test data.');
         $this->assertEmailHasHeader($email, 'subject', 'Test email with data subject');
         $this->assertEmailHasSenderName($email, 'Sender');
-        $this->assertEmailHasSenderEmail($email, 'sender@example.com');
+        $this->assertEmailAddressContains($email, 'From', 'sender@example.com');
     }
 
     /** @test */
@@ -90,7 +90,7 @@ final class SymfonyMailerSenderTest extends KernelTestCase
         $this->assertEmailHtmlBodyContains($email, 'Test email body');
         $this->assertEmailHasHeader($email, 'subject', 'Test email subject');
         $this->assertEmailHasSenderName($email, 'Modified sender name');
-        $this->assertEmailHasSenderEmail($email, 'sender@example.com');
+        $this->assertEmailAddressContains($email, 'From', 'sender@example.com');
     }
 
     private function assertEmailHasSenderName(?RawMessage $email, string $sender): void
@@ -103,17 +103,5 @@ final class SymfonyMailerSenderTest extends KernelTestCase
         }
 
         throw new ExpectationFailedException(sprintf('There is no email sent by sender with name "%s"', $sender));
-    }
-
-    private function assertEmailHasSenderEmail(?RawMessage $email, string $emailAddress): void
-    {
-        /** @var Address $address */
-        foreach ($email->getHeaders()->get('from')->getAddresses() as $address) {
-            if ($address->getAddress() === $emailAddress) {
-                return;
-            }
-        }
-
-        throw new ExpectationFailedException(sprintf('There is no email sent by sender with email "%s"', $emailAddress));
     }
 }
