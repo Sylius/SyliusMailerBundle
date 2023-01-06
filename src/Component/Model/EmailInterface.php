@@ -27,16 +27,10 @@ interface EmailInterface
 
     public function disable(): void;
 
-    /**
-     * @return string
-     */
     public function getSubject(): ?string;
 
     public function setSubject(string $subject): void;
 
-    /**
-     * @return string
-     */
     public function getContent(): ?string;
 
     public function setContent(string $content): void;

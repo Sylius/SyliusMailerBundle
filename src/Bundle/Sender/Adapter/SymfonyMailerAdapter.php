@@ -25,11 +25,8 @@ use Symfony\Component\Mime\Email;
 
 final class SymfonyMailerAdapter extends AbstractAdapter implements CcAwareAdapterInterface
 {
-    private MailerInterface $mailer;
-
-    public function __construct(MailerInterface $mailer)
+    public function __construct(private MailerInterface $mailer)
     {
-        $this->mailer = $mailer;
     }
 
     /**
