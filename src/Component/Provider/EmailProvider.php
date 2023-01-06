@@ -19,21 +19,12 @@ use Webmozart\Assert\Assert;
 
 final class EmailProvider implements EmailProviderInterface
 {
-    private EmailFactoryInterface $emailFactory;
-
-    private array $configuration;
-
     public function __construct(
-        EmailFactoryInterface $emailFactory,
-        array $configuration,
+        private EmailFactoryInterface $emailFactory,
+        private array $configuration,
     ) {
-        $this->emailFactory = $emailFactory;
-        $this->configuration = $configuration;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getEmail(string $code): EmailInterface
     {
         return $this->getEmailFromConfiguration($code);
