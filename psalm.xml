@@ -42,5 +42,11 @@
                 <file name="src/Bundle/Sender/Adapter/DefaultAdapter.php" />
             </errorLevel>
         </NonInvariantDocblockPropertyType>
+
+        <InvalidArgument>
+            <errorLevel type="suppress">
+                <file name="src/Bundle/Sender/Adapter/SymfonyMailerAdapter.php" />
+            </errorLevel>
+        </InvalidArgument>
     </issueHandlers>
 </psalm>
