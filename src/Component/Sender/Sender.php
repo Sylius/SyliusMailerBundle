@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Mailer\Sender;
 
+use Sylius\Component\Mailer\Modifier\EmailModifierInterface;
 use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
@@ -27,7 +28,13 @@ final class Sender implements SenderInterface
         private SenderAdapterInterface $senderAdapter,
         private EmailProviderInterface $provider,
         private DefaultSettingsProviderInterface $defaultSettingsProvider,
+        private ?EmailModifierInterface $emailModifier = null,
     ) {
+        if ($this->emailModifier === null) {
+            @trigger_error(
+                'Not passing EmailModifierInterface is deprecated since 2.1 and will not be possible in 3.0',
+            );
+        }
     }
 
     /**
@@ -45,6 +52,9 @@ final class Sender implements SenderInterface
         Assert::allStringNotEmpty($recipients);
 
         $email = $this->provider->getEmail($code);
+        if ($this->emailModifier !== null) {
+            $email = $this->emailModifier->modify($email, $data);
+        }
 
         if (!$email->isEnabled()) {
             return;

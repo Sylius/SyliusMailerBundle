@@ -29,6 +29,7 @@
             <argument type="service" id="sylius.email_sender.adapter" />
             <argument type="service" id="sylius.email_provider" />
             <argument type="service" id="sylius.mailer.default_settings_provider" />
+            <argument type="service" id="Sylius\Component\Mailer\Modifier\EmailModifierInterface" />
         </service>
         <service id="Sylius\Component\Mailer\Sender\SenderInterface" alias="sylius.email_sender" />
 
@@ -77,6 +78,13 @@
             public="true"
         >
             <argument type="service" id="mailer.mailer" />
+        </service>
+
+        <service
+            id="Sylius\Component\Mailer\Modifier\EmailModifierInterface"
+            class="Sylius\Component\Mailer\Modifier\CompositeEmailModifier"
+        >
+            <argument type="tagged" tag="sylius_mailer.email_modifier" />
         </service>
     </services>
 </container>
