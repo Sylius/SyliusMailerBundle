@@ -91,8 +91,8 @@
             <argument>%sylius.mailer.sender_name%</argument>
             <argument>%sylius.mailer.sender_address%</argument>
             <argument>%sylius.mailer.emails%</argument>
-            <argument>%kernel.project_dir%/templates</argument>
             <argument type="service" id="Symfony\Contracts\Translation\TranslatorInterface" />
+            <argument type="service" id="twig.loader" />
         </service>
     </services>
 </container>

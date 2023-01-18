@@ -12,6 +12,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Loader\LoaderInterface;
 
 #[AsCommand(name: 'sylius:debug:mailer', description: 'Shows configured emails and sender data')]
 final class DebugMailerCommand extends Command
@@ -20,8 +21,8 @@ final class DebugMailerCommand extends Command
         private string $senderName,
         private string $senderEmail,
         private array $emails,
-        private string $templatesDir,
         private TranslatorInterface $translator,
+        private LoaderInterface $templateLoader,
     ) {
         parent::__construct();
     }
@@ -87,6 +88,6 @@ final class DebugMailerCommand extends Command
         $io->writeln(sprintf('<comment>Subject:</comment> %s', $this->translator->trans($email['subject'] ?? '')));
         $io->writeln(sprintf('<comment>Enabled:</comment> %s', $email['enabled'] ? '<info>yes</info>' : '<error>no</error>'));
         $io->newLine();
-        $io->text(file_get_contents($this->templatesDir.'/'.$email['template']));
+        $io->text($this->templateLoader->getSourceContext($email['template'])->getCode());
     }
 }
