@@ -87,12 +87,26 @@
             <argument type="tagged" tag="sylius_mailer.email_modifier" />
         </service>
 
-        <service id="Sylius\Bundle\MailerBundle\Cli\DebugMailerCommand" autoconfigure="true">
-            <argument>%sylius.mailer.sender_name%</argument>
-            <argument>%sylius.mailer.sender_address%</argument>
+        <service id="Sylius\Bundle\MailerBundle\Cli\Dumper\EmailDetailsDumper">
             <argument>%sylius.mailer.emails%</argument>
             <argument type="service" id="Symfony\Contracts\Translation\TranslatorInterface" />
             <argument type="service" id="twig.loader" />
+        </service>
+
+        <service id="Sylius\Bundle\MailerBundle\Cli\Dumper\EmailsListDumper">
+            <argument>%sylius.mailer.emails%</argument>
+            <argument type="service" id="Symfony\Contracts\Translation\TranslatorInterface" />
+        </service>
+
+        <service id="Sylius\Bundle\MailerBundle\Cli\Dumper\SenderDataDumper">
+            <argument>%sylius.mailer.sender_name%</argument>
+            <argument>%sylius.mailer.sender_address%</argument>
+        </service>
+
+        <service id="Sylius\Bundle\MailerBundle\Cli\DebugMailerCommand" autoconfigure="true">
+            <argument type="service" id="Sylius\Bundle\MailerBundle\Cli\Dumper\SenderDataDumper" />
+            <argument type="service" id="Sylius\Bundle\MailerBundle\Cli\Dumper\EmailsListDumper" />
+            <argument type="service" id="Sylius\Bundle\MailerBundle\Cli\Dumper\EmailDetailsDumper" />
         </service>
     </services>
 </container>
