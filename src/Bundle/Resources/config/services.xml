@@ -87,7 +87,7 @@
             <argument type="tagged" tag="sylius_mailer.email_modifier" />
         </service>
 
-        <service id="Sylius\Bundle\MailerBundle\Command\DebugMailerCommand" autoconfigure="true">
+        <service id="Sylius\Bundle\MailerBundle\Cli\DebugMailerCommand" autoconfigure="true">
             <argument>%sylius.mailer.sender_name%</argument>
             <argument>%sylius.mailer.sender_address%</argument>
             <argument>%sylius.mailer.emails%</argument>
