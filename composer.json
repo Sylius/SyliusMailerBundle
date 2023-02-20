@@ -51,7 +51,7 @@
         "symfony/event-dispatcher": "^5.4 || ^6.0",
         "symfony/mailer": "^5.4 || ^6.0",
         "symfony/twig-bundle": "^5.4 || ^6.0",
-        "vimeo/psalm": "^4.22"
+        "vimeo/psalm": "^5.7"
     },
     "extra": {
         "branch-alias": {
