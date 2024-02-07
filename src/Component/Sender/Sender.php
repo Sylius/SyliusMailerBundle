@@ -39,9 +39,9 @@ final class Sender implements SenderInterface
         array $data = [],
         array $attachments = [],
         array $replyTo = [],
+        array $ccRecipients = [],
+        array $bccRecipients = [],
     ): void {
-        $arguments = func_get_args();
-
         Assert::allStringNotEmpty($recipients);
 
         $email = $this->provider->getEmail($code);
@@ -55,7 +55,7 @@ final class Sender implements SenderInterface
 
         $renderedEmail = $this->rendererAdapter->render($email, $data);
 
-        if (count($arguments) > 5 && $this->senderAdapter instanceof CcAwareAdapterInterface) {
+        if ($this->senderAdapter instanceof CcAwareAdapterInterface) {
             $this->senderAdapter->sendWithCC(
                 $recipients,
                 $senderAddress,
@@ -65,8 +65,8 @@ final class Sender implements SenderInterface
                 $data,
                 $attachments,
                 $replyTo,
-                $arguments[5] ?? [],
-                $arguments[6] ?? [],
+                $ccRecipients,
+                $bccRecipients,
             );
 
             return;
