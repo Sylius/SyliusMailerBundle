@@ -50,8 +50,7 @@
         "symfony/dotenv": "^5.4 || ^6.4 || ^7.0",
         "symfony/event-dispatcher": "^5.4 || ^6.4 || ^7.0",
         "symfony/mailer": "^5.4 || ^6.4 || ^7.0",
-        "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.0",
-        "vimeo/psalm": "^5.22"
+        "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.0"
     },
     "extra": {
         "branch-alias": {
@@ -85,14 +84,12 @@
         "analyse": [
             "@composer validate --strict",
             "vendor/bin/ecs check src",
-            "vendor/bin/phpstan analyse --ansi -c phpstan.neon -l max src",
-            "vendor/bin/psalm src"
+            "vendor/bin/phpstan analyse --ansi -c phpstan.neon -l max src"
         ],
         "analyse-symfony5": [
             "@composer validate --strict",
             "vendor/bin/ecs check src",
-            "vendor/bin/phpstan analyse --ansi -c phpstan.symfony5.neon -l max src",
-            "vendor/bin/psalm -c psalm.symfony5.xml src"
+            "vendor/bin/phpstan analyse --ansi -c phpstan.symfony5.neon -l max src"
         ],
         "fix": [
             "vendor/bin/ecs check src --fix"
