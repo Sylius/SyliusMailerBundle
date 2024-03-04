@@ -86,11 +86,6 @@
             "vendor/bin/ecs check src",
             "vendor/bin/phpstan analyse --ansi -c phpstan.neon -l max src"
         ],
-        "analyse-symfony5": [
-            "@composer validate --strict",
-            "vendor/bin/ecs check src",
-            "vendor/bin/phpstan analyse --ansi -c phpstan.symfony5.neon -l max src"
-        ],
         "fix": [
             "vendor/bin/ecs check src --fix"
         ],
