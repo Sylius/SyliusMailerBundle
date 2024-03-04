@@ -95,7 +95,7 @@
 
         <service id="Sylius\Bundle\MailerBundle\Cli\Dumper\EmailsListDumper">
             <argument>%sylius.mailer.emails%</argument>
-            <argument type="service" id="Symfony\Contracts\Translation\TranslatorInterface" />
+            <argument type="service" id="Symfony\Contracts\Translation\TranslatorInterface" on-invalid="null" />
             <tag name="sylius_mailer.dumper" />
         </service>
 
@@ -105,7 +105,7 @@
             <tag name="sylius_mailer.dumper" />
         </service>
 
-        <service id="Sylius\Bundle\MailerBundle\Cli\DebugMailerCommand">
+        <service id="Sylius\Bundle\MailerBundle\Cli\DebugMailerCommand" autoconfigure="true">
             <argument type="tagged_iterator" tag="sylius_mailer.dumper" />
             <argument type="service" id="Sylius\Bundle\MailerBundle\Cli\Dumper\EmailDetailDumperInterface" />
         </service>

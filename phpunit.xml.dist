@@ -10,7 +10,11 @@
 
     <testsuites>
         <testsuite name="SyliusMailerBundle Test Suite">
-            <directory>./src/Bundle/test/</directory>
+            <directory>./src/Bundle/tests/</directory>
+            <exclude>./src/Bundle/tests/Integration/Cli/DebugMailerCommandTest.php</exclude>
+        </testsuite>
+        <testsuite name="SyliusMailerBundle Integration Test Suite">
+            <directory>./src/Bundle/tests/Integration/Cli/</directory>
         </testsuite>
     </testsuites>
 </phpunit>

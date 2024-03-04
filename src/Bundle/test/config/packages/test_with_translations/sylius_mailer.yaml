@@ -1,0 +1,17 @@
+sylius_mailer:
+    sender:
+        name: Sender
+        address: sender@example.com
+    sender_adapter: sylius.email_sender.adapter.symfony_mailer
+    emails:
+        test_email:
+            subject: 'Hardcoded subject'
+            template: 'Email/test.html.twig'
+        test_email_with_data:
+            subject: 'sylius_mailer.test_email_with_data.subject'
+            template: 'Email/testWithData.html.twig'
+        test_modified_email:
+            template: 'Email/test.html.twig'
+        test_disabled_email:
+            template: 'Email/test.html.twig'
+            enabled: false

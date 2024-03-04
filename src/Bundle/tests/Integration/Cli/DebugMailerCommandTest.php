@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\MailerBundle\tests\Cli;
+namespace Sylius\Bundle\MailerBundle\tests\Integration\Cli;
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -40,11 +40,11 @@ final class DebugMailerCommandTest extends KernelTestCase
         $this->assertStringContainsString('Name    Sender', $output);
         $this->assertStringContainsString('Email   sender@example.com', $output);
         $this->assertStringContainsString(
-            '| test_email           | Email/test.html.twig         | yes     | Hardcoded subject                          |',
+            '| test_email           | Email/test.html.twig         | yes     | Hardcoded subject           |',
             $output,
         );
         $this->assertStringContainsString(
-            '| test_email_with_data | Email/testWithData.html.twig | yes     | sylius_mailer.test_email_with_data.subject |',
+            '| test_email_with_data | Email/testWithData.html.twig | yes     | Subject for email with data |',
             $output,
         );
         $this->assertStringContainsString(
@@ -65,7 +65,7 @@ final class DebugMailerCommandTest extends KernelTestCase
 
         $output = $this->commandTester->getDisplay();
         $this->assertStringContainsString('Email: test_email_with_data', $output);
-        $this->assertStringContainsString('Subject: sylius_mailer.test_email_with_data.subject', $output);
+        $this->assertStringContainsString('Subject: Subject for email with data', $output);
         $this->assertStringContainsString('Enabled: yes', $output);
         $this->assertStringContainsString('Test email body. Data: {{ data }}.', $output);
     }

@@ -26,8 +26,8 @@ final class DebugMailerCommand extends Command
 {
     public function __construct(
         /** @var DumperInterface[] $dumpers */
-        private iterable $dumpers,
-        private EmailDetailDumperInterface $emailDetailDumper,
+        private readonly iterable $dumpers,
+        private readonly EmailDetailDumperInterface $emailDetailDumper,
     ) {
         parent::__construct();
     }

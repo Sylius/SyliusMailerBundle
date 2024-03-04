@@ -22,8 +22,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class EmailsListDumper implements DumperInterface
 {
     public function __construct(
-        private array $emails,
-        private TranslatorInterface $translator,
+        private readonly array $emails,
+        private readonly ?TranslatorInterface $translator,
     ) {
     }
 
@@ -33,11 +33,17 @@ final class EmailsListDumper implements DumperInterface
         $rows = [];
 
         foreach ($this->emails as $code => $emailConfiguration) {
+            $subject = $emailConfiguration['subject'] ?? '';
+
+            if ($this->translator !== null) {
+                $subject = $this->translator->trans($subject);
+            }
+
             $rows[] = [
                 $code,
                 $emailConfiguration['template'],
                 $emailConfiguration['enabled'] ? 'yes' : 'no',
-                isset($emailConfiguration['subject']) ? $this->translator->trans($emailConfiguration['subject']) : '',
+                $subject,
             ];
         }
 

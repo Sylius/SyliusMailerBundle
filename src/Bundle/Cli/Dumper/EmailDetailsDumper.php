@@ -22,9 +22,9 @@ use Twig\Loader\LoaderInterface;
 final class EmailDetailsDumper implements EmailDetailDumperInterface
 {
     public function __construct(
-        private array $emails,
-        private ?TranslatorInterface $translator,
-        private LoaderInterface $templateLoader,
+        private readonly array $emails,
+        private readonly ?TranslatorInterface $translator,
+        private readonly LoaderInterface $templateLoader,
     ) {
     }
 

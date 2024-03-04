@@ -20,8 +20,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 final class SenderDataDumper implements DumperInterface
 {
     public function __construct(
-        private string $senderName,
-        private string $senderEmail,
+        private readonly string $senderName,
+        private readonly string $senderEmail,
     ) {
     }
 
