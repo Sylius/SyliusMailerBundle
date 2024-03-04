@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Bundle\MailerBundle\Cli;
 
 use Sylius\Bundle\MailerBundle\Cli\Dumper\DumperInterface;
+use Sylius\Bundle\MailerBundle\Cli\Dumper\EmailDetailDumperInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -24,9 +25,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class DebugMailerCommand extends Command
 {
     public function __construct(
-        private DumperInterface $senderDataDumper,
-        private DumperInterface $emailsListDumper,
-        private DumperInterface $emailDetailDumper,
+        /** @var DumperInterface[] $dumpers */
+        private iterable $dumpers,
+        private EmailDetailDumperInterface $emailDetailDumper,
     ) {
         parent::__construct();
     }
@@ -39,15 +40,16 @@ final class DebugMailerCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($input->getArgument('email') === null) {
-            $this->senderDataDumper->dump($input, $output);
-            $this->emailsListDumper->dump($input, $output);
+            foreach ($this->dumpers as $dumper) {
+                $dumper->dump($input, $output);
+            }
 
             return 0;
         }
 
         /** @var string $email */
         $email = $input->getArgument('email');
-        $this->emailDetailDumper->dump($input, $output, ['code' => $email]);
+        $this->emailDetailDumper->dump($input, $output, $email);
 
         return 0;
     }

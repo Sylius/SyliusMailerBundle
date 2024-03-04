@@ -32,8 +32,7 @@
         "symfony/framework-bundle": "^5.4 || ^6.4 || ^7.0",
         "symfony/http-kernel": "^5.4 || ^6.4 || ^7.0",
         "twig/twig": "^2.12 || ^3.3",
-        "webmozart/assert": "^1.9",
-        "symfony/translation": "^5.4 || ^6.0"
+        "webmozart/assert": "^1.9"
     },
     "replace": {
         "sylius/mailer": "self.version"
@@ -51,7 +50,8 @@
         "symfony/dotenv": "^5.4 || ^6.4 || ^7.0",
         "symfony/event-dispatcher": "^5.4 || ^6.4 || ^7.0",
         "symfony/mailer": "^5.4 || ^6.4 || ^7.0",
-        "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.0"
+        "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.0",
+        "symfony/translation": "^5.4 || ^6.4 || ^7.0"
     },
     "extra": {
         "branch-alias": {

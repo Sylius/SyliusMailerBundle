@@ -16,7 +16,7 @@ namespace Sylius\Bundle\MailerBundle\Cli\Dumper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-interface DumperInterface
+interface EmailDetailDumperInterface
 {
-    public function dump(InputInterface $input, OutputInterface $output): void;
+    public function dump(InputInterface $input, OutputInterface $output, string $code): void;
 }

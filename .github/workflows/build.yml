@@ -80,6 +80,12 @@ jobs:
                     vendor/bin/phpunit
 
             -
+                name: Install and test integration with translator component
+                run: |
+                    composer require symfony/translation:${{ matrix.symfony }}
+                    vendor/bin/phpunit tests/CLI
+
+            -
                 name: Run lint container (with no mailers)
                 run: |
                     rm -rf src/Bundle/test/var/cache

@@ -27,7 +27,7 @@ final class EmailsListDumper implements DumperInterface
     ) {
     }
 
-    public function dump(InputInterface $input, OutputInterface $output, array $data = []): void
+    public function dump(InputInterface $input, OutputInterface $output): void
     {
         $io = new SymfonyStyle($input, $output);
         $rows = [];
