@@ -11,7 +11,8 @@
     <testsuites>
         <testsuite name="SyliusMailerBundle Test Suite">
             <directory>./src/Bundle/tests/</directory>
-            <exclude>./src/Bundle/tests/Integration/Cli/DebugMailerCommandTest.php</exclude>
+
+<exclude>./src/Bundle/tests/Integration/Cli/</exclude>
         </testsuite>
         <testsuite name="SyliusMailerBundle Integration Test Suite">
             <directory>./src/Bundle/tests/Integration/Cli/</directory>
