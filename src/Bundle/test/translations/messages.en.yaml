@@ -1,0 +1,3 @@
+sylius_mailer:
+    test_email_with_data:
+        subject: Subject for email with data
