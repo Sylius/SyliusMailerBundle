@@ -7,6 +7,7 @@
         </picture>
     </a>
 </p>
+
 SyliusMailerBundle
 ==================
 
@@ -15,12 +16,8 @@ SyliusMailerBundle
 Sylius
 ------
 
-**Sylius** - Modern ecommerce for Symfony. Visit [sylius.com](https://sylius.com).
-
-Sylius
-------
-
-Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.com](https://sylius.com).
+Sylius is a modern Open Source eCommerce solution built from decoupled components with powerful API
+and the highest quality code. [Read more on sylius.com](https://sylius.com).
 
 Documentation
 -------------
