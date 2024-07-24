@@ -40,7 +40,7 @@
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^5.0",
         "phpspec/phpspec": "^7.0",
-        "phpstan/phpstan": "1.8.5",
+        "phpstan/phpstan": "1.11.8",
         "phpstan/phpstan-phpunit": "1.1.1",
         "phpstan/phpstan-webmozart-assert": "1.2.0",
         "phpunit/phpunit": "^10.5",
