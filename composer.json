@@ -42,7 +42,7 @@
         "phpspec/phpspec": "^7.0",
         "phpstan/phpstan": "1.11.10",
         "phpstan/phpstan-phpunit": "1.4.0",
-        "phpstan/phpstan-webmozart-assert": "1.2.9",
+        "phpstan/phpstan-webmozart-assert": "1.2.10",
         "phpunit/phpunit": "^10.5",
         "rector/rector": "^1.2.2",
         "sylius-labs/coding-standard": "^4.0",
