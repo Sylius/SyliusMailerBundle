@@ -77,7 +77,13 @@ jobs:
                 run: |
                     rm -rf src/Bundle/test/var/cache
                     (cd src/Bundle/test && APP_ENV=test bin/console lint:container)
-                    vendor/bin/phpunit
+                    vendor/bin/phpunit --testsuite "SyliusMailerBundle Test Suite"
+
+            -
+                name: Install and test integration with translator component
+                run: |
+                    composer require symfony/translation:${{ matrix.symfony }}
+                    APP_ENV=test_with_translations vendor/bin/phpunit --testsuite "SyliusMailerBundle Integration Test Suite"
 
             -
                 name: Run lint container (with no mailers)

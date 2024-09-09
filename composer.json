@@ -52,6 +52,9 @@
         "symfony/mailer": "^5.4 || ^6.4 || ^7.0",
         "symfony/twig-bundle": "^5.4 || ^6.4 || ^7.0"
     },
+    "suggest": {
+        "symfony/translation": "To use the translation features for testing purposes"
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.8-dev"

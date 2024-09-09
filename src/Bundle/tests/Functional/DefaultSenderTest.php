@@ -17,9 +17,12 @@ use Sylius\Bundle\MailerBundle\tests\Provider\MessagesProvider;
 use Sylius\Bundle\MailerBundle\tests\Purger\SentMessagesPurger;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\MailerAssertionsTrait;
 
 final class DefaultSenderTest extends KernelTestCase
 {
+    use MailerAssertionsTrait;
+
     private SenderInterface $sender;
 
     private MessagesProvider $messagesProvider;
@@ -41,11 +44,11 @@ final class DefaultSenderTest extends KernelTestCase
     {
         $this->sender->send('test_email', ['test@example.com']);
 
-        $messages = $this->messagesProvider->getMessages();
+        $this->assertEmailCount(1);
 
-        $this->assertCount(1, $messages);
-        $this->assertStringContainsString('Test email subject', $messages[0]->getSubject());
-        $this->assertStringContainsString('Test email body', $messages[0]->getBody());
+        $email = $this->getMailerMessage();
+        $this->assertEmailHtmlBodyContains($email, 'Test email body');
+        $this->assertEmailHasHeader($email, 'subject', 'Test email subject');
     }
 
     protected function tearDown(): void
