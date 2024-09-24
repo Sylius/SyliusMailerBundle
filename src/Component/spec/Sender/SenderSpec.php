@@ -63,6 +63,35 @@ final class SenderSpec extends ObjectBehavior
         $this->send('bar', ['john@example.com'], $data, [], []);
     }
 
+    function it_sends_an_email_and_name_pair_through_the_adapter(
+        EmailInterface $email,
+        EmailProviderInterface $provider,
+        RenderedEmail $renderedEmail,
+        RendererAdapterInterface $rendererAdapter,
+        SenderAdapterInterface $senderAdapter,
+    ): void {
+        $provider->getEmail('bar')->willReturn($email);
+        $email->isEnabled()->willReturn(true);
+        $email->getSenderAddress()->willReturn('sender@example.com');
+        $email->getSenderName()->willReturn('Sender');
+
+        $data = ['foo' => 2];
+
+        $rendererAdapter->render($email, ['foo' => 2])->willReturn($renderedEmail);
+        $senderAdapter->send(
+            ['john@example.com' => 'John Doe'],
+            'sender@example.com',
+            'Sender',
+            $renderedEmail,
+            $email,
+            $data,
+            [],
+            [],
+        )->shouldBeCalled();
+
+        $this->send('bar', ['john@example.com' => 'John Doe'], $data, [], []);
+    }
+
     function it_sends_an_email_with_cc_and_bcc_through_the_adapter(
         EmailInterface $email,
         EmailProviderInterface $provider,
@@ -92,6 +121,37 @@ final class SenderSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $this->send('bar', ['john@example.com'], $data, [], [], ['cc@example.com'], ['bcc@example.com']);
+    }
+
+    function it_sends_an_email_with_cc_and_name_pair_and_bcc_and_name_pair_through_the_adapter(
+        EmailInterface $email,
+        EmailProviderInterface $provider,
+        RenderedEmail $renderedEmail,
+        RendererAdapterInterface $rendererAdapter,
+        SenderAdapterInterface $senderAdapter,
+    ): void {
+        $provider->getEmail('bar')->willReturn($email);
+        $email->isEnabled()->willReturn(true);
+        $email->getSenderAddress()->willReturn('sender@example.com');
+        $email->getSenderName()->willReturn('Sender');
+
+        $data = ['foo' => 2];
+
+        $rendererAdapter->render($email, ['foo' => 2])->willReturn($renderedEmail);
+        $senderAdapter->sendWithCC(
+            ['john@example.com'],
+            'sender@example.com',
+            'Sender',
+            $renderedEmail,
+            $email,
+            $data,
+            [],
+            [],
+            ['cc@example.com' => 'CC'],
+            ['bcc@example.com' => 'BCC'],
+        )->shouldBeCalled();
+
+        $this->send('bar', ['john@example.com'], $data, [], [], ['cc@example.com' => 'CC'], ['bcc@example.com' => 'BCC']);
     }
 
     function it_sends_a_modified_email_with_cc_and_bcc_through_the_adapter(
