@@ -1,5 +1,13 @@
 ## CHANGELOG FOR `2.0.x`
 
+## v2.1.0-BETA.1 (2024-09-24)
+
+#### Details
+
+- [#259](https://github.com/Sylius/SyliusMailerBundle/issues/259) Manage address/name recipients array in SymfonyMailerAdapter ([@lanfisis](https://github.com/lanfisis))
+- [#260](https://github.com/Sylius/SyliusMailerBundle/issues/260) Update phpstan/phpstan requirement from 1.11.10 to 1.12.4 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)])
+- [#262](https://github.com/Sylius/SyliusMailerBundle/issues/262) Update phpstan/phpstan-phpunit requirement from 1.1.1 to 1.4.0 ([@dependabot](https://github.com/dependabot)[[@bot](https://github.com/bot)], [@GSadee](https://github.com/GSadee))
+
 ## v2.1.0-ALPHA.1 (2024-07-29)
 
 #### Details
