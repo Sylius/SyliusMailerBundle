@@ -1,5 +1,12 @@
 ## CHANGELOG FOR `2.0.x`
 
+## v2.1.0 (2024-10-01)
+
+#### Details
+
+- [#265](https://github.com/Sylius/SyliusMailerBundle/issues/265) Update phpstan/phpstan requirement from 1.12.4 to 1.12.5
+- [#263](https://github.com/Sylius/SyliusMailerBundle/issues/263) Update phpstan/phpstan-webmozart-assert requirement from 1.2.0 to 1.2.11
+
 ## v2.1.0-BETA.1 (2024-09-24)
 
 #### Details
