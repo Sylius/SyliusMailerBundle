@@ -99,7 +99,7 @@ final class SenderSpec extends ObjectBehavior
         EmailProviderInterface $provider,
         RenderedEmail $renderedEmail,
         RendererAdapterInterface $rendererAdapter,
-        SenderAdapterInterface $senderAdapter,
+        CcAwareSenderAdapterInterface $senderAdapter,
         DefaultSettingsProviderInterface $defaultSettingsProvider,
         EmailModifierInterface $emailModifier,
     ): void {

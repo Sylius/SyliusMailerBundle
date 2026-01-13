@@ -18,5 +18,3 @@ parameters:
 
     ignoreErrors:
         - '/Property Sylius\\Component\\Mailer\\Model\\Email\:\:\$id is never written\, only read\./'
-        - '/PHPDoc tag \@param references unknown parameter\: \$bccRecipients/'
-        - '/PHPDoc tag \@param references unknown parameter\: \$ccRecipients/'
