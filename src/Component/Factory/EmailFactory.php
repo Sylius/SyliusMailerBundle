@@ -16,7 +16,7 @@ namespace Sylius\Component\Mailer\Factory;
 use Sylius\Component\Mailer\Model\Email;
 use Sylius\Component\Mailer\Model\EmailInterface;
 
-class EmailFactory implements EmailFactoryInterface
+final class EmailFactory implements EmailFactoryInterface
 {
     /**
      * {@inheritdoc}
