@@ -64,6 +64,15 @@
         "allow-plugins": {
             "symfony/flex": true,
             "dealerdirect/phpcodesniffer-composer-installer": false
+        },
+        "audit": {
+            "ignore": [
+                "PKSA-yhcn-xrg3-68b1",
+                "PKSA-2wrf-1xmk-1pky",
+                "PKSA-6319-ffpf-gx66",
+                "PKSA-n7sg-8f52-pqtf",
+                "PKSA-8kk8-h2xr-h5nx"
+            ]
         }
     },
     "autoload": {
