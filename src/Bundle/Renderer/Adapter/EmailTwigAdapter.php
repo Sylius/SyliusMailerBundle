@@ -71,7 +71,7 @@ class EmailTwigAdapter extends AbstractAdapter
 
         $template = $this->twig->load((string) $email->getTemplate())->unwrap();
 
-        $subject = $template->renderBlock('subject', $data);
+        $subject = trim($template->renderBlock('subject', $data));
         $body = $template->renderBlock('body', $data);
 
         return new RenderedEmail($subject, $body);
@@ -84,7 +84,7 @@ class EmailTwigAdapter extends AbstractAdapter
         $subjectTemplate = $twig->createTemplate((string) $email->getSubject());
         $bodyTemplate = $twig->createTemplate((string) $email->getContent());
 
-        $subject = $subjectTemplate->render($data);
+        $subject = trim($subjectTemplate->render($data));
         $body = $bodyTemplate->render($data);
 
         return new RenderedEmail($subject, $body);
