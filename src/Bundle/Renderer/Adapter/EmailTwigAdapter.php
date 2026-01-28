@@ -18,27 +18,19 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 
 class EmailTwigAdapter extends AbstractAdapter
 {
-    /** @var Environment */
-    protected $twig;
-
-    /** @var EventDispatcherInterface|null */
-    protected $dispatcher;
-
-    public function __construct(Environment $twig, ?EventDispatcherInterface $dispatcher = null)
-    {
-        $this->twig = $twig;
+    public function __construct(
+        protected Environment $twig,
+        ?EventDispatcherInterface $dispatcher = null,
+    ) {
         $this->dispatcher = $dispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function render(EmailInterface $email, array $data = []): RenderedEmail
     {
         $renderedEmail = $this->getRenderedEmail($email, $data);

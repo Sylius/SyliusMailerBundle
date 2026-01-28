@@ -20,9 +20,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class EmailDefaultAdapter extends AbstractAdapter
 {
-    /** @var EventDispatcherInterface|null */
-    protected $dispatcher;
-
     public function __construct(?EventDispatcherInterface $dispatcher = null)
     {
         $this->dispatcher = $dispatcher;
