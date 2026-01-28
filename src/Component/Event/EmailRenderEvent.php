@@ -18,16 +18,13 @@ use SyliusLabs\Polyfill\Symfony\EventDispatcher\Event;
 
 class EmailRenderEvent extends Event
 {
-    /** @var RenderedEmail */
-    protected $renderedEmail;
-
-    /** @var string[] */
-    protected $recipients;
-
-    public function __construct(RenderedEmail $renderedEmail, array $recipients = [])
-    {
-        $this->renderedEmail = $renderedEmail;
-        $this->recipients = $recipients;
+    /**
+     * @param string[] $recipients
+     */
+    public function __construct(
+        protected RenderedEmail $renderedEmail,
+        protected array $recipients = [],
+    ) {
     }
 
     public function getRenderedEmail(): RenderedEmail

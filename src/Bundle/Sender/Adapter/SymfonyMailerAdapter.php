@@ -32,9 +32,6 @@ final class SymfonyMailerAdapter extends AbstractAdapter implements CcAwareAdapt
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function send(
         array $recipients,
         string $senderAddress,

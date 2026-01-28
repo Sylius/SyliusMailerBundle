@@ -37,9 +37,6 @@ final class Sender implements SenderInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function send(
         string $code,
         array $recipients,

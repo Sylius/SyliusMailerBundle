@@ -18,9 +18,6 @@ use Sylius\Component\Mailer\Model\EmailInterface;
 
 class EmailFactory implements EmailFactoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function createNew(): EmailInterface
     {
         return new Email();
