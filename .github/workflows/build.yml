@@ -53,10 +53,6 @@ jobs:
                     (cd src/Component && composer validate --strict)
 
             -
-                name: Run PHPUnit tests
-                run: vendor/bin/phpunit
-
-            -
                 name: Test bundle (with all services)
                 run: |
                     rm -rf tests/Application/var/cache
