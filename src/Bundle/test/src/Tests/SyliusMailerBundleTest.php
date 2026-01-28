@@ -20,8 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class SyliusMailerBundleTest extends KernelTestCase
 {
-    /** @test */
-    public function its_services_are_initializable(): void
+    public function testServicesAreInitializable(): void
     {
         self::bootKernel();
 

@@ -19,8 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class RendererAdapterPassTest extends KernelTestCase
 {
-    /** @test */
-    public function it_has_swiftmailer_adapter_configured_by_default(): void
+    public function testHasTwigAdapterConfiguredByDefault(): void
     {
         self::bootKernel(['environment' => 'test']);
         $container = self::getContainer();

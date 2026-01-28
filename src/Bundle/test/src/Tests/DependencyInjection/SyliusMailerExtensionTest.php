@@ -18,8 +18,7 @@ use Sylius\Bundle\MailerBundle\DependencyInjection\SyliusMailerExtension;
 
 final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
 {
-    /** @test */
-    public function it_configures_the_bundle_with_the_default_configuration(): void
+    public function testConfiguresWithDefaultConfiguration(): void
     {
         $this->load();
 
@@ -29,8 +28,7 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sylius.mailer.templates');
     }
 
-    /** @test */
-    public function it_configures_the_bundle_with_custom_sender_data(): void
+    public function testConfiguresWithCustomSenderData(): void
     {
         $this->load(['sender' => ['name' => 'John Doe', 'address' => 'john@doe.com']]);
 
@@ -38,8 +36,7 @@ final class SyliusMailerExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasParameter('sylius.mailer.sender_address', 'john@doe.com');
     }
 
-    /** @test */
-    public function it_configures_the_bundle_with_custom_adapter_services(): void
+    public function testConfiguresWithCustomAdapterServices(): void
     {
         $this->load(['sender_adapter' => 'sylius.email_sender.adapter.custom', 'renderer_adapter' => 'sylius.email_renderer.adapter.custom']);
 

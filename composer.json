@@ -38,12 +38,10 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^5.0",
-        "phpspec/phpspec": "^7.0",
         "phpstan/phpstan": "1.12.5",
         "phpstan/phpstan-phpunit": "1.4.0",
         "phpstan/phpstan-webmozart-assert": "1.2.11",
         "phpunit/phpunit": "^10.5",
-        "rector/rector": "^0.13.6",
         "sylius-labs/coding-standard": "^4.0",
         "symfony/console": "^6.4 || ^7.4",
         "symfony/dotenv": "^6.4 || ^7.4",
@@ -76,9 +74,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sylius\\Bundle\\MailerBundle\\spec\\": "src/Bundle/spec/",
-            "Sylius\\Bundle\\MailerBundle\\Tests\\": "src/Bundle/test/",
-            "Sylius\\Component\\Mailer\\spec\\": "src/Component/spec/",
+            "Sylius\\Bundle\\MailerBundle\\Tests\\": ["src/Bundle/test/", "tests/"],
             "App\\": "src/Bundle/test/src/"
         }
     },
@@ -92,7 +88,7 @@
             "vendor/bin/ecs check src --fix"
         ],
         "test": [
-            "vendor/bin/phpspec run --ansi --no-interaction"
+            "vendor/bin/phpunit --colors=always"
         ]
     }
 }

@@ -20,8 +20,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class SenderAdapterPassTest extends KernelTestCase
 {
-    /** @test */
-    public function it_has_symfony_mailer_adapter_configured_by_default(): void
+    public function testHasSymfonyMailerAdapterConfiguredByDefault(): void
     {
         self::bootKernel(['environment' => 'test']);
         $container = self::getContainer();
@@ -35,8 +34,7 @@ final class SenderAdapterPassTest extends KernelTestCase
         );
     }
 
-    /** @test */
-    public function it_does_not_fail_if_there_are_no_mailers_available(): void
+    public function testDoesNotFailIfNoMailersAvailable(): void
     {
         self::bootKernel(['environment' => 'test_with_no_mailers']);
         $container = self::getContainer();

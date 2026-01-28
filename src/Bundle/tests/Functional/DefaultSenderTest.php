@@ -39,8 +39,7 @@ final class DefaultSenderTest extends KernelTestCase
         $this->messagesProvider = new MessagesProvider($this->spoolDirectory);
     }
 
-    /** @test */
-    public function it_sends_email_rendered_with_given_template(): void
+    public function testSendsEmailRenderedWithGivenTemplate(): void
     {
         $this->sender->send('test_email', ['test@example.com']);
 

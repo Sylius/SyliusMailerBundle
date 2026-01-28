@@ -34,8 +34,7 @@ final class SymfonyMailerSenderTest extends KernelTestCase
         $this->sender = $container->get('sylius.email_sender');
     }
 
-    /** @test */
-    public function it_sends_email_rendered_with_given_template(): void
+    public function testSendsEmailRenderedWithGivenTemplate(): void
     {
         $this->sender->send('test_email', ['test@example.com']);
 
@@ -48,8 +47,7 @@ final class SymfonyMailerSenderTest extends KernelTestCase
         $this->assertEmailAddressContains($email, 'From', 'sender@example.com');
     }
 
-    /** @test */
-    public function it_sends_email_rendered_with_given_template_and_data(): void
+    public function testSendsEmailRenderedWithGivenTemplateAndData(): void
     {
         $this->sender->send('test_email_with_data', ['test@example.com'], ['data' => 'Test data']);
 
@@ -62,8 +60,7 @@ final class SymfonyMailerSenderTest extends KernelTestCase
         $this->assertEmailAddressContains($email, 'From', 'sender@example.com');
     }
 
-    /** @test */
-    public function it_sends_email_multiple_messages(): void
+    public function testSendsMultipleEmails(): void
     {
         $this->sender->send('test_email', ['test@example.com']);
         $this->sender->send('test_email_with_data', ['test@example.com'], ['data' => 'Test data']);
@@ -79,8 +76,7 @@ final class SymfonyMailerSenderTest extends KernelTestCase
         $this->assertEmailHasHeader($secondEmail, 'subject', 'Test email with data subject');
     }
 
-    /** @test */
-    public function it_sends_conditionally_modified_email(): void
+    public function testSendsConditionallyModifiedEmail(): void
     {
         $this->sender->send('test_modified_email', ['test@example.com']);
 

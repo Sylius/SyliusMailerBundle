@@ -30,8 +30,7 @@ final class DebugMailerCommandTest extends KernelTestCase
         $this->commandTester = new CommandTester($command);
     }
 
-    /** @test */
-    public function it_lists_all_configured_emails_and_sender_data(): void
+    public function testListsAllConfiguredEmailsAndSenderData(): void
     {
         $this->commandTester->execute([]);
         $this->commandTester->assertCommandIsSuccessful();
@@ -57,8 +56,7 @@ final class DebugMailerCommandTest extends KernelTestCase
         );
     }
 
-    /** @test */
-    public function it_shows_configured_email_details(): void
+    public function testShowsConfiguredEmailDetails(): void
     {
         $this->commandTester->execute(['codeOfEmail' => 'test_email_with_data']);
         $this->commandTester->assertCommandIsSuccessful();
