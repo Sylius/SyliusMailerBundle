@@ -53,18 +53,10 @@ jobs:
                     (cd src/Component && composer validate --strict)
 
             -
-                name: Run component tests
-                run: (cd src/Component && vendor/bin/phpspec run)
-
-            -
-                name: Run PHPSpec tests
-                run: vendor/bin/phpspec run
-
-            -
                 name: Test bundle (with all services)
                 run: |
-                    rm -rf src/Bundle/test/var/cache
-                    (cd src/Bundle/test && APP_ENV=test bin/console lint:container)
+                    rm -rf tests/Application/var/cache
+                    (cd tests/Application && APP_ENV=test bin/console lint:container)
                     vendor/bin/phpunit --testsuite "SyliusMailerBundle Test Suite"
 
             -
@@ -76,6 +68,6 @@ jobs:
             -
                 name: Run lint container (with no mailers)
                 run: |
-                    rm -rf src/Bundle/test/var/cache
+                    rm -rf tests/Application/var/cache
                     composer remove symfony/mailer --dev --no-scripts
-                    (cd src/Bundle/test && APP_ENV=test_no_mailers bin/console lint:container)
+                    (cd tests/Application && APP_ENV=test_with_no_mailers bin/console lint:container)

@@ -1,7 +1,10 @@
 /vendor/
 /bin/
+/var/
+/tests/Application/var/
 
 /composer.phar
 /composer.lock
 
 /.phpunit.result.cache
+.phpunit.cache/

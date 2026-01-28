@@ -29,7 +29,7 @@
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.0"
+        "phpunit/phpunit": "^10.5"
     },
     "extra": {
         "branch-alias": {
@@ -39,11 +39,6 @@
     "autoload": {
         "psr-4": {
             "Sylius\\Component\\Mailer\\": ""
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Sylius\\Component\\Mailer\\spec\\": "spec/"
         }
     }
 }
