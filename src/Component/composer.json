@@ -25,6 +25,7 @@
     ],
     "require": {
         "php": "^8.2",
+        "symfony/event-dispatcher-contracts": "^3.0",
         "webmozart/assert": "^1.9"
     },
     "require-dev": {
