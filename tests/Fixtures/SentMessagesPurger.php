@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\MailerBundle\Tests\Purger;
+namespace Sylius\Bundle\MailerBundle\Tests\Fixtures;
 
 final class SentMessagesPurger
 {

@@ -11,16 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\MailerBundle\Tests\Provider;
+namespace Sylius\Bundle\MailerBundle\Tests\Fixtures;
 
-use Sylius\Bundle\MailerBundle\Tests\Model\SentMessage;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Mime\Email;
 
 final class MessagesProvider
 {
-    public function __construct(private string $spoolDirectory)
+    public function __construct(private readonly string $spoolDirectory)
     {
     }
 
@@ -37,10 +36,8 @@ final class MessagesProvider
         foreach ($messages as $message) {
             $contents = unserialize($message->getContents());
 
-            if ($contents instanceof \Swift_Message) {
-                $parsedMessages[] = SentMessage::fromSwiftMessage($contents);
-            } elseif ($contents instanceof Email) {
-                $parsedMessages[] = SentMessage::fromSymfonyMessage($contents);
+            if ($contents instanceof Email) {
+                $parsedMessages[] = SentMessage::fromEmail($contents);
             }
         }
 
