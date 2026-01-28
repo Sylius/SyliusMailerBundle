@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\MailerBundle\tests\Model;
+namespace Sylius\Bundle\MailerBundle\Tests\Model;
 
 use Symfony\Component\Mime\Email as SymfonyEmail;
 

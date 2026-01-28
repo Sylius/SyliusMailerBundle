@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Compiler;
+namespace Sylius\Bundle\MailerBundle\Tests\Functional\Compiler;
 
 use Sylius\Bundle\MailerBundle\Sender\Adapter\DefaultAdapter;
 use Sylius\Bundle\MailerBundle\Sender\Adapter\SymfonyMailerAdapter;

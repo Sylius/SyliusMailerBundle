@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\MailerBundle\tests\Functional;
+namespace Sylius\Bundle\MailerBundle\Tests\Functional;
 
 use PHPUnit\Framework\ExpectationFailedException;
 use Sylius\Component\Mailer\Sender\SenderInterface;

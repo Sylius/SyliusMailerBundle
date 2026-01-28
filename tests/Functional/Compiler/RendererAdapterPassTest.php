@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Compiler;
+namespace Sylius\Bundle\MailerBundle\Tests\Functional\Compiler;
 
 use Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

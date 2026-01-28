@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\MailerBundle\tests\Provider;
+namespace Sylius\Bundle\MailerBundle\Tests\Provider;
 
-use Sylius\Bundle\MailerBundle\tests\Model\SentMessage;
+use Sylius\Bundle\MailerBundle\Tests\Model\SentMessage;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Mime\Email;

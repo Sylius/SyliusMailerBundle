@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\MailerBundle\test\src\Tests\DependencyInjection;
+namespace Sylius\Bundle\MailerBundle\Tests\Functional\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Sylius\Bundle\MailerBundle\DependencyInjection\SyliusMailerExtension;
