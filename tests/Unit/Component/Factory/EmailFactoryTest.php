@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\Tests\Unit\Component\Factory;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Mailer\Factory\EmailFactory;
 use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
@@ -28,14 +27,12 @@ final class EmailFactoryTest extends TestCase
         $this->factory = new EmailFactory();
     }
 
-    #[Test]
-    public function it_implements_email_factory_interface(): void
+    public function testImplementsEmailFactoryInterface(): void
     {
         $this->assertInstanceOf(EmailFactoryInterface::class, $this->factory);
     }
 
-    #[Test]
-    public function it_creates_new_email(): void
+    public function testCreatesNewEmail(): void
     {
         $email = $this->factory->createNew();
 

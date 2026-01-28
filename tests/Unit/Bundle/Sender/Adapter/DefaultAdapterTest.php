@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\Tests\Unit\Bundle\Sender\Adapter;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\MailerBundle\Sender\Adapter\DefaultAdapter;
 use Sylius\Bundle\MailerBundle\Sender\Adapter\SymfonyMailerAdapter;
@@ -30,14 +29,12 @@ final class DefaultAdapterTest extends TestCase
         $this->adapter = new DefaultAdapter();
     }
 
-    #[Test]
-    public function it_is_an_adapter(): void
+    public function testIsAnAdapter(): void
     {
         $this->assertInstanceOf(AbstractAdapter::class, $this->adapter);
     }
 
-    #[Test]
-    public function it_throws_an_exception_about_not_configured_email_sender_adapter_for_send(): void
+    public function testThrowsExceptionAboutNotConfiguredEmailSenderAdapterForSend(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage(sprintf(
@@ -55,8 +52,7 @@ final class DefaultAdapterTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_throws_an_exception_about_not_configured_email_sender_adapter_for_send_with_cc(): void
+    public function testThrowsExceptionAboutNotConfiguredEmailSenderAdapterForSendWithCc(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage(sprintf(

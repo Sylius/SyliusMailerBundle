@@ -13,13 +13,11 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\Tests\Unit\Bundle\Renderer\Adapter;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter;
 use Sylius\Component\Mailer\Event\EmailRenderEvent;
 use Sylius\Component\Mailer\Model\Email;
-use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
@@ -42,14 +40,12 @@ final class EmailTwigAdapterTest extends TestCase
         $this->adapter = new EmailTwigAdapter($this->twig, $this->dispatcher);
     }
 
-    #[Test]
-    public function it_is_an_adapter(): void
+    public function testIsAnAdapter(): void
     {
         $this->assertInstanceOf(AbstractAdapter::class, $this->adapter);
     }
 
-    #[Test]
-    public function it_creates_and_renders_an_email_without_template(): void
+    public function testCreatesAndRendersEmailWithoutTemplate(): void
     {
         $email = new Email();
         $email->setSubject('Hello {{ name }}');
@@ -73,8 +69,7 @@ final class EmailTwigAdapterTest extends TestCase
         $this->assertInstanceOf(RenderedEmail::class, $result);
     }
 
-    #[Test]
-    public function it_renders_an_email_with_template(): void
+    public function testRendersEmailWithTemplate(): void
     {
         $twig = new Environment(new ArrayLoader([
             'MyTemplate' => '{% block subject %}Test Subject{% endblock %}{% block body %}Test Body{% endblock %}',

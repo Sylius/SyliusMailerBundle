@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\Tests\Unit\Bundle\Renderer\Adapter;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailDefaultAdapter;
 use Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter;
@@ -29,14 +28,12 @@ final class EmailDefaultAdapterTest extends TestCase
         $this->adapter = new EmailDefaultAdapter();
     }
 
-    #[Test]
-    public function it_is_an_adapter(): void
+    public function testIsAnAdapter(): void
     {
         $this->assertInstanceOf(AbstractAdapter::class, $this->adapter);
     }
 
-    #[Test]
-    public function it_throws_an_exception_about_not_configured_email_renderer_adapter(): void
+    public function testThrowsExceptionAboutNotConfiguredEmailRendererAdapter(): void
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage(sprintf(

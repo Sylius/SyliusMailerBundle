@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\Tests\Unit\Component\Sender;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Mailer\Model\Email;
-use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Modifier\EmailModifierInterface;
 use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
@@ -53,8 +51,7 @@ final class SenderTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_sends_an_email_through_the_adapter(): void
+    public function testSendsEmailThroughTheAdapter(): void
     {
         $email = new Email();
         $email->setEnabled(true);
@@ -92,8 +89,7 @@ final class SenderTest extends TestCase
         $this->sender->send('bar', ['john@example.com'], ['foo' => 2], [], []);
     }
 
-    #[Test]
-    public function it_sends_an_email_and_name_pair_through_the_adapter(): void
+    public function testSendsEmailAndNamePairThroughTheAdapter(): void
     {
         $email = new Email();
         $email->setEnabled(true);
@@ -131,8 +127,7 @@ final class SenderTest extends TestCase
         $this->sender->send('bar', ['john@example.com' => 'John Doe'], ['foo' => 2], [], []);
     }
 
-    #[Test]
-    public function it_sends_an_email_with_cc_and_bcc_through_the_adapter(): void
+    public function testSendsEmailWithCcAndBccThroughTheAdapter(): void
     {
         $email = new Email();
         $email->setEnabled(true);
@@ -172,8 +167,7 @@ final class SenderTest extends TestCase
         $this->sender->send('bar', ['john@example.com'], ['foo' => 2], [], [], ['cc@example.com'], ['bcc@example.com']);
     }
 
-    #[Test]
-    public function it_sends_an_email_with_cc_and_name_pair_and_bcc_and_name_pair_through_the_adapter(): void
+    public function testSendsEmailWithCcAndNamePairAndBccAndNamePairThroughTheAdapter(): void
     {
         $email = new Email();
         $email->setEnabled(true);
@@ -213,8 +207,7 @@ final class SenderTest extends TestCase
         $this->sender->send('bar', ['john@example.com'], ['foo' => 2], [], [], ['cc@example.com' => 'CC'], ['bcc@example.com' => 'BCC']);
     }
 
-    #[Test]
-    public function it_sends_a_modified_email_with_cc_and_bcc_through_the_adapter(): void
+    public function testSendsModifiedEmailWithCcAndBccThroughTheAdapter(): void
     {
         /** @var EmailModifierInterface&MockObject $emailModifier */
         $emailModifier = $this->createMock(EmailModifierInterface::class);
@@ -271,8 +264,7 @@ final class SenderTest extends TestCase
         $sender->send('bar', ['john@example.com'], ['foo' => 2], [], [], ['cc@example.com'], ['bcc@example.com']);
     }
 
-    #[Test]
-    public function it_does_not_send_disabled_emails(): void
+    public function testDoesNotSendDisabledEmails(): void
     {
         $email = new Email();
         $email->setEnabled(false);
@@ -294,8 +286,7 @@ final class SenderTest extends TestCase
         $this->sender->send('bar', ['john@example.com'], ['foo' => 2], []);
     }
 
-    #[Test]
-    public function it_throws_an_exception_if_wrong_value_is_provided_as_recipient_email(): void
+    public function testThrowsExceptionIfWrongValueIsProvidedAsRecipientEmail(): void
     {
         $this->rendererAdapter
             ->expects($this->never())
@@ -310,8 +301,7 @@ final class SenderTest extends TestCase
         $this->sender->send('bar', ['john@example.com', null], ['foo' => 2], []);
     }
 
-    #[Test]
-    public function it_throws_an_exception_if_integer_is_provided_as_recipient_email(): void
+    public function testThrowsExceptionIfIntegerIsProvidedAsRecipientEmail(): void
     {
         $this->rendererAdapter
             ->expects($this->never())
@@ -326,8 +316,7 @@ final class SenderTest extends TestCase
         $this->sender->send('bar', [5], ['foo' => 2], []);
     }
 
-    #[Test]
-    public function it_throws_an_exception_if_empty_string_is_provided_as_recipient_email(): void
+    public function testThrowsExceptionIfEmptyStringIsProvidedAsRecipientEmail(): void
     {
         $this->rendererAdapter
             ->expects($this->never())

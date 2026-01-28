@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\Tests\Unit\Component\Provider;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
@@ -55,14 +54,12 @@ final class EmailProviderTest extends TestCase
         $this->provider = new EmailProvider($this->emailFactory, $emails);
     }
 
-    #[Test]
-    public function it_implements_email_provider_interface(): void
+    public function testImplementsEmailProviderInterface(): void
     {
         $this->assertInstanceOf(EmailProviderInterface::class, $this->provider);
     }
 
-    #[Test]
-    public function it_looks_for_an_email_in_configuration_when_it_cannot_be_found_via_repository(): void
+    public function testLooksForEmailInConfigurationWhenItCannotBeFoundViaRepository(): void
     {
         $email = new Email();
 

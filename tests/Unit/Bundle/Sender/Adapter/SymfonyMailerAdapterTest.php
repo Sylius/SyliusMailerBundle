@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\MailerBundle\Tests\Unit\Bundle\Sender\Adapter;
 
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\MailerBundle\Sender\Adapter\SymfonyMailerAdapter;
@@ -22,11 +21,11 @@ use Sylius\Component\Mailer\Model\Email;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\SyliusMailerEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email as MimeEmail;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class SymfonyMailerAdapterTest extends TestCase
 {
@@ -43,14 +42,12 @@ final class SymfonyMailerAdapterTest extends TestCase
         $this->adapter = new SymfonyMailerAdapter($this->mailer);
     }
 
-    #[Test]
-    public function it_is_an_adapter(): void
+    public function testIsAnAdapter(): void
     {
         $this->assertInstanceOf(AbstractAdapter::class, $this->adapter);
     }
 
-    #[Test]
-    public function it_sends_an_email_with_events(): void
+    public function testSendsEmailWithEvents(): void
     {
         $this->adapter->setEventDispatcher($this->dispatcher);
 
@@ -89,8 +86,7 @@ final class SymfonyMailerAdapterTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_sends_an_email_with_cc_and_bcc(): void
+    public function testSendsEmailWithCcAndBcc(): void
     {
         $renderedEmail = new RenderedEmail('subject', 'body');
         $email = new Email();
@@ -121,8 +117,7 @@ final class SymfonyMailerAdapterTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_sends_an_email_with_attachments(): void
+    public function testSendsEmailWithAttachments(): void
     {
         $renderedEmail = new RenderedEmail('subject', 'body');
         $email = new Email();
@@ -142,8 +137,7 @@ final class SymfonyMailerAdapterTest extends TestCase
         );
     }
 
-    #[Test]
-    public function it_does_not_handle_exceptions_from_the_mailer(): void
+    public function testDoesNotHandleExceptionsFromTheMailer(): void
     {
         $renderedEmail = new RenderedEmail('subject', 'body');
         $email = new Email();

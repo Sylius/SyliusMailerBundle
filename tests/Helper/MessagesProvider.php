@@ -11,15 +11,15 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\MailerBundle\Tests\Fixtures;
+namespace Sylius\Bundle\MailerBundle\Tests\Helper;
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Mime\Email;
 
-final class MessagesProvider
+final readonly class MessagesProvider
 {
-    public function __construct(private readonly string $spoolDirectory)
+    public function __construct(private string $spoolDirectory)
     {
     }
 
