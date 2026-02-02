@@ -18,15 +18,15 @@ use Sylius\Bundle\MailerBundle\DependencyInjection\Compiler\SenderAdapterPass;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 final class SyliusMailerExtension extends ConfigurableExtension
 {
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.xml');
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.php');
 
         $this->configureSenderAdapter($mergedConfig, $container);
         $this->configureRendererAdapter($mergedConfig, $container);

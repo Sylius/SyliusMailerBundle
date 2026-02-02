@@ -8,3 +8,4 @@
 
 /.phpunit.result.cache
 .phpunit.cache/
+tests/Application/config/reference.php
