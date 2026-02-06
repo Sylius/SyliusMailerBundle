@@ -15,8 +15,7 @@ namespace Sylius\Component\Mailer\Model;
 
 final class Email implements EmailInterface
 {
-    /** @var mixed */
-    private $id;
+    private string|int|null $id = null;
 
     private ?string $code = null;
 
@@ -32,8 +31,7 @@ final class Email implements EmailInterface
 
     private ?string $senderAddress = null;
 
-    /** @return mixed */
-    public function getId()
+    public function getId(): string|int|null
     {
         return $this->id;
     }

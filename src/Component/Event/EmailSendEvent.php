@@ -19,12 +19,11 @@ use Symfony\Contracts\EventDispatcher\Event;
 final class EmailSendEvent extends Event
 {
     /**
-     * @param mixed $message
      * @param string[] $recipients
      * @param string[] $replyTo
      */
     public function __construct(
-        protected $message,
+        protected mixed $message,
         protected EmailInterface $email,
         protected array $data,
         protected array $recipients = [],
@@ -42,10 +41,7 @@ final class EmailSendEvent extends Event
         return $this->email;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMessage()
+    public function getMessage(): mixed
     {
         return $this->message;
     }
