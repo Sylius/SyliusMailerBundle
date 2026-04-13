@@ -31,7 +31,7 @@
         "symfony/framework-bundle": "^6.4 || ^7.4 || ^8.0",
         "symfony/http-kernel": "^6.4 || ^7.4 || ^8.0",
         "twig/twig": "^3.3",
-        "webmozart/assert": "^1.9"
+        "webmozart/assert": "^2.3"
     },
     "replace": {
         "sylius/mailer": "self.version"
